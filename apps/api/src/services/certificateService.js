@@ -8,6 +8,23 @@ const replacePlaceholders = (text, data) => {
     return text.replace(/{(\w+)}/g, (_, key) => data[key] || '');
 };
 
+// Helper format text
+const formatText = (text, layer) => {
+    let result = text;
+    if (layer.uppercase) {
+        result = result.toUpperCase();
+    }
+    // Simple date format mock if needed, usage: dateFormat: true (iso) or specific string?
+    // User requested "dateFormat" as optional. For MVP, if true/exists, assume they want a cleaner date string if it looks like a date.
+    if (layer.dateFormat && !isNaN(Date.parse(result))) {
+        // Simple default formatting YYYY-MM-DD
+        try {
+            result = new Date(result).toISOString().split('T')[0];
+        } catch (e) { }
+    }
+    return result;
+};
+
 exports.generateCertificate = async (template, data, outputFilename) => {
     try {
         const width = template.width || 800;
@@ -16,45 +33,73 @@ exports.generateCertificate = async (template, data, outputFilename) => {
         const ctx = canvas.getContext('2d');
 
         // 1. Background
-        if (template.background) {
-            if (template.background.startsWith('#')) {
-                ctx.fillStyle = template.background;
-                ctx.fillRect(0, 0, width, height);
-            } else {
-                // Assume it's a URL or path to an uploaded image
-                // For MVP, we might treat it as a path in uploads or a public URL if we had one.
-                // If it doesn't resolve, fallback to white.
-                try {
-                    // Clean up path - if it's just a filename, look in uploads.
-                    // If absolute, use it.
-                    let bgPath = template.background;
-                    if (!path.isAbsolute(bgPath) && !bgPath.startsWith('http')) {
-                        bgPath = path.join(process.cwd(), 'uploads', template.background);
-                    }
+        // Support old schema (string) and new schema ({ type, value })
+        let bgType = 'color';
+        let bgValue = '#ffffff';
 
-                    if (fs.existsSync(bgPath)) {
-                        const image = await loadImage(bgPath);
-                        ctx.drawImage(image, 0, 0, width, height);
-                    } else {
-                        ctx.fillStyle = '#ffffff';
-                        ctx.fillRect(0, 0, width, height);
-                    }
-                } catch (e) {
-                    console.error("Background load error", e);
-                    ctx.fillStyle = '#ffffff';
-                    ctx.fillRect(0, 0, width, height);
+        if (template.background) {
+            if (typeof template.background === 'object') {
+                bgType = template.background.type || 'color';
+                bgValue = template.background.value || '#ffffff';
+            } else if (typeof template.background === 'string') {
+                if (template.background.startsWith('#')) {
+                    bgType = 'color';
+                    bgValue = template.background;
+                } else {
+                    bgType = 'image';
+                    bgValue = template.background;
                 }
             }
-        } else {
-            ctx.fillStyle = '#ffffff';
+        }
+
+        if (bgType === 'color') {
+            ctx.fillStyle = bgValue;
             ctx.fillRect(0, 0, width, height);
+        } else if (bgType === 'image') {
+            try {
+                let bgPath = bgValue;
+                // If not absolute and not url, check uploads
+                if (!path.isAbsolute(bgPath) && !bgPath.startsWith('http')) {
+                    const uploadPath = path.join(process.cwd(), 'uploads', bgPath);
+                    if (fs.existsSync(uploadPath)) {
+                        bgPath = uploadPath;
+                    }
+                    // else it might be a relative path intended to be relative to cwd? Keep as is if exists.
+                }
+
+                // Allow fail-soft
+                if (bgPath.startsWith('http') || fs.existsSync(bgPath)) {
+                    const image = await loadImage(bgPath);
+                    ctx.drawImage(image, 0, 0, width, height);
+                } else {
+                    console.warn(`Background image not found: ${bgValue}`);
+                    ctx.fillStyle = '#ffffff'; // Fallback
+                    ctx.fillRect(0, 0, width, height);
+                }
+            } catch (e) {
+                console.error("Background load error", e);
+                ctx.fillStyle = '#ffffff';
+                ctx.fillRect(0, 0, width, height);
+            }
         }
 
         // 2. Layers
         if (template.layers && Array.isArray(template.layers)) {
             for (const layer of template.layers) {
                 if (layer.type === 'text') {
-                    const text = replacePlaceholders(layer.text, data);
+                    // Logic: uses 'key' if present (data binding), else 'text' (static or mixed)
+                    let content = '';
+                    if (layer.key) {
+                        // Direct binding, e.g. key="name" -> data["name"]
+                        content = data[layer.key] || '';
+                        // If empty and text exists, maybe fallback? Or just use text as template?
+                        // User spec: key: "name". So we map data.name.
+                    } else if (layer.text) {
+                        content = replacePlaceholders(layer.text, data);
+                    }
+
+                    content = formatText(content, layer);
+
                     const fontSize = layer.fontSize || 20;
                     const fontWeight = layer.fontWeight || 'normal';
                     const fontFamily = layer.fontFamily || 'Arial';
@@ -66,12 +111,16 @@ exports.generateCertificate = async (template, data, outputFilename) => {
                     ctx.font = `${fontWeight} ${fontSize}px ${fontFamily}`;
                     ctx.fillStyle = color;
                     ctx.textAlign = align;
-                    ctx.fillText(text, x, y);
+                    ctx.fillText(content, x, y);
 
                 } else if (layer.type === 'image') {
-                    // Basic image layer support (e.g. signature or loose image)
-                    // If the src is a placeholder (e.g. {signature_url}), substitute it
-                    let src = replacePlaceholders(layer.src, data);
+                    // Image layer logic
+                    let src = '';
+                    if (layer.key) {
+                        src = data[layer.key] || '';
+                    } else if (layer.src) {
+                        src = replacePlaceholders(layer.src, data);
+                    }
 
                     if (src) {
                         try {
@@ -81,11 +130,6 @@ exports.generateCertificate = async (template, data, outputFilename) => {
                                 w: layer.w || 100,
                                 h: layer.h || 100
                             };
-                            // Check if src is web url or local
-                            // For MVP, if it starts with http, we try to load it (canvas supports it if built with libcurl, but safer to stick to local or simple URIs? 
-                            // default canvas loading handles http if network is allowed).
-                            // We'll treat it as local if not http.
-                            // NOTE: For 'signature_url' in CSV, it might be a remote URL. node-canvas loadImage handles URLs.
                             const img = await loadImage(src);
                             ctx.drawImage(img, imgConf.x, imgConf.y, imgConf.w, imgConf.h);
                         } catch (e) {
@@ -95,11 +139,6 @@ exports.generateCertificate = async (template, data, outputFilename) => {
                 }
             }
         }
-
-        // Return Buffer or Path?
-        // Service usually saves to file, but for preview we might want Buffer.
-        // Let's modify signature to support returning Buffer if no filename is passed?
-        // Or keep it simple: if outputFilename provided, save and return path. If null, return buffer.
 
         if (outputFilename) {
             const buffer = canvas.toBuffer('image/png');

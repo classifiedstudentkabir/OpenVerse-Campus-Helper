@@ -4,7 +4,10 @@
     "name": "Simple Certificate",
     "width": 800,
     "height": 600,
-    "background": "#f0f0f0",
+    "background": {
+      "type": "color",
+      "value": "#f0f0f0"
+    },
     "layers": [
       {
         "type": "text",
@@ -28,13 +31,14 @@
       },
       {
         "type": "text",
-        "text": "{name}",
+        "key": "name",
         "x": 400,
         "y": 300,
         "fontSize": 48,
         "fontWeight": "bold",
         "color": "#2c3e50",
-        "align": "center"
+        "align": "center",
+        "uppercase": true
       },
       {
         "type": "text",
@@ -48,17 +52,18 @@
       },
       {
         "type": "text",
-        "text": "Date: {date}",
+        "key": "date",
         "x": 400,
         "y": 500,
         "fontSize": 16,
         "fontWeight": "normal",
         "color": "#555555",
-        "align": "center"
+        "align": "center",
+        "dateFormat": true
       },
       {
         "type": "text",
-        "text": "ID: {certificate_id}",
+        "key": "certificate_id",
         "x": 750,
         "y": 580,
         "fontSize": 12,

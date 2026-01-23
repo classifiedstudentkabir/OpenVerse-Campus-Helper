@@ -24,14 +24,14 @@ if (!fs.existsSync(DATA_FILE)) {
         name: "Simple Certificate",
         width: 800,
         height: 600,
-        background: "#f0f0f0",
+        background: { type: "color", value: "#f0f0f0" },
         layers: [
             { type: "text", text: "CERTIFICATE OF ACHIEVEMENT", x: 400, y: 100, fontSize: 40, fontWeight: "bold", color: "#000000", align: "center" },
             { type: "text", text: "This is presented to", x: 400, y: 200, fontSize: 24, fontWeight: "normal", color: "#333333", align: "center" },
-            { type: "text", text: "{name}", x: 400, y: 300, fontSize: 48, fontWeight: "bold", color: "#2c3e50", align: "center" },
+            { type: "text", key: "name", x: 400, y: 300, fontSize: 48, fontWeight: "bold", color: "#2c3e50", align: "center", uppercase: true },
             { type: "text", text: "For participating in {event}", x: 400, y: 400, fontSize: 20, fontWeight: "normal", color: "#555555", align: "center" },
-            { type: "text", text: "Date: {date}", x: 400, y: 500, fontSize: 16, fontWeight: "normal", color: "#555555", align: "center" },
-            { type: "text", text: "ID: {certificate_id}", x: 750, y: 580, fontSize: 12, fontWeight: "normal", color: "#999999", align: "right" }
+            { type: "text", key: "date", x: 400, y: 500, fontSize: 16, fontWeight: "normal", color: "#555555", align: "center", dateFormat: true },
+            { type: "text", key: "certificate_id", x: 750, y: 580, fontSize: 12, fontWeight: "normal", color: "#999999", align: "right" }
         ]
     }]);
 }
