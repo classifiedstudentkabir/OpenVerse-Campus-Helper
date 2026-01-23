@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Canva-Inspired Templates Library - CertiGen Pro</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#7d2ae8",
+              "sidebar-bg": "#ffffff",
+              "app-bg": "#F2F4F7",
+              "card-border": "rgba(0, 0, 0, 0.04)",
+            },
+            fontFamily: {
+              "display": ["Manrope", "sans-serif"]
+            },
+            borderRadius: {
+                "template": "16px",
+            },
+            boxShadow: {
+              'canva-soft': '0 2px 8px rgba(0,0,0,0.04), 0 10px 30px rgba(0,0,0,0.02)',
+              'canva-hover': '0 20px 40px -12px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(125, 42, 232, 0.2)',
+              'sidebar-right': '1px 0 0 0 rgba(0,0,0,0.06)',
+            }
+          },
+        },
+      }
+    </script>
+<style type="text/tailwindcss">
+        @layer base {
+            body {
+                @apply font-display text-[#0e1217] antialiased;
+            }
+        }
+        .hero-gradient {
+            background: linear-gradient(100deg, #7d2ae8 0%, #3b59ff 100%);
+        }
+        .soft-surface-bg {
+            background-color: #F8F9FB;
+            background-image: radial-gradient(at 100% 0%, hsla(271, 76%, 94%, 1) 0, transparent 40%), 
+                              radial-gradient(at 0% 100%, hsla(220, 100%, 97%, 1) 0, transparent 40%);
+        }
+        .template-card {
+            @apply transition-all duration-300 ease-out bg-white border border-card-border;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02), 0 4px 12px rgba(0,0,0,0.03);
+        }
+        .template-card:hover {
+            @apply -translate-y-1;
+            box-shadow: 0 12px 24px -8px rgba(0,0,0,0.1), 0 0 0 1px rgba(125, 42, 232, 0.15);
+        }
+        .sidebar-active {
+            @apply bg-[#7d2ae8]/5 text-primary;
+        }
+        .sidebar-active .material-symbols-outlined {
+            @apply text-primary;
+            font-variation-settings: 'FILL' 1;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-white overflow-hidden">
+<div class="flex h-screen overflow-hidden">
+<aside class="w-20 lg:w-64 flex flex-col bg-sidebar-bg border-r border-slate-200/60 shadow-sidebar-right z-30 transition-all duration-300">
+<div class="px-4 lg:px-6 py-8 flex flex-col h-full">
+<div class="flex items-center gap-3 mb-10 overflow-hidden">
+<div class="hero-gradient size-10 min-w-10 rounded-xl flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-[24px]">verified</span>
+</div>
+<span class="text-slate-900 text-lg font-extrabold tracking-tight whitespace-nowrap hidden lg:block">CertiGen Pro</span>
+</div>
+<nav class="flex flex-col gap-1.5 grow overflow-y-auto hide-scrollbar">
+<a class="flex flex-col lg:flex-row items-center gap-1 lg:gap-3 px-3 py-3 rounded-xl text-slate-500 hover:bg-slate-50 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[24px]">home</span>
+<span class="text-[10px] lg:text-[14px] font-semibold lg:font-medium">Home</span>
+</a>
+<a class="flex flex-col lg:flex-row items-center gap-1 lg:gap-3 px-3 py-3 rounded-xl text-slate-500 hover:bg-slate-50 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[24px]">folder</span>
+<span class="text-[10px] lg:text-[14px] font-semibold lg:font-medium whitespace-nowrap">Projects</span>
+</a>
+<a class="flex flex-col lg:flex-row items-center gap-1 lg:gap-3 px-3 py-3 rounded-xl sidebar-active" href="#">
+<span class="material-symbols-outlined text-[24px]">dashboard_customize</span>
+<span class="text-[10px] lg:text-[14px] font-bold">Templates</span>
+</a>
+<a class="flex flex-col lg:flex-row items-center gap-1 lg:gap-3 px-3 py-3 rounded-xl text-slate-500 hover:bg-slate-50 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[24px]">auto_awesome_motion</span>
+<span class="text-[10px] lg:text-[14px] font-semibold lg:font-medium">Brand</span>
+</a>
+<div class="h-px bg-slate-100 my-4 mx-2"></div>
+<a class="flex flex-col lg:flex-row items-center gap-1 lg:gap-3 px-3 py-3 rounded-xl text-slate-500 hover:bg-slate-50 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[24px]">groups</span>
+<span class="text-[10px] lg:text-[14px] font-semibold lg:font-medium">Teams</span>
+</a>
+<a class="flex flex-col lg:flex-row items-center gap-1 lg:gap-3 px-3 py-3 rounded-xl text-slate-500 hover:bg-slate-50 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[24px]">settings</span>
+<span class="text-[10px] lg:text-[14px] font-semibold lg:font-medium">Settings</span>
+</a>
+</nav>
+<button class="mt-auto hidden lg:flex w-full items-center justify-center gap-2 rounded-xl hero-gradient py-3 text-white text-[14px] font-bold hover:opacity-90 transition-all shadow-md">
+<span class="material-symbols-outlined text-[20px]">add</span>
+<span>Create design</span>
+</button>
+<button class="mt-auto lg:hidden flex items-center justify-center size-12 rounded-full hero-gradient text-white mx-auto">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+</aside>
+<main class="flex-1 flex flex-col overflow-hidden soft-surface-bg">
+<header class="flex items-center justify-between px-8 py-4 bg-white border-b border-slate-200/60 z-20">
+<div class="flex-1 max-w-2xl">
+<div class="relative group">
+<div class="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none">
+<span class="material-symbols-outlined text-slate-400 text-[20px] group-focus-within:text-primary transition-colors">search</span>
+</div>
+<input class="block w-full pl-12 pr-8 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-[14px] focus:ring-4 focus:ring-primary/5 focus:border-primary/50 transition-all placeholder:text-slate-400 font-medium" placeholder="Search templates..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4 ml-8">
+<button class="flex items-center justify-center size-10 rounded-full hover:bg-slate-100 text-slate-600 transition-colors">
+<span class="material-symbols-outlined text-[24px]">notifications</span>
+</button>
+<div class="size-10 rounded-full bg-cover bg-center ring-2 ring-offset-2 ring-primary/20 cursor-pointer" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBiC1F8x5ezTvlnslGJ-kPXftVXisgMmvttDyrvmYlbKIuchjC6bNpNdHz8kQ5Jb4-FJ1n94zK4HeY5eSXeTE3TPMNWMajJiX53l0sfu76L9OX2mSy0N2mbr1vZqkBjZeK8wp_1T1hIu-SwFP01WIaTGrmPzazDceRvsA9lc6t_5XZEq-ZUw597VAgiNzph8NR--A57fKnD_qg0oDQ2q1sP1x9OJyDlFNStAuaJ-VpfN8es4quK8ym9IUT6Xak2vdensllizqCG9RM')"></div>
+</div>
+</header>
+<div class="flex-1 overflow-y-auto scroll-smooth hide-scrollbar">
+<div class="px-8 pt-10 pb-12">
+<div class="hero-gradient rounded-[24px] p-10 lg:p-14 relative overflow-hidden shadow-2xl shadow-primary/10">
+<div class="relative z-10 max-w-2xl text-white">
+<h2 class="text-3xl lg:text-4xl font-extrabold tracking-tight mb-4">Design excellence for every achievement</h2>
+<p class="text-white/80 text-lg font-medium leading-relaxed mb-8">Choose from thousands of professional certificate templates designed to inspire and recognize.</p>
+<div class="flex flex-wrap gap-4">
+<button class="bg-white text-primary px-8 py-3 rounded-xl font-bold text-sm hover:bg-slate-50 transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-xl">auto_fix_high</span>
+                                Magic Studio
+                            </button>
+<button class="bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/20 px-8 py-3 rounded-xl font-bold text-sm transition-all">
+                                Custom Size
+                            </button>
+</div>
+</div>
+<div class="absolute top-0 right-0 w-1/3 h-full bg-white/5 skew-x-[-15deg] translate-x-12"></div>
+<div class="absolute bottom-0 right-1/4 w-32 h-32 bg-white/10 rounded-full blur-3xl"></div>
+</div>
+</div>
+<div class="px-8 pb-20">
+<div class="flex flex-wrap items-center gap-4 mb-10 overflow-x-auto hide-scrollbar py-2">
+<button class="px-5 py-2 rounded-lg bg-slate-900 text-white text-sm font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-lg">tune</span>
+                        Filters
+                    </button>
+<div class="h-6 w-px bg-slate-200 mx-2"></div>
+<button class="px-6 py-2 rounded-lg bg-white border border-slate-200 text-slate-600 text-sm font-semibold hover:border-primary/50 transition-all whitespace-nowrap">Professional</button>
+<button class="px-6 py-2 rounded-lg bg-white border border-slate-200 text-slate-600 text-sm font-semibold hover:border-primary/50 transition-all whitespace-nowrap">Modern</button>
+<button class="px-6 py-2 rounded-lg bg-white border border-slate-200 text-slate-600 text-sm font-semibold hover:border-primary/50 transition-all whitespace-nowrap">Academic</button>
+<button class="px-6 py-2 rounded-lg bg-white border border-slate-200 text-slate-600 text-sm font-semibold hover:border-primary/50 transition-all whitespace-nowrap">Corporate</button>
+<button class="px-6 py-2 rounded-lg bg-white border border-slate-200 text-slate-600 text-sm font-semibold hover:border-primary/50 transition-all whitespace-nowrap">Award</button>
+</div>
+<div class="space-y-16">
+<section>
+<div class="flex items-center justify-between mb-8">
+<div>
+<h3 class="text-2xl font-extrabold text-slate-900 tracking-tight">Trending Templates</h3>
+<p class="text-slate-500 text-sm font-medium mt-1">Most popular choices for professionals this week.</p>
+</div>
+<button class="text-primary font-bold text-sm hover:underline">See all</button>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
+<div class="template-card group rounded-template overflow-hidden flex flex-col">
+<div class="aspect-[4/3] relative overflow-hidden bg-slate-100">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCF2tkIJS2FkGj8dUJZnlqZFgujQ2tzpJjg2XiLOo4gFe9gtJxZfLqTNpDK9mjJ1muLE9EOE8K50FR6ZYayx_dzVzNxLYykJYwbyFAecGZMBPRiNBMzUMarkB2542ipwxUHJilzbwadPkB1EQ8Veg6kmfWpLVlA59TGtGejbMTu2xh0s4OS5NBy3Y7zS4m_lr8DpDE3KOmkbH1fZtjnP22tdEMgIP2HuY4rjMMPgMtUT_i2dHcmAwYYuEttFHnPRP6VGyDRgZJHfjg"/>
+<div class="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<div class="bg-white/95 backdrop-blur-sm p-3 rounded-full shadow-lg transform translate-y-4 group-hover:translate-y-0 transition-transform">
+<span class="material-symbols-outlined text-primary">edit</span>
+</div>
+</div>
+<button class="absolute top-3 right-3 p-1.5 rounded-lg bg-white/80 opacity-0 group-hover:opacity-100 backdrop-blur-md transition-all">
+<span class="material-symbols-outlined text-lg text-slate-600">star</span>
+</button>
+</div>
+<div class="p-4">
+<h4 class="font-bold text-[14px] text-slate-900 line-clamp-1">Modern Achievement Gold</h4>
+<p class="text-[12px] text-slate-500 mt-1">Professional • Landscape</p>
+</div>
+</div>
+<div class="template-card group rounded-template overflow-hidden flex flex-col">
+<div class="aspect-[4/3] relative overflow-hidden bg-slate-100">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBSy5UEbh78CbeBuEx2xM8mlpk9XXJfBnhlijyVJZr6UaDdwjVe6bdTcIO_B6dqm0_L6Z6zRgrlD4hojpJGZLi9zRT7fayW9pm-6TCbKX_-cCaFrME5OzSUFDk-qXcAQQNlU-SC_bZM8Oq7LMprjD20e1X4oUBXZBvzEKmZOw2D3G9xQl1FxiGQA6D6liBCIhp2raKi8hS5q7Wv_WpFvvch8jmDueOx0T8yqVF8JbIVZ5qiWxnbX7xfOFb_gfvmyMAvaAIi6oSpbGk"/>
+<div class="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<div class="bg-white/95 backdrop-blur-sm p-3 rounded-full shadow-lg transform translate-y-4 group-hover:translate-y-0 transition-transform">
+<span class="material-symbols-outlined text-primary">edit</span>
+</div>
+</div>
+</div>
+<div class="p-4">
+<h4 class="font-bold text-[14px] text-slate-900 line-clamp-1">University Excellence</h4>
+<p class="text-[12px] text-slate-500 mt-1">Academic • Landscape</p>
+</div>
+</div>
+<div class="template-card group rounded-template overflow-hidden flex flex-col">
+<div class="aspect-[4/3] relative overflow-hidden bg-slate-100">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhWcMhXlCbUR0MiV8f2O7MUNM1x-gJY5Y5aELpQ5ItW0koTqMyYVLBS-W9_4uu4Pwwdyr9Q3V09FwRvRAS2OnA6CoTymRHcxK9-13vdMMyHtqOWX1x0ReVUFVrohLIAA7mRrxYBtGRmY4HyRv2uGVjAqL2Cvif767ckxmGbxY5TTVjvldIU_U9Z2Qsi1bTefSZmx-ePwt9o0o0gnexBDb3r_y-no1HH5pQ3Ln17IOobM2HxL79s7CDyARyXg-Y1xnlSs9PRD94oi4"/>
+<div class="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<div class="bg-white/95 backdrop-blur-sm p-3 rounded-full shadow-lg transform translate-y-4 group-hover:translate-y-0 transition-transform">
+<span class="material-symbols-outlined text-primary">edit</span>
+</div>
+</div>
+</div>
+<div class="p-4">
+<h4 class="font-bold text-[14px] text-slate-900 line-clamp-1">Geometric Teal Award</h4>
+<p class="text-[12px] text-slate-500 mt-1">Modern • Landscape</p>
+</div>
+</div>
+<div class="template-card group rounded-template overflow-hidden flex flex-col">
+<div class="aspect-[4/3] relative overflow-hidden bg-slate-100">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA61h-czW50qHJ8XDyQiOpgd1ND3RUWpHJedL-l6dkwoB5Ypl61U3nBDkUHZ2NCpeVPoghN33x2UpytbYkq-zpVIhNVFDpch5wSETSN77C9HQ-HiVklA-FlLjxJnGxWZK54u-nIgAVceoxLiGS0P-JLgUpI_vS41p7RK9HiC6h78J_3vR92wFd2LXZeg1yuBV4XWfbrnEp7Jnns0CqsHqx2KZto7IiQNCkv3FmgAVv2Bsd8bbY-WTVJKYn4NozzPDA0MmeFTaVnuAA"/>
+<div class="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<div class="bg-white/95 backdrop-blur-sm p-3 rounded-full shadow-lg transform translate-y-4 group-hover:translate-y-0 transition-transform">
+<span class="material-symbols-outlined text-primary">edit</span>
+</div>
+</div>
+</div>
+<div class="p-4">
+<h4 class="font-bold text-[14px] text-slate-900 line-clamp-1">Premium Workshop Credential</h4>
+<p class="text-[12px] text-slate-500 mt-1">Education • Landscape</p>
+</div>
+</div>
+<div class="template-card group rounded-template overflow-hidden flex flex-col items-center justify-center bg-white border-2 border-dashed border-slate-200 hover:border-primary/40 hover:bg-primary/[0.01] transition-all cursor-pointer min-h-[220px]">
+<div class="size-12 rounded-full bg-slate-50 flex items-center justify-center mb-3 group-hover:scale-110 group-hover:bg-primary/10 transition-all">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary text-[28px]">add_circle</span>
+</div>
+<p class="text-[14px] font-bold text-slate-600">Create blank</p>
+<p class="text-[11px] text-slate-400 mt-1">Landscape (A4)</p>
+</div>
+</div>
+</section>
+<section>
+<div class="flex items-center justify-between mb-8">
+<div>
+<h3 class="text-2xl font-extrabold text-slate-900 tracking-tight">Corporate Branding</h3>
+<p class="text-slate-500 text-sm font-medium mt-1">Sophisticated designs for industry leaders.</p>
+</div>
+<button class="text-primary font-bold text-sm hover:underline">See all</button>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
+<div class="template-card group rounded-template overflow-hidden flex flex-col">
+<div class="aspect-[4/3] relative overflow-hidden bg-slate-100">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBazF7jKZ7JgMhz-jSFm9NecbEOE4GMkWE3NJWctLhXWHHVzM-I-f5W5nN8Sn_IiwrunXpW8cBqaMMcUslTFkyaLhSJPAcKs4feQI_2H8RpYYhgzls80sNlKtywr5qiKNmjetIQQJKCJ5e40uYssEBAHm0Gn6zP14JHn763cAxoui8h-yBMyCEHtHaMwF7B8wv552SZNwKoWCXz6VGof25qQSyoj9ShEEubFPSmGn5O0SRkPL4lJw-lkCG7yt1ayGSH6ndpLaYOLCc"/>
+<div class="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<div class="bg-white/95 backdrop-blur-sm p-3 rounded-full shadow-lg transform translate-y-4 group-hover:translate-y-0 transition-transform">
+<span class="material-symbols-outlined text-primary">edit</span>
+</div>
+</div>
+</div>
+<div class="p-4">
+<h4 class="font-bold text-[14px] text-slate-900 line-clamp-1">Service Recognition</h4>
+<p class="text-[12px] text-slate-500 mt-1">Corporate • Landscape</p>
+</div>
+</div>
+<div class="template-card group rounded-template overflow-hidden flex flex-col">
+<div class="aspect-[4/3] relative overflow-hidden bg-slate-100">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDU7_OPK6ftz9fO5K81yx6DkOgWML15ndkEWiGLL70KpuZ5ftIMzcB8l5cqHqGTfCvDqrhcD1CZi7-LZPZ8H4ERYp_xbs2fZHe_kRUuSEAP90Bz6dZXyikLfCdT5w-udk2XM4hfm6nLc4NzDBsmChFeeZXndFBL6bFymZHJFLeklksEAUUHmFfU-xNcxUNESwpYJLi-YW9WSxFS8zIFjPHEKEpxD7EK77Xt2Kq9Ta-90mCEDrFgd0JXZWGi9_sAsw-h5Ymhcaqkg_8"/>
+<div class="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<div class="bg-white/95 backdrop-blur-sm p-3 rounded-full shadow-lg transform translate-y-4 group-hover:translate-y-0 transition-transform">
+<span class="material-symbols-outlined text-primary">edit</span>
+</div>
+</div>
+</div>
+<div class="p-4">
+<h4 class="font-bold text-[14px] text-slate-900 line-clamp-1">Leadership Award</h4>
+<p class="text-[12px] text-slate-500 mt-1">Management • Landscape</p>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+</div>
+</main>
+</div>
+
+</body></html>

@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Bulk Certificate Generation - Map Fields</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#4f46e5","primary-dark": "#4338ca",
+                        "background-light": "#f8fafc",
+                        "background-dark": "#0f172a",
+                        "paper": "#ffffff",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "serif": ["Playfair Display", "serif"],
+                        "script": ["Dancing Script", "cursive"],
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 20px -2px rgba(0, 0, 0, 0.05)',
+                        'glow': '0 0 15px rgba(79, 70, 229, 0.3)',
+                    }
+                },
+            },
+        }
+    </script>
+<style>::-webkit-scrollbar {
+    width: 6px;
+    height: 6px
+    }
+::-webkit-scrollbar-track {
+    background: transparent
+    }
+::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 3px
+    }
+.drag-source {
+    cursor: grab
+    }
+.drag-source:active {
+    cursor: grabbing
+    }.paper-texture {
+    background-color: #fff;
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuDHMoCHTfedglQWPWLTADhGW_qnzNO39GZDTLBeCbmQ1sJNKY20VrLHBmeWr4G33zv2QBM5UzY58Y4rhkYEVp7B_bidB_fjcY_7B1Uif9qjr841bu388gVncrQa-55aSiDoCIO8NHOTHvd_gLXK2yKQEKHLYAwbpYhO0-Vswq2ezYD2RRVLb70sUFVNikfU-Y0kqIpdbGsoegkCjvJKT4Zo7omAOlMHCyR168SqkdC9yToGlNcPjZnfmIqRbSNcapIK_BsvEcDMNoMo)
+    }
+.embossed-seal {
+    background: radial-gradient(ellipse at center, #ffd700 0%, #d4af37 100%);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3), inset 0 2px 4px rgba(255, 255, 255, 0.4)
+    }</style>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-slate-800 dark:text-slate-100 overflow-hidden">
+<div class="flex h-screen w-full">
+<aside class="hidden w-64 flex-col border-r border-slate-200 bg-white dark:bg-slate-900 dark:border-slate-800 lg:flex z-30 shadow-sm">
+<div class="flex h-16 items-center gap-3 px-6 border-b border-slate-100 dark:border-slate-800">
+<div class="size-8 rounded-lg bg-primary flex items-center justify-center text-white shadow-lg shadow-primary/30">
+<span class="material-symbols-outlined text-xl">verified</span>
+</div>
+<div class="flex flex-col">
+<h1 class="text-base font-bold leading-none text-slate-900 dark:text-white tracking-tight">Certify.io</h1>
+<p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Concierge Admin</p>
+</div>
+</div>
+<nav class="flex-1 overflow-y-auto px-4 py-6 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-primary transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-primary transition-colors">dashboard</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary dark:text-primary-400 font-semibold" href="#">
+<span class="material-symbols-outlined text-[20px] fill-1">workspace_premium</span>
+<span class="text-sm">Certificates</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-primary transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-primary transition-colors">layers</span>
+<span class="text-sm font-medium">Templates</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-primary transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-primary transition-colors">group</span>
+<span class="text-sm font-medium">Recipients</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-primary transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-primary transition-colors">settings</span>
+<span class="text-sm font-medium">Settings</span>
+</a>
+</nav>
+<div class="p-4 border-t border-slate-100 dark:border-slate-800">
+<div class="flex items-center gap-3 rounded-lg bg-slate-50 dark:bg-slate-800 p-3 hover:bg-slate-100 transition-colors cursor-pointer">
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-9 shrink-0 shadow-sm" data-alt="User profile picture" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBcEGGDBaXx7uyrdGhrZyDRZ1ewqCZ7mAPC4M7rmoxpFXo4XBRHpk2m7q_R20NrnsgYkT-mt_YW8aPVgfkW8oCAz7mm0HDWZ_S5ALhSQ7yn0t574HzbOO9-7peuVCnLgybykEcsPOjzqOzkDJ3twGg8OCL2XTHP6PTr-IM-Na-a-KmTWlhXD4d1qGiPzscs8X5vQ6ACaSrpIXjgKhBCkpRUqWwugG8TTaD-ICm1f84yHnyspz1NtaUxJnAA7bWT3oB5DVAXHroKJMnX");'></div>
+<div class="flex flex-col min-w-0">
+<p class="text-sm font-medium text-slate-900 dark:text-white truncate">Alex Morgan</p>
+<p class="text-xs text-slate-500 dark:text-slate-400 truncate">alex@certify.io</p>
+</div>
+</div>
+</div>
+</aside>
+<main class="flex h-full flex-1 flex-col relative overflow-hidden bg-background-light dark:bg-background-dark">
+<header class="flex h-16 w-full items-center justify-between border-b border-slate-200 bg-white/80 backdrop-blur-md dark:bg-slate-900/80 dark:border-slate-800 px-6 sm:px-10 z-20 sticky top-0">
+<div class="flex items-center gap-4">
+<button class="lg:hidden text-slate-500 hover:text-slate-700">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<nav class="flex items-center gap-2 text-sm font-medium">
+<span class="text-slate-400 hover:text-slate-600 cursor-pointer transition-colors">Generators</span>
+<span class="material-symbols-outlined text-base text-slate-300">chevron_right</span>
+<span class="text-slate-900 dark:text-white">Bulk Wizard</span>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden md:flex items-center px-3 py-1 bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-400 text-xs font-semibold rounded-full border border-green-100 dark:border-green-800">
+<span class="material-symbols-outlined text-sm mr-1">cloud_done</span>
+                    Auto-save enabled
+                </div>
+<button class="flex size-9 items-center justify-center rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-500 transition-colors">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+</button>
+<button class="flex size-9 items-center justify-center rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-500 transition-colors">
+<span class="material-symbols-outlined text-[20px]">help</span>
+</button>
+</div>
+</header>
+<div class="flex-1 overflow-y-auto p-4 sm:p-8">
+<div class="mx-auto max-w-7xl flex flex-col h-full gap-8">
+<div class="w-full max-w-4xl mx-auto py-4">
+<div class="flex items-center justify-between relative">
+<div class="absolute left-10 right-10 top-1/2 h-0.5 bg-slate-200 dark:bg-slate-700 -z-10 -translate-y-1/2">
+<div class="h-full bg-primary w-1/2 transition-all duration-1000 ease-out shadow-[0_0_10px_rgba(79,70,229,0.3)]"></div>
+</div>
+<div class="flex flex-col items-center gap-3 cursor-pointer group">
+<div class="size-12 rounded-full bg-green-500 text-white flex items-center justify-center shadow-lg shadow-green-200 dark:shadow-green-900/30 ring-4 ring-white dark:ring-background-dark transition-transform group-hover:scale-105">
+<span class="material-symbols-outlined text-xl font-bold">check</span>
+</div>
+<span class="text-xs font-bold uppercase tracking-wider text-green-600 dark:text-green-400">Upload Data</span>
+</div>
+<div class="flex flex-col items-center gap-3">
+<div class="relative">
+<div class="size-14 rounded-full bg-primary text-white flex items-center justify-center shadow-xl shadow-primary/30 ring-4 ring-white dark:ring-background-dark z-10 relative animate-pulse-slow">
+<span class="material-symbols-outlined text-2xl">magic_button</span>
+</div>
+<div class="absolute inset-0 rounded-full bg-primary/20 animate-ping" style="animation-duration: 2s;"></div>
+</div>
+<div class="flex flex-col items-center">
+<span class="text-sm font-bold text-slate-900 dark:text-white">Map Fields</span>
+<span class="text-[10px] text-primary font-medium">In Progress</span>
+</div>
+</div>
+<div class="flex flex-col items-center gap-3 opacity-60">
+<div class="size-12 rounded-full bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-600 text-slate-400 flex items-center justify-center ring-4 ring-white dark:ring-background-dark">
+<span class="material-symbols-outlined text-xl">rocket_launch</span>
+</div>
+<span class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Generate</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between border-b border-slate-100 dark:border-slate-800 pb-6">
+<div class="max-w-2xl">
+<h2 class="text-3xl font-bold text-slate-900 dark:text-white tracking-tight font-serif">Welcome, Alex.</h2>
+<p class="text-slate-500 dark:text-slate-400 mt-2 text-lg">We've analyzed <span class="font-semibold text-slate-800 dark:text-slate-200">recipients_2023.csv</span>. Let's ensure your data maps perfectly to your certificate design before we proceed.</p>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 h-full min-h-[600px]">
+<div class="lg:col-span-5 flex flex-col gap-6">
+<div class="rounded-xl border border-amber-200 bg-amber-50/60 dark:bg-amber-900/10 dark:border-amber-800/50 p-5 shadow-sm">
+<div class="flex items-start gap-4">
+<div class="p-2 bg-amber-100 text-amber-600 dark:bg-amber-900/30 dark:text-amber-400 rounded-lg shrink-0">
+<span class="material-symbols-outlined">analytics</span>
+</div>
+<div class="flex-1">
+<h3 class="text-sm font-bold text-amber-900 dark:text-amber-100 mb-2">Validation Summary</h3>
+<div class="space-y-2">
+<div class="flex items-start gap-2 text-sm text-amber-800 dark:text-amber-200">
+<span class="material-symbols-outlined text-base mt-0.5 filled">warning</span>
+<p>2 rows contain duplicate email addresses. <button class="underline decoration-amber-400/50 hover:decoration-amber-500 font-medium">Review Rows</button></p>
+</div>
+<div class="flex items-start gap-2 text-sm text-red-700 dark:text-red-300">
+<span class="material-symbols-outlined text-base mt-0.5 filled">error</span>
+<p><strong>Required Field Missing:</strong> Please map the "Authorized Signature" field below.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between bg-white dark:bg-slate-800 rounded-xl p-4 border border-slate-200 dark:border-slate-700 shadow-soft">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-lg bg-indigo-50 dark:bg-indigo-900/30 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-xl">smart_toy</span>
+</div>
+<div>
+<p class="text-sm font-bold text-slate-900 dark:text-white">Smart Match</p>
+<p class="text-xs text-slate-500 dark:text-slate-400">AI automatically matched 3 columns</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary shadow-inner"></div>
+</label>
+</div>
+<div class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-soft flex flex-col flex-1 overflow-hidden">
+<div class="p-5 border-b border-slate-100 dark:border-slate-700">
+<h3 class="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-slate-400">alt_route</span>
+                                    Field Mapping
+                                </h3>
+<p class="text-xs text-slate-500 mt-1">Drag fields from the top to the matching placeholder below.</p>
+</div>
+<div class="p-5 flex-1 overflow-y-auto custom-scrollbar">
+<div class="mb-8">
+<p class="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-3 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">table_view</span>
+                                        Available Data Columns
+                                    </p>
+<div class="flex flex-wrap gap-2">
+<div class="drag-source group flex items-center gap-2 bg-slate-50 dark:bg-slate-700/50 hover:bg-white hover:shadow-md hover:ring-1 hover:ring-primary/20 transition-all rounded-lg px-3 py-2 border border-slate-200 dark:border-slate-600 select-none cursor-grab active:cursor-grabbing" draggable="true">
+<span class="material-symbols-outlined text-slate-400 text-sm">drag_indicator</span>
+<span class="text-sm font-medium text-slate-700 dark:text-slate-200">Email Address</span>
+</div>
+<div class="drag-source flex items-center gap-2 bg-green-50 dark:bg-green-900/20 rounded-lg px-3 py-2 border border-green-100 dark:border-green-800 select-none opacity-60" draggable="false">
+<span class="material-symbols-outlined text-green-600 text-sm">check_circle</span>
+<span class="text-sm font-medium text-green-800 dark:text-green-300 line-through">Student Name</span>
+</div>
+<div class="drag-source flex items-center gap-2 bg-green-50 dark:bg-green-900/20 rounded-lg px-3 py-2 border border-green-100 dark:border-green-800 select-none opacity-60" draggable="false">
+<span class="material-symbols-outlined text-green-600 text-sm">check_circle</span>
+<span class="text-sm font-medium text-green-800 dark:text-green-300 line-through">Course Name</span>
+</div>
+<div class="drag-source flex items-center gap-2 bg-green-50 dark:bg-green-900/20 rounded-lg px-3 py-2 border border-green-100 dark:border-green-800 select-none opacity-60" draggable="false">
+<span class="material-symbols-outlined text-green-600 text-sm">check_circle</span>
+<span class="text-sm font-medium text-green-800 dark:text-green-300 line-through">Date Completed</span>
+</div>
+<div class="drag-source group flex items-center gap-2 bg-slate-50 dark:bg-slate-700/50 hover:bg-white hover:shadow-md hover:ring-1 hover:ring-primary/20 transition-all rounded-lg px-3 py-2 border border-slate-200 dark:border-slate-600 select-none cursor-grab active:cursor-grabbing" draggable="true">
+<span class="material-symbols-outlined text-slate-400 text-sm">drag_indicator</span>
+<span class="text-sm font-medium text-slate-700 dark:text-slate-200">Instructor Name</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-4">
+<p class="text-[10px] font-bold uppercase tracking-wider text-slate-400 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">badge</span>
+                                        Certificate Fields
+                                    </p>
+<div class="group relative flex items-center gap-4 rounded-xl border border-green-200 bg-green-50/30 dark:bg-green-900/10 dark:border-green-800/50 p-3 transition-all hover:shadow-sm">
+<div class="flex size-10 shrink-0 items-center justify-center rounded-lg bg-white dark:bg-slate-800 shadow-sm border border-slate-100 dark:border-slate-700 text-green-600">
+<span class="material-symbols-outlined text-xl">person</span>
+</div>
+<div class="flex-1">
+<p class="text-xs font-semibold text-slate-500 dark:text-slate-400 mb-1.5 uppercase tracking-wide">Recipient Name</p>
+<div class="flex items-center gap-2 bg-white border border-green-200 text-slate-800 rounded-md px-3 py-1.5 w-fit text-sm font-medium shadow-sm">
+<span class="material-symbols-outlined text-xs text-green-600">link</span>
+                                                Student Name
+                                                <button class="ml-2 hover:text-red-500 transition-colors"><span class="material-symbols-outlined text-xs">close</span></button>
+</div>
+</div>
+<div class="absolute right-4 top-1/2 -translate-y-1/2 text-green-500 opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined">check_circle</span>
+</div>
+</div>
+<div class="group relative flex items-center gap-4 rounded-xl border border-green-200 bg-green-50/30 dark:bg-green-900/10 dark:border-green-800/50 p-3 transition-all hover:shadow-sm">
+<div class="flex size-10 shrink-0 items-center justify-center rounded-lg bg-white dark:bg-slate-800 shadow-sm border border-slate-100 dark:border-slate-700 text-green-600">
+<span class="material-symbols-outlined text-xl">school</span>
+</div>
+<div class="flex-1">
+<p class="text-xs font-semibold text-slate-500 dark:text-slate-400 mb-1.5 uppercase tracking-wide">Award Title</p>
+<div class="flex items-center gap-2 bg-white border border-green-200 text-slate-800 rounded-md px-3 py-1.5 w-fit text-sm font-medium shadow-sm">
+<span class="material-symbols-outlined text-xs text-green-600">link</span>
+                                                Course Name
+                                                <button class="ml-2 hover:text-red-500 transition-colors"><span class="material-symbols-outlined text-xs">close</span></button>
+</div>
+</div>
+<div class="absolute right-4 top-1/2 -translate-y-1/2 text-green-500 opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined">check_circle</span>
+</div>
+</div>
+<div class="group relative flex items-center gap-4 rounded-xl border border-green-200 bg-green-50/30 dark:bg-green-900/10 dark:border-green-800/50 p-3 transition-all hover:shadow-sm">
+<div class="flex size-10 shrink-0 items-center justify-center rounded-lg bg-white dark:bg-slate-800 shadow-sm border border-slate-100 dark:border-slate-700 text-green-600">
+<span class="material-symbols-outlined text-xl">event</span>
+</div>
+<div class="flex-1">
+<p class="text-xs font-semibold text-slate-500 dark:text-slate-400 mb-1.5 uppercase tracking-wide">Issue Date</p>
+<div class="flex items-center gap-2 bg-white border border-green-200 text-slate-800 rounded-md px-3 py-1.5 w-fit text-sm font-medium shadow-sm">
+<span class="material-symbols-outlined text-xs text-green-600">link</span>
+                                                Date Completed
+                                                <button class="ml-2 hover:text-red-500 transition-colors"><span class="material-symbols-outlined text-xs">close</span></button>
+</div>
+</div>
+<div class="absolute right-4 top-1/2 -translate-y-1/2 text-green-500 opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined">check_circle</span>
+</div>
+</div>
+<div class="relative flex items-center gap-4 rounded-xl border-2 border-dashed border-red-300 bg-red-50/30 dark:bg-red-900/10 p-4 transition-all hover:border-red-400 hover:bg-red-50/50 cursor-pointer">
+<div class="flex size-10 shrink-0 items-center justify-center rounded-lg bg-white dark:bg-slate-800 shadow-sm border border-red-200 text-red-500">
+<span class="material-symbols-outlined text-xl">ink_pen</span>
+</div>
+<div class="flex-1">
+<div class="flex items-center justify-between mb-1">
+<p class="text-xs font-bold text-red-600 dark:text-red-400 uppercase tracking-wide">Authorized Signature</p>
+<span class="text-[10px] bg-red-100 text-red-600 px-2 py-0.5 rounded-full font-bold">REQUIRED</span>
+</div>
+<p class="text-sm text-slate-400 italic flex items-center gap-1">
+<span class="material-symbols-outlined text-sm animate-bounce">arrow_downward</span>
+                                                Drag "Instructor Name" here
+                                            </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="lg:col-span-7 flex flex-col gap-4">
+<div class="flex items-center justify-between bg-white dark:bg-slate-800 rounded-xl p-3 px-5 border border-slate-200 dark:border-slate-700 shadow-soft">
+<h3 class="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">visibility</span>
+                                Live Sample
+                            </h3>
+<div class="flex items-center gap-3 bg-slate-50 dark:bg-slate-700/50 rounded-lg p-1">
+<button class="p-1.5 rounded hover:bg-white dark:hover:bg-slate-600 shadow-sm transition-all text-slate-400 disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined text-lg">chevron_left</span>
+</button>
+<span class="text-xs font-mono font-medium text-slate-500 dark:text-slate-400 w-24 text-center">Row 1 of 150</span>
+<button class="p-1.5 rounded hover:bg-white dark:hover:bg-slate-600 shadow-sm transition-all text-slate-600 dark:text-slate-200">
+<span class="material-symbols-outlined text-lg">chevron_right</span>
+</button>
+</div>
+</div>
+<div class="flex-1 bg-slate-200 dark:bg-slate-900 rounded-xl border border-slate-300 dark:border-slate-700 relative overflow-hidden flex items-center justify-center p-8 bg-[radial-gradient(#cbd5e1_1px,transparent_1px)] dark:bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:24px_24px]">
+<div class="w-full max-w-[700px] aspect-[1.414/1] paper-texture text-slate-900 shadow-2xl relative p-14 flex flex-col items-center text-center justify-between select-none transform transition-transform hover:scale-[1.01] duration-500" style="font-family: 'Playfair Display', serif;">
+<div class="absolute inset-5 border border-slate-400 pointer-events-none"></div>
+<div class="absolute inset-6 border-[3px] border-slate-800 pointer-events-none"></div>
+<div class="absolute top-6 left-6 w-16 h-16 border-t-[6px] border-l-[6px] border-slate-800 rounded-tl-none"></div>
+<div class="absolute top-6 right-6 w-16 h-16 border-t-[6px] border-r-[6px] border-slate-800 rounded-tr-none"></div>
+<div class="absolute bottom-6 left-6 w-16 h-16 border-b-[6px] border-l-[6px] border-slate-800 rounded-bl-none"></div>
+<div class="absolute bottom-6 right-6 w-16 h-16 border-b-[6px] border-r-[6px] border-slate-800 rounded-br-none"></div>
+<div class="z-10 w-full flex flex-col items-center gap-6 mt-4">
+<div class="flex flex-col items-center">
+<div class="flex items-center justify-center mb-4 text-slate-800">
+<span class="material-symbols-outlined text-6xl">account_balance</span>
+</div>
+<h1 class="text-5xl font-bold uppercase tracking-widest text-slate-800 mb-2">Certificate</h1>
+<span class="text-xl italic text-slate-600 font-serif">of Achievement</span>
+</div>
+<div class="mt-6 w-full">
+<p class="text-xs text-slate-500 font-sans uppercase tracking-[0.2em] mb-4">Presented To</p>
+<div class="relative group inline-block w-full max-w-lg">
+<h2 class="text-4xl font-bold text-slate-900 border-b border-slate-300 pb-2 w-full font-script bg-green-50/50 px-4 rounded transition-colors hover:bg-green-100/50 cursor-help">
+                                                Johnathan Doe
+                                            </h2>
+<div class="absolute -top-10 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-xs px-3 py-1.5 rounded-lg shadow-xl opacity-0 group-hover:opacity-100 transition-all transform group-hover:-translate-y-1 font-sans flex items-center gap-2">
+<span class="material-symbols-outlined text-xs text-green-400">link</span>
+                                                Student Name
+                                            </div>
+</div>
+</div>
+<div class="mt-2 w-full">
+<p class="text-xs text-slate-500 font-sans uppercase tracking-[0.2em] mb-4">For the successful completion of</p>
+<div class="relative group inline-block w-full max-w-xl">
+<h3 class="text-2xl font-bold text-slate-800 uppercase tracking-wide bg-green-50/50 px-4 py-1 rounded transition-colors hover:bg-green-100/50 cursor-help">
+                                                Advanced Digital Marketing Mastery
+                                            </h3>
+<div class="absolute -top-10 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-xs px-3 py-1.5 rounded-lg shadow-xl opacity-0 group-hover:opacity-100 transition-all transform group-hover:-translate-y-1 font-sans flex items-center gap-2">
+<span class="material-symbols-outlined text-xs text-green-400">link</span>
+                                                Course Name
+                                            </div>
+</div>
+</div>
+</div>
+<div class="z-10 w-full flex justify-between items-end mt-8 px-16 pb-4">
+<div class="flex flex-col items-center gap-2 w-48">
+<div class="relative group w-full text-center">
+<p class="font-sans text-lg text-slate-800 border-b border-slate-400 pb-1 w-full bg-green-50/50 rounded hover:bg-green-100/50 cursor-help">October 24, 2023</p>
+<div class="absolute -top-10 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-xs px-3 py-1.5 rounded-lg shadow-xl opacity-0 group-hover:opacity-100 transition-all transform group-hover:-translate-y-1 font-sans flex items-center gap-2">
+<span class="material-symbols-outlined text-xs text-green-400">link</span>
+                                                Date Completed
+                                            </div>
+</div>
+<p class="text-[10px] uppercase tracking-widest text-slate-500 font-sans">Date Issued</p>
+</div>
+<div class="relative -mb-6 mx-4">
+<div class="size-24 rounded-full embossed-seal flex items-center justify-center relative">
+<div class="absolute inset-2 border border-yellow-200 rounded-full opacity-50"></div>
+<div class="text-center transform -rotate-12">
+<span class="material-symbols-outlined text-4xl text-yellow-900 opacity-60">workspace_premium</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col items-center gap-2 w-48">
+<div class="w-full text-center group relative">
+<div class="border-b border-dashed border-red-300 bg-red-50 px-4 py-2 w-full text-red-400 italic font-script text-xl min-h-[40px] flex items-center justify-center">
+                                                (Signature Missing)
+                                            </div>
+<div class="absolute -top-10 left-1/2 -translate-x-1/2 bg-red-600 text-white text-xs px-3 py-1.5 rounded-lg shadow-xl opacity-0 group-hover:opacity-100 transition-all transform group-hover:-translate-y-1 font-sans flex items-center gap-2">
+<span class="material-symbols-outlined text-xs">error</span>
+                                                Unmapped Field
+                                            </div>
+</div>
+<p class="text-[10px] uppercase tracking-widest text-slate-500 font-sans">Authorized Signature</p>
+</div>
+</div>
+<div class="absolute inset-0 opacity-[0.03] pointer-events-none z-0" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDwwz1bEMTY-pUqNXioiKVOD_-dewDpn1cL1YyF0bH3DEQNkhycocovKuCUKh7l6AAPhRU1r_jOlCuRYQwCp9h3pDEoONKtooV3A1J2dhBBoYzMvNsTTRkldV49Zi6z5Z3Wsoc9n9mVyoDnRKYQt2GwPRGz2xnY4usEVQJXHeJSAHl-DXHO-KNIuKm2ojDcmcNDSlEP-AnMiKe9LeKfEifDtqKjzrTiramIGGo_aMwwRtMNXcgriwCOog5qB3S0jcEZuP7PiLgGpa1F'); background-size: 20px 20px;"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="w-full border-t border-slate-200 bg-white/80 backdrop-blur dark:bg-slate-900/80 dark:border-slate-800 p-4 px-6 rounded-t-xl sticky bottom-0 z-30 shadow-[0_-5px_20px_-5px_rgba(0,0,0,0.1)]">
+<div class="mx-auto max-w-7xl flex items-center justify-between">
+<button class="px-6 py-2.5 rounded-xl border border-slate-300 text-slate-700 font-medium hover:bg-slate-50 dark:border-slate-600 dark:text-slate-300 dark:hover:bg-slate-800 transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-lg">arrow_back</span>
+                            Back to Upload
+                        </button>
+<div class="flex items-center gap-6">
+<div class="flex flex-col items-end hidden sm:flex">
+<span class="text-xs font-bold text-amber-600 uppercase tracking-wide">Action Required</span>
+<span class="text-sm text-slate-500 dark:text-slate-400">1 mandatory field unmapped</span>
+</div>
+<button class="px-8 py-3 rounded-xl bg-slate-300 text-slate-500 font-bold cursor-not-allowed flex items-center gap-2 transition-all">
+                                Continue to Review
+                                <span class="material-symbols-outlined text-lg">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+
+</body></html>

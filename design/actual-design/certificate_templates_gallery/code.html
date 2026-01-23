@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Creative Inspiration Gallery</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#4f46e5", // Updated to a slightly more vibrant indigo
+                        "secondary": "#ec4899", // Added for gradients
+                        "background-light": "#f8fafc",
+                        "background-dark": "#0f172a",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "2xl": "2rem", "full": "9999px"},
+                    backgroundImage: {
+                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+                        'subtle-pattern': "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")",
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }.card-hover-effect {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .card-hover-effect:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white font-display bg-subtle-pattern">
+<div class="flex h-screen w-full overflow-hidden">
+<div class="hidden md:flex flex-col w-64 border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shrink-0 z-20 shadow-sm">
+<div class="flex flex-col h-full justify-between p-4">
+<div class="flex flex-col gap-6">
+<div class="flex items-center gap-3 px-2">
+<div class="flex items-center justify-center size-10 rounded-xl bg-gradient-to-br from-primary to-secondary text-white shadow-lg shadow-primary/30">
+<span class="material-symbols-outlined text-2xl">workspace_premium</span>
+</div>
+<h1 class="text-xl font-bold tracking-tight text-slate-900 dark:text-white bg-clip-text text-transparent bg-gradient-to-r from-slate-900 to-slate-600 dark:from-white dark:to-slate-400">CertifyOS</h1>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors group" href="#">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary dark:text-slate-500 dark:group-hover:text-primary transition-colors">dashboard</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-gradient-to-r from-primary/10 to-transparent text-primary dark:from-primary/20 dark:text-primary-400 font-semibold" href="#">
+<span class="material-symbols-outlined fill-1">grid_view</span>
+<span class="text-sm">Inspiration Gallery</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors group" href="#">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary dark:text-slate-500 dark:group-hover:text-primary transition-colors">history_edu</span>
+<span class="text-sm font-medium">Issued Certificates</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors group" href="#">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary dark:text-slate-500 dark:group-hover:text-primary transition-colors">groups</span>
+<span class="text-sm font-medium">Recipients</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors group" href="#">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary dark:text-slate-500 dark:group-hover:text-primary transition-colors">settings</span>
+<span class="text-sm font-medium">Settings</span>
+</a>
+</nav>
+</div>
+<div class="flex items-center gap-3 px-3 py-3 border-t border-slate-100 dark:border-slate-800 mt-auto bg-slate-50/50 dark:bg-slate-800/50 rounded-xl">
+<div class="size-9 rounded-full bg-cover bg-center ring-2 ring-white dark:ring-slate-700 shadow-sm" data-alt="User profile picture of a man" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBIxC0UEn9lH4cQoZVwfp_PFe2OG_EQ4HLxIR7kp7j3w2P3cuMvg_75ZdDStqUfCNX0nuWmUeKNmmGmalUQIqRGy7KAsF1GrBJz7hQpMtBXlYkNeAWECbi_V-oAQwDh2mcXAl5emkmDRJs5aGWx4C42P8ZKHLf9OhMn3QDGofTm7AJWThWEY3AVZDdMwSXJFcnqazCeiTBljLE-eEwBLmxHOyhqOJOSYHSMtRQoPCV5N0XDQCNa0bGiMaFalBjEwF5nZ5jD9dbVDGd6');"></div>
+<div class="flex flex-col">
+<p class="text-sm font-bold text-slate-900 dark:text-white">Alex Morgan</p>
+<p class="text-xs text-slate-500 dark:text-slate-400">Design Admin</p>
+</div>
+</div>
+</div>
+</div>
+<div class="flex flex-col flex-1 h-full overflow-hidden relative">
+<header class="flex items-center justify-between h-20 px-6 border-b border-slate-200/60 dark:border-slate-800 bg-white/60 dark:bg-slate-900/60 backdrop-blur-md sticky top-0 z-30 shrink-0">
+<div class="flex items-center gap-4">
+<button class="md:hidden p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="hidden sm:flex flex-col">
+<h2 class="text-lg font-bold text-slate-900 dark:text-white">Inspiration Gallery</h2>
+<span class="text-xs text-slate-500 dark:text-slate-400">Curated designs for your team</span>
+</div>
+</div>
+<div class="hidden md:flex max-w-lg w-full mx-8">
+<label class="relative w-full group">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-slate-400 group-focus-within:text-primary transition-colors">search</span>
+</div>
+<input class="block w-full pl-10 pr-3 py-2.5 border-none rounded-xl bg-slate-100/50 dark:bg-slate-800/50 text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:ring-primary/50 focus:bg-white dark:focus:bg-slate-800 transition-all shadow-sm" placeholder="Search for styles, moods, or occasions..." type="text"/>
+<div class="absolute inset-y-0 right-2 flex items-center">
+<span class="text-xs text-slate-400 bg-white dark:bg-slate-700 px-1.5 py-0.5 rounded border border-slate-200 dark:border-slate-600">⌘K</span>
+</div>
+</label>
+</div>
+<div class="flex items-center gap-3">
+<button class="flex items-center justify-center size-10 rounded-full text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-primary transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2.5 right-2.5 size-2 bg-rose-500 rounded-full ring-2 ring-white dark:ring-slate-900"></span>
+</button>
+<button class="px-5 py-2.5 bg-slate-900 hover:bg-slate-800 dark:bg-white dark:hover:bg-slate-200 dark:text-slate-900 text-white text-sm font-semibold rounded-xl shadow-lg shadow-slate-900/10 transition-all flex items-center gap-2 transform active:scale-95">
+<span class="material-symbols-outlined text-[20px]">add_circle</span>
+<span>New Design</span>
+</button>
+</div>
+</header>
+<main class="flex-1 overflow-y-auto p-6 md:p-10 scroll-smooth">
+<div class="max-w-[1600px] mx-auto space-y-12">
+<div class="flex flex-col gap-8 relative">
+<div class="absolute -top-10 -left-10 w-64 h-64 bg-primary/5 rounded-full blur-3xl pointer-events-none"></div>
+<div class="absolute top-0 right-0 w-96 h-96 bg-secondary/5 rounded-full blur-3xl pointer-events-none"></div>
+<div class="flex flex-col gap-3 relative z-10">
+<h1 class="text-4xl md:text-5xl font-black tracking-tight text-slate-900 dark:text-white">
+                            Creative <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Inspiration</span> Gallery
+                        </h1>
+<p class="text-slate-500 dark:text-slate-400 text-lg max-w-3xl leading-relaxed">
+                            Discover a curated collection of emotionally engaging designs. From formal recognition to vibrant celebrations, find the perfect template to tell your story.
+                        </p>
+</div>
+<div class="md:hidden w-full relative z-10">
+<label class="relative w-full">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-slate-400">search</span>
+</div>
+<input class="block w-full pl-10 pr-3 py-3 border-none rounded-xl bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-500 shadow-lg shadow-slate-200/50 dark:shadow-none focus:ring-2 focus:ring-primary" placeholder="Search templates..." type="text"/>
+</label>
+</div>
+<div class="flex gap-3 overflow-x-auto hide-scrollbar pb-4 relative z-10">
+<button class="flex shrink-0 items-center justify-center px-5 py-2.5 rounded-full bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-sm font-semibold transition-transform active:scale-95 shadow-lg shadow-slate-900/20">
+                            All Collections
+                        </button>
+<button class="flex shrink-0 items-center justify-center px-5 py-2.5 rounded-full bg-white/80 dark:bg-slate-800/80 backdrop-blur text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700 hover:border-primary/50 hover:text-primary hover:bg-white hover:shadow-md text-sm font-medium transition-all active:scale-95">
+                            ✨ Corporate Elite
+                        </button>
+<button class="flex shrink-0 items-center justify-center px-5 py-2.5 rounded-full bg-white/80 dark:bg-slate-800/80 backdrop-blur text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700 hover:border-primary/50 hover:text-primary hover:bg-white hover:shadow-md text-sm font-medium transition-all active:scale-95">
+                            🚀 Startup Vibes
+                        </button>
+<button class="flex shrink-0 items-center justify-center px-5 py-2.5 rounded-full bg-white/80 dark:bg-slate-800/80 backdrop-blur text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700 hover:border-primary/50 hover:text-primary hover:bg-white hover:shadow-md text-sm font-medium transition-all active:scale-95">
+                            🎓 Academic Merit
+                        </button>
+<button class="flex shrink-0 items-center justify-center px-5 py-2.5 rounded-full bg-white/80 dark:bg-slate-800/80 backdrop-blur text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700 hover:border-primary/50 hover:text-primary hover:bg-white hover:shadow-md text-sm font-medium transition-all active:scale-95">
+                            🎨 Creative Arts
+                        </button>
+</div>
+</div>
+<section>
+<div class="flex items-center justify-between mb-6">
+<div class="flex items-center gap-3">
+<div class="p-2 bg-amber-100 dark:bg-amber-900/30 rounded-lg">
+<span class="material-symbols-outlined text-amber-500">auto_awesome</span>
+</div>
+<div>
+<h3 class="text-xl font-bold text-slate-900 dark:text-white">Trending This Week</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400">Handpicked designs that are getting attention</p>
+</div>
+</div>
+<a class="text-primary font-medium hover:text-primary/80 flex items-center gap-1 group" href="#">
+                        View all featured
+                        <span class="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="group relative rounded-2xl overflow-hidden bg-white dark:bg-slate-800 shadow-lg shadow-slate-200/50 dark:shadow-slate-900/50 border border-slate-100 dark:border-slate-700 hover:shadow-2xl hover:-translate-y-1 transition-all duration-500">
+<div class="absolute top-4 left-4 z-20">
+<div class="px-3 py-1 bg-gradient-to-r from-amber-500 to-orange-500 text-white text-xs font-bold rounded-full shadow-lg flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">star</span>
+                                    EDITOR'S CHOICE
+                                </div>
+</div>
+<div class="aspect-[16/9] w-full bg-slate-100 dark:bg-slate-700 relative overflow-hidden">
+<img class="object-cover w-full h-full group-hover:scale-110 transition-transform duration-700 ease-in-out" data-alt="Golden ornate certificate template with blue ribbon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAFRy2BPP7pC3d5qUvXE6WgOhVC3yAI_8j5ppqbbNeqmDYFZCHUp_FL50abKm4I86tfZbKcKSTx2XFVjzLF3Fx9KufN6gfSmLte0GlAbnZh3k5KNmfkO1BfnoFFh-YkKK6JyDK50qnQmxL8d-cbDmzGQpMVa4c0yA0WiowqL0qAzGcnob94gR_hgmNCNi1wMffCagpJtnmu4nEyJUs7_paqg3mmU5XHidGu1_oE_ulR-FTUUonesQpwr1_ZnsxwDDC-YK8b8VmNSP5z"/>
+<div class="absolute inset-0 bg-slate-900/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4 backdrop-blur-[2px]">
+<button class="size-12 rounded-full bg-white/20 hover:bg-white/40 backdrop-blur-md text-white flex items-center justify-center transition-all hover:scale-110" title="Quick Preview">
+<span class="material-symbols-outlined text-2xl">visibility</span>
+</button>
+<button class="px-6 py-3 bg-primary hover:bg-indigo-500 text-white rounded-xl font-bold text-sm shadow-xl shadow-primary/30 flex items-center gap-2 transition-all hover:scale-105 transform">
+                                        Use This Design
+                                        <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<div class="p-6 relative">
+<div class="flex justify-between items-start">
+<div class="space-y-1">
+<h4 class="font-bold text-slate-900 dark:text-white text-xl">Modern Excellence Award</h4>
+<p class="text-sm text-slate-500 dark:text-slate-400">The gold standard for corporate recognition.</p>
+<div class="pt-2 flex items-center gap-2 text-xs font-medium text-emerald-600 dark:text-emerald-400">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+                                        Best for HR recognition
+                                    </div>
+</div>
+<button class="size-10 rounded-full hover:bg-rose-50 dark:hover:bg-rose-900/20 text-slate-300 hover:text-rose-500 transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined">favorite</span>
+</button>
+</div>
+</div>
+</div>
+<div class="group relative rounded-2xl overflow-hidden bg-white dark:bg-slate-800 shadow-lg shadow-slate-200/50 dark:shadow-slate-900/50 border border-slate-100 dark:border-slate-700 hover:shadow-2xl hover:-translate-y-1 transition-all duration-500">
+<div class="absolute top-4 left-4 z-20">
+<div class="px-3 py-1 bg-gradient-to-r from-blue-500 to-cyan-500 text-white text-xs font-bold rounded-full shadow-lg flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">trending_up</span>
+                                    TRENDING
+                                </div>
+</div>
+<div class="aspect-[16/9] w-full bg-slate-100 dark:bg-slate-700 relative overflow-hidden">
+<img class="object-cover w-full h-full group-hover:scale-110 transition-transform duration-700 ease-in-out" data-alt="Clean minimalist certificate template with geometric shapes" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCIokQa_IYAv5gyBJ6NBKnmiZ4tm5nAG89W9Ek_A648lpb_uJecTuynSSB1j4qjjiTiBOikA-fw5-xJUiKH5JXGzU4dOaFxXLonQjnEBKxZvbnqyZvsRnKrxfaGpK5K0kDxuktqleJuFNiNzMy9EnNCaTeYKyBQV79fFNSnHkhyF7CNAASEHmqwj6J8FKGdj9d6O4yvcNDKucplxKbF1hakkEodjfhbB9zARXnUe10uZmQrOgLiLu4PDPDbcBctxOakUUhV-w-wRY_6"/>
+<div class="absolute inset-0 bg-slate-900/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4 backdrop-blur-[2px]">
+<button class="size-12 rounded-full bg-white/20 hover:bg-white/40 backdrop-blur-md text-white flex items-center justify-center transition-all hover:scale-110" title="Quick Preview">
+<span class="material-symbols-outlined text-2xl">visibility</span>
+</button>
+<button class="px-6 py-3 bg-primary hover:bg-indigo-500 text-white rounded-xl font-bold text-sm shadow-xl shadow-primary/30 flex items-center gap-2 transition-all hover:scale-105 transform">
+                                        Use This Design
+                                        <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<div class="p-6 relative">
+<div class="flex justify-between items-start">
+<div class="space-y-1">
+<h4 class="font-bold text-slate-900 dark:text-white text-xl">Tech Internship Completion</h4>
+<p class="text-sm text-slate-500 dark:text-slate-400">Minimalist aesthetic with sharp geometric lines.</p>
+<div class="pt-2 flex items-center gap-2 text-xs font-medium text-blue-600 dark:text-blue-400">
+<span class="material-symbols-outlined text-[16px]">groups</span>
+                                        Popular for Tech Events
+                                    </div>
+</div>
+<button class="size-10 rounded-full hover:bg-rose-50 dark:hover:bg-rose-900/20 text-slate-300 hover:text-rose-500 transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined">favorite</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section>
+<div class="flex items-center justify-between mb-6">
+<div>
+<h3 class="text-xl font-bold text-slate-900 dark:text-white">Explore Collection</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Found 48 templates tailored for you</p>
+</div>
+<div class="flex items-center gap-3">
+<div class="hidden sm:flex items-center bg-white dark:bg-slate-800 rounded-lg p-1 border border-slate-200 dark:border-slate-700">
+<button class="p-1.5 rounded bg-slate-100 dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm">
+<span class="material-symbols-outlined text-[20px]">grid_view</span>
+</button>
+<button class="p-1.5 rounded text-slate-400 hover:text-slate-600 dark:hover:text-slate-300">
+<span class="material-symbols-outlined text-[20px]">view_list</span>
+</button>
+</div>
+<div class="flex items-center gap-2 text-sm text-slate-500">
+<button class="font-medium px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-slate-900 dark:text-white flex items-center gap-2 hover:border-primary transition-colors">
+                                Popularity <span class="material-symbols-outlined text-[16px]">expand_more</span>
+</button>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+<div class="card-hover-effect group flex flex-col bg-white dark:bg-slate-800 rounded-2xl overflow-hidden border border-slate-100 dark:border-slate-700 shadow-sm relative">
+<div class="aspect-[4/3] w-full relative overflow-hidden bg-slate-50">
+<img class="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-500" data-alt="Classic formal certificate with border" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCo-Zuqdc18QnvKemQwHMW611BC-781WwRT7UgQ280F-Ed1G1wulyM3P7MTi8J5gq7xJBZjFla6acHK5be7awFvqZJT4_TMUVeErAybD27NZh7s8LKTCqjuXoCz7pvnFSGhS9wv3Ee_l514iEu9Zo9e7-n6iSYiZoqwERF7a5LtCvZEHSI6tob0ponDQ4yo3sftqU8Gd6FePsGn6-4HZohGJGWPxaTxD7l-Si-kQ7iwcvXokjPsPBr1BF-OC31ppqfV62zZu1cX5QIH"/>
+<div class="absolute inset-0 bg-slate-900/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3 backdrop-blur-[1px]">
+<button class="size-10 rounded-full bg-white/20 backdrop-blur-md text-white flex items-center justify-center hover:bg-white/40 transition-colors" title="Preview">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+<button class="px-4 py-2 bg-primary text-white rounded-lg text-sm font-bold shadow-lg hover:bg-indigo-500 transition-colors">Use Design</button>
+</div>
+</div>
+<div class="p-5">
+<h5 class="text-base font-bold text-slate-900 dark:text-white truncate">Participation Certificate</h5>
+<p class="text-xs text-slate-500 dark:text-slate-400 mt-1 line-clamp-2">A timeless classic for workshops and seminars.</p>
+<div class="flex justify-between items-center mt-4 pt-3 border-t border-slate-100 dark:border-slate-700">
+<span class="text-[10px] uppercase tracking-wider font-semibold text-slate-400">Classic</span>
+<button class="text-slate-300 hover:text-rose-500 transition-colors"><span class="material-symbols-outlined text-[20px]">favorite</span></button>
+</div>
+</div>
+</div>
+<div class="card-hover-effect group flex flex-col bg-white dark:bg-slate-800 rounded-2xl overflow-hidden border border-slate-100 dark:border-slate-700 shadow-sm relative">
+<div class="aspect-[4/3] w-full relative overflow-hidden bg-slate-50">
+<img class="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-500" data-alt="Abstract colorful gradient background certificate" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-oevWZf_-Ym51ym6HtzaQVNjy9uFe2BW4ZyVT8gfuowUSPIQxX7zXDyyD4OnvnY4ja7gT86ngVrIOTNanuOcyfDsNPK3-7AsAl9uNLi-Q4EIrdaRBfhHEKhN6ex4Kqo2Mjn3TK7Y-lTPIYSGjbIU4etkhuGbwjSkD1ytwUjS9B3U8PFvUoN-TOXMYURYZIdz1K2_obH2BBR6QSUvEBxbYpyFAFDf99SDgZUuPgLLQKImE-J9o1ALVcf773DTB68I4_rgQITkq0uCK"/>
+<div class="absolute top-3 left-3 px-2 py-0.5 bg-secondary/90 backdrop-blur-sm rounded text-[10px] font-bold text-white shadow-sm">
+                            VIBRANT
+                        </div>
+<div class="absolute inset-0 bg-slate-900/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3 backdrop-blur-[1px]">
+<button class="size-10 rounded-full bg-white/20 backdrop-blur-md text-white flex items-center justify-center hover:bg-white/40 transition-colors" title="Preview">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+<button class="px-4 py-2 bg-primary text-white rounded-lg text-sm font-bold shadow-lg hover:bg-indigo-500 transition-colors">Use Design</button>
+</div>
+</div>
+<div class="p-5">
+<h5 class="text-base font-bold text-slate-900 dark:text-white truncate">Creative Gradient</h5>
+<p class="text-xs text-slate-500 dark:text-slate-400 mt-1 line-clamp-2">Inject energy into your awards with fluid colors.</p>
+<div class="flex justify-between items-center mt-4 pt-3 border-t border-slate-100 dark:border-slate-700">
+<span class="text-[10px] uppercase tracking-wider font-semibold text-slate-400">Modern</span>
+<button class="text-slate-300 hover:text-rose-500 transition-colors"><span class="material-symbols-outlined text-[20px]">favorite</span></button>
+</div>
+</div>
+</div>
+<div class="card-hover-effect group flex flex-col bg-white dark:bg-slate-800 rounded-2xl overflow-hidden border border-slate-100 dark:border-slate-700 shadow-sm relative">
+<div class="aspect-[4/3] w-full relative overflow-hidden bg-slate-50">
+<img class="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-500" data-alt="Dark themed luxury certificate" src="https://lh3.googleusercontent.com/aida-public/AB6AXuByEJfnruJifKb2xMbOeVp1E0zO8RJnHb-ZOqfH0HLAQmVylsRAQ06AWhD2zNc-qY8Zb0uPe1BmDBRoFkiwId_tHt3448oNfKFSbnZzY-bNQ_UOfcCO-raWJr2f0ZzXbIs0eXV0CL3xOhwck4ofjNuphogee_55xQJu__yDv75lu47z5QcT5Ji5BzPwqCr9AbrmtaU-Kbn1gKdEDn7q28ikRTDqPwlT-WppRrfSHEuaC5EJdTGbohMsVaJub6NlSjYLwpAK36vitKSx"/>
+<div class="absolute inset-0 bg-slate-900/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3 backdrop-blur-[1px]">
+<button class="size-10 rounded-full bg-white/20 backdrop-blur-md text-white flex items-center justify-center hover:bg-white/40 transition-colors" title="Preview">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+<button class="px-4 py-2 bg-primary text-white rounded-lg text-sm font-bold shadow-lg hover:bg-indigo-500 transition-colors">Use Design</button>
+</div>
+</div>
+<div class="p-5">
+<h5 class="text-base font-bold text-slate-900 dark:text-white truncate">Luxury Dark Mode</h5>
+<p class="text-xs text-slate-500 dark:text-slate-400 mt-1 line-clamp-2">Sophistication for premium memberships.</p>
+<div class="flex justify-between items-center mt-4 pt-3 border-t border-slate-100 dark:border-slate-700">
+<span class="text-[10px] uppercase tracking-wider font-semibold text-slate-400">Premium</span>
+<button class="text-slate-300 hover:text-rose-500 transition-colors"><span class="material-symbols-outlined text-[20px]">favorite</span></button>
+</div>
+</div>
+</div>
+<div class="card-hover-effect group flex flex-col bg-white dark:bg-slate-800 rounded-2xl overflow-hidden border border-slate-100 dark:border-slate-700 shadow-sm relative">
+<div class="aspect-[4/3] w-full relative overflow-hidden bg-slate-50">
+<img class="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-500" data-alt="Playful colorful kids certificate" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtgzpIoh6uLJ3ed_iDxODHKZ7vR7dky1eo6HgGNB8CRqWrz1CBoqsuB0qMNsd1iABwluW8WNGbRSmhrE18mh-wW8DM6VrY4fS-V30LMcXQyafusSxMa1q8YM05Ti0NeZ3Ah7SL3K3x3QIi-fMqLlR5IJoW-JMI1xFZeZZLDEHj64xKObgTYaVjSCPVmVEco3EZ1xAbiuTZacY9kSGp0v4WgAgSitXZqC66U8djoRaVbHLD9YnAMoQJy1jufqeaZzj5bew3ywDpgYDm"/>
+<div class="absolute inset-0 bg-slate-900/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3 backdrop-blur-[1px]">
+<button class="size-10 rounded-full bg-white/20 backdrop-blur-md text-white flex items-center justify-center hover:bg-white/40 transition-colors" title="Preview">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+<button class="px-4 py-2 bg-primary text-white rounded-lg text-sm font-bold shadow-lg hover:bg-indigo-500 transition-colors">Use Design</button>
+</div>
+</div>
+<div class="p-5">
+<h5 class="text-base font-bold text-slate-900 dark:text-white truncate">Junior Achievement</h5>
+<p class="text-xs text-slate-500 dark:text-slate-400 mt-1 line-clamp-2">Bright and playful for the little achievers.</p>
+<div class="flex justify-between items-center mt-4 pt-3 border-t border-slate-100 dark:border-slate-700">
+<span class="text-[10px] uppercase tracking-wider font-semibold text-slate-400">Kids</span>
+<button class="text-slate-300 hover:text-rose-500 transition-colors"><span class="material-symbols-outlined text-[20px]">favorite</span></button>
+</div>
+</div>
+</div>
+<div class="card-hover-effect group flex flex-col bg-white dark:bg-slate-800 rounded-2xl overflow-hidden border border-slate-100 dark:border-slate-700 shadow-sm relative">
+<div class="aspect-[4/3] w-full relative overflow-hidden bg-slate-50">
+<img class="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-500" data-alt="Minimalist typography certificate" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2X3Q0G8qEzryPMCncfLejB8423_FeYpDdvy9Me4R8B3mOtGKuszXmI1EdI4ETvTvelPLODuOIvQ9QU3EiEQiTTgbyElE8vuhBG0TYnfUGKiJ2jnEodpSXZF91n-8FwYk4O22m3BMJxfe4Qft3-JBrkS7lv-kRZOnHzgKX7nCq22tRfqo8Av9aID-1f1QfgjIyfpSHJLECnrNInBAiRelmeCavh_ob-Um_23_k1is_T1z1VYmtNnz6Lj5oMJ2agS3UKCFJiLV5xWsX"/>
+<div class="absolute inset-0 bg-slate-900/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3 backdrop-blur-[1px]">
+<button class="size-10 rounded-full bg-white/20 backdrop-blur-md text-white flex items-center justify-center hover:bg-white/40 transition-colors" title="Preview">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+<button class="px-4 py-2 bg-primary text-white rounded-lg text-sm font-bold shadow-lg hover:bg-indigo-500 transition-colors">Use Design</button>
+</div>
+</div>
+<div class="p-5">
+<h5 class="text-base font-bold text-slate-900 dark:text-white truncate">Clean Typography</h5>
+<p class="text-xs text-slate-500 dark:text-slate-400 mt-1 line-clamp-2">Where the words matter more than the decoration.</p>
+<div class="flex justify-between items-center mt-4 pt-3 border-t border-slate-100 dark:border-slate-700">
+<span class="text-[10px] uppercase tracking-wider font-semibold text-slate-400">Minimal</span>
+<button class="text-slate-300 hover:text-rose-500 transition-colors"><span class="material-symbols-outlined text-[20px]">favorite</span></button>
+</div>
+</div>
+</div>
+<div class="card-hover-effect group flex flex-col bg-white dark:bg-slate-800 rounded-2xl overflow-hidden border border-slate-100 dark:border-slate-700 shadow-sm relative">
+<div class="aspect-[4/3] w-full relative overflow-hidden bg-slate-50">
+<img class="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-500" data-alt="University diploma style certificate" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9DbkSamxteVJLJaccc-_kIopc_QyBFVjNJMgedB_7vFO8HkFuNEsO3ZtPmS4cpBRpVdwn-ePKiQbneQqCoxR0iOgVAo30HKNtZoEfKCuB7u_SUTdfKl7somy9SyQ-0zJx2nI7sX90fgIhaQSUApzRcrZUwLrvjPlFAq-hi3rZDMwWC1jjXfVcsJ-4BcaDMJgU4MLKxirk8vEdW4HCb5KPYHf7CD_Uv6nxkZ7_IKGZoXlySlJ1GQwq7EY5uscLWxI7SAd-hcZePD66"/>
+<div class="absolute inset-0 bg-slate-900/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3 backdrop-blur-[1px]">
+<button class="size-10 rounded-full bg-white/20 backdrop-blur-md text-white flex items-center justify-center hover:bg-white/40 transition-colors" title="Preview">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+<button class="px-4 py-2 bg-primary text-white rounded-lg text-sm font-bold shadow-lg hover:bg-indigo-500 transition-colors">Use Design</button>
+</div>
+</div>
+<div class="p-5">
+<h5 class="text-base font-bold text-slate-900 dark:text-white truncate">Academic Merit</h5>
+<p class="text-xs text-slate-500 dark:text-slate-400 mt-1 line-clamp-2">Prestigious layout for university achievements.</p>
+<div class="flex justify-between items-center mt-4 pt-3 border-t border-slate-100 dark:border-slate-700">
+<span class="text-[10px] uppercase tracking-wider font-semibold text-slate-400">Academic</span>
+<button class="text-slate-300 hover:text-rose-500 transition-colors"><span class="material-symbols-outlined text-[20px]">favorite</span></button>
+</div>
+</div>
+</div>
+<div class="card-hover-effect group flex flex-col bg-white dark:bg-slate-800 rounded-2xl overflow-hidden border border-slate-100 dark:border-slate-700 shadow-sm relative">
+<div class="aspect-[4/3] w-full relative overflow-hidden bg-slate-50">
+<img class="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-500" data-alt="Tech hackathon winner certificate" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4HX4NCWMHoqPo3vLZhBlHIzeA2ZmR27C0-TXziwGOo_lMgPrSaD8h3TlxM3r4sQxDHUPQrpRwYMFBrvCytDRAHp3NflPkqA6_m7i0gYNcaDDgB0WEJQqJvRuQ_dyKqJhg0N-QniF6yLJaMayu2vcgd_3k4BXlFlIZdDf3nSb-W_lRt1SgNs2SnOSHrt-RiBhmjpS1HpQpexxrHP1t-0yWvlmOV4aTIyTwYQm3QRSBFqJMJjhfK6t6LHQRKI9WVEXHaOXrCdfd5WIx"/>
+<div class="absolute top-3 left-3 px-2 py-0.5 bg-indigo-500/90 backdrop-blur-sm rounded text-[10px] font-bold text-white shadow-sm">
+                            TECH
+                        </div>
+<div class="absolute inset-0 bg-slate-900/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3 backdrop-blur-[1px]">
+<button class="size-10 rounded-full bg-white/20 backdrop-blur-md text-white flex items-center justify-center hover:bg-white/40 transition-colors" title="Preview">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+<button class="px-4 py-2 bg-primary text-white rounded-lg text-sm font-bold shadow-lg hover:bg-indigo-500 transition-colors">Use Design</button>
+</div>
+</div>
+<div class="p-5">
+<h5 class="text-base font-bold text-slate-900 dark:text-white truncate">Hackathon Winner</h5>
+<p class="text-xs text-slate-500 dark:text-slate-400 mt-1 line-clamp-2">Futuristic vibes for coding competitions.</p>
+<div class="flex justify-between items-center mt-4 pt-3 border-t border-slate-100 dark:border-slate-700">
+<span class="text-[10px] uppercase tracking-wider font-semibold text-slate-400">Tech</span>
+<button class="text-slate-300 hover:text-rose-500 transition-colors"><span class="material-symbols-outlined text-[20px]">favorite</span></button>
+</div>
+</div>
+</div>
+<div class="card-hover-effect group flex flex-col bg-white dark:bg-slate-800 rounded-2xl overflow-hidden border border-slate-100 dark:border-slate-700 shadow-sm relative">
+<div class="aspect-[4/3] w-full relative overflow-hidden bg-slate-50">
+<img class="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-500" data-alt="Elegant vintage style certificate" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA6qVD_ZAoBcShtpUFLOhawfxnSIqfg1ra0jUmzxxdrQIDHV0HW8oyU3prcU5jRcMSmmNENHTp33oob1aEf27M4goiTjXPsW1KbTfpqeW9OzPVCGuKiv9Y3pe7rN4e7XrK_rr9usCYtGLvtGhgJNji0O72MCvOE0KJZ0hg21sf9KbYx4gJz9rNqEuG6yWVhXcG-7F_VHdIa5mFbkQHISS2_jV7nY24U-LKVNi9zkNvrtygltrDKu1e9EnuXHuoWeAUyLSUd5n20cD_d"/>
+<div class="absolute inset-0 bg-slate-900/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3 backdrop-blur-[1px]">
+<button class="size-10 rounded-full bg-white/20 backdrop-blur-md text-white flex items-center justify-center hover:bg-white/40 transition-colors" title="Preview">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+<button class="px-4 py-2 bg-primary text-white rounded-lg text-sm font-bold shadow-lg hover:bg-indigo-500 transition-colors">Use Design</button>
+</div>
+</div>
+<div class="p-5">
+<h5 class="text-base font-bold text-slate-900 dark:text-white truncate">Vintage Elegance</h5>
+<p class="text-xs text-slate-500 dark:text-slate-400 mt-1 line-clamp-2">A touch of heritage and old-world charm.</p>
+<div class="flex justify-between items-center mt-4 pt-3 border-t border-slate-100 dark:border-slate-700">
+<span class="text-[10px] uppercase tracking-wider font-semibold text-slate-400">Heritage</span>
+<button class="text-slate-300 hover:text-rose-500 transition-colors"><span class="material-symbols-outlined text-[20px]">favorite</span></button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<div class="flex flex-col items-center justify-center pb-8 pt-4 gap-4">
+<p class="text-sm text-slate-400">Showing 8 of 48 templates</p>
+<button class="px-8 py-3 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-white font-semibold rounded-xl hover:bg-slate-50 dark:hover:bg-slate-700 transition-all shadow-sm hover:shadow-md w-full md:w-auto flex items-center gap-2 group">
+                        Load More Inspiration
+                        <span class="material-symbols-outlined group-hover:translate-y-1 transition-transform">expand_more</span>
+</button>
+</div>
+</div>
+</main>
+</div>
+</div>
+
+</body></html>

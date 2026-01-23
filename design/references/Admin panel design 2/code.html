@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CertiGen - Premium Analytics Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#8B3DFF", // Canva-inspired Purple
+                        "sidebar-bg": "#FFFFFF",
+                        "content-bg": "#F9F9FB",
+                        "accent-teal": "#00C4CC",
+                        "accent-pink": "#FF4D97",
+                        "accent-yellow": "#FFD12D",
+                        "slate-custom": "#0E1318",
+                    },
+                    fontFamily: {
+                        "display": ["'Plus Jakarta Sans'", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "16px",
+                        "lg": "16px",
+                        "xl": "20px",
+                        "2xl": "24px",
+                        "3xl": "32px",
+                    },
+                    boxShadow: {
+                        'premium': '0 2px 8px rgba(0,0,0,0.04), 0 10px 30px rgba(0,0,0,0.02)',
+                        'kpi-layered': '0 1px 3px rgba(0,0,0,0.05), 0 10px 20px -5px rgba(0,0,0,0.04), 0 25px 40px -10px rgba(0,0,0,0.03)',
+                        'card-hover': '0 20px 40px -10px rgba(0,0,0,0.08)',
+                    }
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        @layer base {
+            .material-symbols-outlined {
+                font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            }
+            body {
+                font-family: 'Plus Jakarta Sans', sans-serif;
+            }
+        }
+        .kpi-card {
+            @apply relative overflow-hidden bg-white p-8 rounded-2xl border border-slate-100 shadow-kpi-layered transition-all duration-500 hover:shadow-card-hover hover:-translate-y-1.5;
+        }.card-texture {
+            background-image: radial-gradient(#e2e8f0 0.5px, transparent 0.5px);
+            background-size: 16px 16px;
+            opacity: 0.15;
+        }
+        .gradient-blob {
+            @apply absolute w-48 h-48 blur-[80px] opacity-20 pointer-events-none rounded-full;
+        }
+        .nav-item {
+            @apply flex items-center gap-3 px-4 py-2.5 rounded-lg transition-all duration-200 text-slate-600 hover:bg-slate-100;
+        }
+        .nav-item.active {
+            @apply text-primary bg-primary/5 font-bold;
+        }
+    </style>
+</head>
+<body class="bg-content-bg text-slate-custom antialiased font-display">
+<div class="flex h-screen overflow-hidden">
+<aside class="w-64 flex-shrink-0 bg-sidebar-bg border-r border-slate-200 hidden lg:flex flex-col relative">
+<div class="p-6 flex flex-col h-full relative z-10">
+<div class="flex items-center gap-3 mb-10 px-2">
+<div class="bg-primary size-9 rounded-lg flex items-center justify-center shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-white text-xl">verified</span>
+</div>
+<h1 class="text-xl font-extrabold tracking-tight text-slate-custom">CertiGen</h1>
+</div>
+<nav class="flex flex-col gap-1 grow">
+<p class="px-4 text-[11px] font-bold text-slate-400 uppercase tracking-widest mb-2">Main Menu</p>
+<a class="nav-item active" href="#">
+<span class="material-symbols-outlined text-[22px]">dashboard</span>
+<span class="text-sm">Insights</span>
+</a>
+<a class="nav-item" href="#">
+<span class="material-symbols-outlined text-[22px]">description</span>
+<span class="text-sm">Templates</span>
+</a>
+<a class="nav-item" href="#">
+<span class="material-symbols-outlined text-[22px]">group</span>
+<span class="text-sm">Institutions</span>
+</a>
+<a class="nav-item" href="#">
+<span class="material-symbols-outlined text-[22px]">card_membership</span>
+<span class="text-sm">Verification</span>
+</a>
+<a class="nav-item" href="#">
+<span class="material-symbols-outlined text-[22px]">analytics</span>
+<span class="text-sm">Audit Logs</span>
+</a>
+</nav>
+<div class="pt-6 mt-6 border-t border-slate-100">
+<div class="p-4 rounded-xl bg-slate-50 border border-slate-100 mb-6">
+<div class="flex items-center justify-between mb-2">
+<p class="text-[11px] font-bold text-slate-900">PRO USAGE</p>
+<span class="text-[10px] text-primary font-bold">62%</span>
+</div>
+<div class="w-full bg-slate-200 h-1.5 rounded-full mb-2 overflow-hidden">
+<div class="bg-primary h-full w-3/4 rounded-full"></div>
+</div>
+<p class="text-[10px] text-slate-500 font-medium text-center">12,450 of 20,000 credits</p>
+</div>
+<a class="nav-item" href="#">
+<span class="material-symbols-outlined text-[22px]">settings</span>
+<span class="text-sm">Settings</span>
+</a>
+</div>
+</div>
+</aside>
+<main class="flex-1 overflow-y-auto">
+<header class="sticky top-0 z-30 bg-content-bg/80 backdrop-blur-xl px-10 py-5 flex items-center justify-between border-b border-transparent">
+<div class="flex items-center gap-6">
+<div class="lg:hidden text-slate-900">
+<span class="material-symbols-outlined">menu</span>
+</div>
+<div class="relative w-[480px] group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary transition-colors">search</span>
+<input class="w-full pl-12 pr-4 py-2.5 bg-white border border-slate-200 rounded-lg focus:ring-4 focus:ring-primary/5 focus:border-primary/30 text-sm transition-all outline-none" placeholder="Search for anything..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-1">
+<button class="size-10 flex items-center justify-center text-slate-500 hover:bg-white hover:shadow-sm rounded-lg transition-all">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="size-10 flex items-center justify-center text-slate-500 hover:bg-white hover:shadow-sm rounded-lg transition-all">
+<span class="material-symbols-outlined">help</span>
+</button>
+</div>
+<div class="h-6 w-px bg-slate-200 mx-2"></div>
+<div class="flex items-center gap-3 pl-2">
+<div class="text-right hidden sm:block">
+<p class="text-sm font-bold text-slate-900">Alex Rivera</p>
+<p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Administrator</p>
+</div>
+<div class="size-10 rounded-full bg-cover bg-center border border-white shadow-sm ring-1 ring-slate-200" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCKqNNbbObd_T3YlfEgM_GOqvhguSPl_OIUmRaoQhwFzst_HXrfV02X3g4VuUFIeRRmwcoDtUz0I1RtHbSWXxp91p1zjZAs85OMtdoUPduCnOokqtQQh1DG5Kdaoe3ng0ImriL9PbL_-hRwJTNzV1GZbn_gyd1TF2RvatniiAq0XJt-YbeNuC7_Gg-1B98IuooHJIJ5Gw8eKmS5IgKg2dbQP9V72RMtRURrU3F2h1QhNQu92ZZ8Edx1L6oKgzWwpcjgy4pPeCTF_dw");'></div>
+</div>
+</div>
+</header>
+<div class="px-10 pb-12 max-w-[1600px] mx-auto">
+<div class="flex flex-col md:flex-row md:items-center justify-between mb-10 gap-4 mt-8">
+<div>
+<h2 class="text-3xl font-extrabold text-slate-900 tracking-tight">System Analytics</h2>
+<p class="text-slate-500 font-medium">Monitoring issuance health for <span class="text-primary font-bold">Q4 Period</span></p>
+</div>
+<div class="flex items-center bg-white p-1 rounded-xl border border-slate-200 shadow-sm">
+<button class="px-5 py-2 text-xs font-bold rounded-lg transition-all bg-slate-900 text-white">30 Days</button>
+<button class="px-5 py-2 text-xs font-bold rounded-lg transition-all text-slate-500 hover:text-slate-900">90 Days</button>
+<button class="px-5 py-2 text-xs font-bold rounded-lg transition-all text-slate-500 hover:text-slate-900">1 Year</button>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+<div class="kpi-card group">
+<div class="card-texture absolute inset-0"></div>
+<div class="gradient-blob -right-10 -bottom-10 bg-primary"></div>
+<div class="flex justify-between items-start mb-6 relative z-10">
+<div class="size-11 bg-primary/10 text-primary rounded-xl flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-all duration-300">
+<span class="material-symbols-outlined">description</span>
+</div>
+<span class="text-emerald-600 text-[11px] font-bold flex items-center gap-1 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-100">
+                            +12.5% <span class="material-symbols-outlined !text-[14px] !font-bold">trending_up</span>
+</span>
+</div>
+<p class="text-slate-400 text-[11px] font-bold uppercase tracking-widest mb-1 relative z-10">Total Issued</p>
+<p class="text-4xl font-extrabold tracking-tight text-slate-900 relative z-10">12,450</p>
+</div>
+<div class="kpi-card group">
+<div class="card-texture absolute inset-0"></div>
+<div class="gradient-blob -right-10 -bottom-10 bg-accent-teal"></div>
+<div class="flex justify-between items-start mb-6 relative z-10">
+<div class="size-11 bg-accent-teal/10 text-accent-teal rounded-xl flex items-center justify-center group-hover:bg-accent-teal group-hover:text-white transition-all duration-300">
+<span class="material-symbols-outlined">group</span>
+</div>
+<span class="text-emerald-600 text-[11px] font-bold flex items-center gap-1 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-100">
+                            +5.2% <span class="material-symbols-outlined !text-[14px] !font-bold">trending_up</span>
+</span>
+</div>
+<p class="text-slate-400 text-[11px] font-bold uppercase tracking-widest mb-1 relative z-10">Active Clients</p>
+<p class="text-4xl font-extrabold tracking-tight text-slate-900 relative z-10">1,200</p>
+</div>
+<div class="kpi-card group">
+<div class="card-texture absolute inset-0"></div>
+<div class="gradient-blob -right-10 -bottom-10 bg-accent-pink"></div>
+<div class="flex justify-between items-start mb-6 relative z-10">
+<div class="size-11 bg-accent-pink/10 text-accent-pink rounded-xl flex items-center justify-center group-hover:bg-accent-pink group-hover:text-white transition-all duration-300">
+<span class="material-symbols-outlined">payments</span>
+</div>
+<span class="text-rose-500 text-[11px] font-bold flex items-center gap-1 bg-rose-50 px-2.5 py-1 rounded-full border border-rose-100">
+                            -2.1% <span class="material-symbols-outlined !text-[14px] !font-bold">trending_down</span>
+</span>
+</div>
+<p class="text-slate-400 text-[11px] font-bold uppercase tracking-widest mb-1 relative z-10">MRR Revenue</p>
+<p class="text-4xl font-extrabold tracking-tight text-slate-900 relative z-10">$45.2k</p>
+</div>
+<div class="kpi-card group">
+<div class="card-texture absolute inset-0"></div>
+<div class="gradient-blob -right-10 -bottom-10 bg-accent-yellow"></div>
+<div class="flex justify-between items-start mb-6 relative z-10">
+<div class="size-11 bg-accent-yellow/10 text-accent-yellow rounded-xl flex items-center justify-center group-hover:bg-accent-yellow group-hover:text-white transition-all duration-300">
+<span class="material-symbols-outlined">pending_actions</span>
+</div>
+<span class="text-slate-400 text-[11px] font-bold flex items-center gap-1 bg-slate-50 px-2.5 py-1 rounded-full border border-slate-100">
+                            Stable <span class="material-symbols-outlined !text-[14px] !font-bold">remove</span>
+</span>
+</div>
+<p class="text-slate-400 text-[11px] font-bold uppercase tracking-widest mb-1 relative z-10">Review Queue</p>
+<p class="text-4xl font-extrabold tracking-tight text-slate-900 relative z-10">14</p>
+</div>
+</div>
+<div class="grid grid-cols-1 xl:grid-cols-3 gap-8">
+<div class="xl:col-span-2 bg-white p-10 rounded-2xl border border-slate-200 shadow-premium relative">
+<div class="flex justify-between items-center mb-10 relative z-10">
+<div>
+<h3 class="text-2xl font-extrabold text-slate-900 tracking-tight">Issuance Volume</h3>
+<p class="text-sm text-slate-400 font-medium">Daily distribution overview</p>
+</div>
+<button class="px-4 py-2 text-xs font-bold text-slate-600 bg-slate-50 hover:bg-slate-100 rounded-lg transition-all flex items-center gap-2 border border-slate-200">
+<span class="material-symbols-outlined !text-lg">download</span> Export
+                        </button>
+</div>
+<div class="h-80 relative z-10">
+<svg class="w-full h-full" preserveAspectRatio="none" viewBox="0 0 800 240">
+<defs>
+<linearGradient id="chartLineGradient" x1="0%" x2="100%" y1="0%" y2="0%">
+<stop offset="0%" stop-color="#8B3DFF"></stop>
+<stop offset="100%" stop-color="#00C4CC"></stop>
+</linearGradient>
+<linearGradient id="chartAreaGradient" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#8B3DFF" stop-opacity="0.08"></stop>
+<stop offset="100%" stop-color="#8B3DFF" stop-opacity="0"></stop>
+</linearGradient>
+</defs>
+<path d="M0,190 C80,180 120,220 200,160 C280,100 360,180 440,110 C520,40 600,100 800,70 L800,240 L0,240 Z" fill="url(#chartAreaGradient)"></path>
+<path d="M0,190 C80,180 120,220 200,160 C280,100 360,180 440,110 C520,40 600,100 800,70" fill="none" stroke="url(#chartLineGradient)" stroke-linecap="round" stroke-linejoin="round" stroke-width="5"></path>
+</svg>
+<div class="flex justify-between mt-8 border-t border-slate-50 pt-6">
+<span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Oct 01</span>
+<span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Oct 10</span>
+<span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Oct 20</span>
+<span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Oct 30</span>
+</div>
+</div>
+</div>
+<div class="bg-white p-8 rounded-2xl border border-slate-200 shadow-premium">
+<div class="flex justify-between items-center mb-8">
+<h3 class="text-xl font-extrabold text-slate-900 tracking-tight">Recent Activity</h3>
+<button class="size-9 flex items-center justify-center rounded-lg hover:bg-slate-50 text-slate-400 hover:text-slate-900 transition-colors">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</div>
+<div class="flex flex-col gap-8">
+<div class="flex gap-4">
+<div class="size-10 rounded-xl bg-indigo-50 flex items-center justify-center shrink-0 text-indigo-600">
+<span class="material-symbols-outlined text-[20px]">corporate_fare</span>
+</div>
+<div>
+<p class="text-sm font-bold text-slate-900 mb-0.5">TechCorp Global</p>
+<p class="text-[12px] text-slate-500 leading-snug">Generated 250 professional diplomas.</p>
+<p class="text-[10px] text-primary mt-2 font-bold uppercase tracking-wider">2 mins ago</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="size-10 rounded-xl bg-purple-50 flex items-center justify-center shrink-0 text-purple-600">
+<span class="material-symbols-outlined text-[20px]">school</span>
+</div>
+<div>
+<p class="text-sm font-bold text-slate-900 mb-0.5">State University</p>
+<p class="text-[12px] text-slate-500 leading-snug">Updated security signature for masters template.</p>
+<p class="text-[10px] text-primary mt-2 font-bold uppercase tracking-wider">15 mins ago</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="size-10 rounded-xl bg-rose-50 flex items-center justify-center shrink-0 text-rose-600">
+<span class="material-symbols-outlined text-[20px]">account_balance_wallet</span>
+</div>
+<div>
+<p class="text-sm font-bold text-slate-900 mb-0.5">System Update</p>
+<p class="text-[12px] text-slate-500 leading-snug">Automatic billing cycle completed for 12 accounts.</p>
+<p class="text-[10px] text-primary mt-2 font-bold uppercase tracking-wider">1 hour ago</p>
+</div>
+</div>
+</div>
+<button class="w-full mt-10 py-3.5 rounded-xl bg-slate-50 text-[11px] font-bold text-slate-600 hover:bg-slate-900 hover:text-white transition-all">
+                        View Full History
+                    </button>
+</div>
+</div>
+<div class="mt-8 bg-white rounded-2xl border border-slate-200 shadow-premium overflow-hidden">
+<div class="p-8 border-b border-slate-100 flex justify-between items-center">
+<div>
+<h3 class="text-xl font-extrabold text-slate-900 tracking-tight">Institutional Partners</h3>
+<p class="text-sm text-slate-400 font-medium">Top performing organizations</p>
+</div>
+<button class="flex items-center gap-2 px-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs font-bold text-slate-600 hover:bg-white transition-all">
+<span class="material-symbols-outlined !text-lg">filter_list</span> Filter
+                    </button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="bg-slate-50/50">
+<th class="px-8 py-4 text-[11px] font-bold text-slate-400 uppercase tracking-widest">Organization</th>
+<th class="px-8 py-4 text-[11px] font-bold text-slate-400 uppercase tracking-widest">Health Score</th>
+<th class="px-8 py-4 text-[11px] font-bold text-slate-400 uppercase tracking-widest">License Tier</th>
+<th class="px-8 py-4 text-[11px] font-bold text-slate-400 uppercase tracking-widest">Usage</th>
+<th class="px-8 py-4 text-[11px] font-bold text-slate-400 uppercase tracking-widest text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-50">
+<tr class="hover:bg-slate-50/30 transition-all">
+<td class="px-8 py-5">
+<div class="flex items-center gap-4">
+<div class="size-10 rounded-lg bg-primary text-white flex items-center justify-center font-bold text-xs">TC</div>
+<div>
+<p class="text-sm font-bold text-slate-900">TechCorp Global</p>
+<p class="text-xs text-slate-400">techcorp.com</p>
+</div>
+</div>
+</td>
+<td class="px-8 py-5">
+<span class="inline-flex items-center px-3 py-1 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-600 border border-emerald-100">ACTIVE</span>
+</td>
+<td class="px-8 py-5">
+<p class="text-sm font-medium text-slate-700">Enterprise Elite</p>
+</td>
+<td class="px-8 py-5">
+<p class="text-sm font-bold text-slate-900">5,200 <span class="text-[10px] font-medium text-slate-400">/ mo</span></p>
+</td>
+<td class="px-8 py-5 text-right">
+<button class="text-primary hover:underline text-[11px] font-bold uppercase tracking-wider">Details</button>
+</td>
+</tr>
+<tr class="hover:bg-slate-50/30 transition-all">
+<td class="px-8 py-5">
+<div class="flex items-center gap-4">
+<div class="size-10 rounded-lg bg-accent-teal text-white flex items-center justify-center font-bold text-xs">SU</div>
+<div>
+<p class="text-sm font-bold text-slate-900">State University</p>
+<p class="text-xs text-slate-400">state.edu</p>
+</div>
+</div>
+</td>
+<td class="px-8 py-5">
+<span class="inline-flex items-center px-3 py-1 rounded-full text-[10px] font-bold bg-amber-50 text-amber-600 border border-amber-100">REVIEWING</span>
+</td>
+<td class="px-8 py-5">
+<p class="text-sm font-medium text-slate-700">Academic Plus</p>
+</td>
+<td class="px-8 py-5">
+<p class="text-sm font-bold text-slate-900">12,400 <span class="text-[10px] font-medium text-slate-400">/ mo</span></p>
+</td>
+<td class="px-8 py-5 text-right">
+<button class="text-primary hover:underline text-[11px] font-bold uppercase tracking-wider">Details</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-6 bg-slate-50/30 border-t border-slate-50 flex justify-between items-center px-8">
+<p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Showing 2 of 1,248 accounts</p>
+<div class="flex gap-2">
+<button class="px-4 py-2 text-[11px] font-bold bg-white border border-slate-200 rounded-lg text-slate-600 hover:bg-slate-900 hover:text-white transition-all">Previous</button>
+<button class="px-4 py-2 text-[11px] font-bold bg-white border border-slate-200 rounded-lg text-slate-600 hover:bg-slate-900 hover:text-white transition-all">Next</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+
+</body></html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Premium Signature Management - CertiGen Pro</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&amp;family=Great+Vibes&amp;family=Pacifico&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1337ec",
+                        "primary-dark": "#0a24a5",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101322",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"],
+                        "signature-1": ["Dancing Script", "cursive"],
+                        "signature-2": ["Great Vibes", "cursive"],
+                        "signature-3": ["Pacifico", "cursive"],
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "2xl": "2rem",
+                        "full": "9999px"
+                    },
+                    boxShadow: {
+                        'premium': '0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 40px rgba(19, 55, 236, 0.05)',
+                        'inner-soft': 'inset 0 2px 4px 0 rgba(0, 0, 0, 0.05)',
+                        'button-depth': '0 4px 0px 0px #0a24a5, 0 8px 15px -3px rgba(19, 55, 236, 0.3)',
+                        'button-depth-hover': '0 2px 0px 0px #0a24a5, 0 4px 10px -2px rgba(19, 55, 236, 0.3)',
+                    }
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        body {
+            font-family: 'Manrope', sans-serif;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }.mesh-gradient {
+            background-color: #ffffff;
+            background-image: 
+                radial-gradient(at 0% 0%, hsla(228, 85%, 95%, 1) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, hsla(210, 100%, 98%, 1) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, hsla(228, 85%, 96%, 1) 0px, transparent 50%),
+                radial-gradient(at 0% 100%, hsla(210, 100%, 98%, 1) 0px, transparent 50%);
+        }
+        .dark .mesh-gradient {
+            background-color: #0f172a;
+            background-image: 
+                radial-gradient(at 0% 0%, hsla(228, 40%, 15%, 1) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, hsla(228, 40%, 12%, 1) 0px, transparent 50%);
+        }
+        .tab-indicator {
+            position: relative;
+        }
+        .tab-indicator::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background-color: theme('colors.primary');
+            transition: width 0.3s ease;
+        }
+        .tab-active::after {
+            width: 24px;
+        }
+        .btn-premium-depth {
+            @apply shadow-button-depth transform transition-all duration-200 active:translate-y-[2px] active:shadow-button-depth-hover;
+        }
+    </style>
+</head>
+<body class="bg-slate-100/80 font-display text-[#111218] dark:text-white h-screen flex items-center justify-center p-4">
+<div class="fixed inset-0 bg-slate-900/40 backdrop-blur-md z-40"></div>
+<div class="relative w-full max-w-2xl bg-white dark:bg-slate-900 rounded-2xl shadow-premium z-50 overflow-hidden flex flex-col max-h-[90vh]">
+<div class="px-8 py-6 bg-slate-50/80 dark:bg-slate-800/40 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="bg-primary/10 text-primary p-2.5 rounded-xl">
+<span class="material-symbols-outlined text-2xl">draw</span>
+</div>
+<div>
+<h2 class="text-xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-none">Signature Management</h2>
+<p class="text-sm text-slate-500 dark:text-slate-400 font-medium mt-1">Refine your professional mark</p>
+</div>
+</div>
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-slate-400 hover:bg-slate-200/50 dark:hover:bg-slate-700/50 hover:text-slate-600 dark:hover:text-slate-200 transition-all">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="px-8 pt-2">
+<div class="flex gap-8 border-b border-slate-100 dark:border-slate-800">
+<button class="tab-indicator tab-active px-2 py-4 text-sm font-bold text-primary flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">gesture</span>
+                Draw
+            </button>
+<button class="tab-indicator px-2 py-4 text-sm font-semibold text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">keyboard</span>
+                Type
+            </button>
+<button class="tab-indicator px-2 py-4 text-sm font-semibold text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">upload</span>
+                Upload
+            </button>
+</div>
+</div>
+<div class="p-8 flex-1 overflow-y-auto hide-scrollbar">
+<div class="space-y-8">
+<div class="relative group">
+<div class="w-full h-56 rounded-2xl border border-slate-200 dark:border-slate-700 mesh-gradient flex flex-col items-center justify-center shadow-inner-soft overflow-hidden">
+<div class="absolute inset-0 opacity-[0.03] dark:opacity-[0.05] pointer-events-none" style="background-image: radial-gradient(#1337ec 1px, transparent 1px); background-size: 24px 24px;"></div>
+<div class="text-slate-300 dark:text-slate-600 pointer-events-none select-none italic font-signature-1 text-5xl opacity-40">
+                        Draw your signature
+                    </div>
+</div>
+<div class="absolute bottom-4 right-4 flex gap-2">
+<button class="bg-white/90 dark:bg-slate-800/90 backdrop-blur shadow-sm border border-slate-200 dark:border-slate-600 px-4 py-2 rounded-lg text-xs font-bold text-slate-600 dark:text-slate-200 hover:bg-white dark:hover:bg-slate-700 transition-all hover:shadow-md">
+                        Clear Canvas
+                    </button>
+</div>
+</div>
+<div class="space-y-5">
+<div class="flex items-center justify-between">
+<h3 class="text-sm font-bold text-slate-800 dark:text-slate-200 flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                        Recent Signatures
+                    </h3>
+<span class="text-[10px] uppercase tracking-[0.15em] font-extrabold text-slate-400 bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded">3 stored</span>
+</div>
+<div class="grid grid-cols-3 gap-5">
+<button class="group relative aspect-[3/2] bg-white dark:bg-slate-800 rounded-xl border-2 border-primary shadow-lg shadow-primary/5 flex items-center justify-center p-4 transition-all hover:scale-[1.02]">
+<span class="font-signature-1 text-3xl text-slate-900 dark:text-white">Alex Morgan</span>
+<div class="absolute -top-2 -right-2 bg-primary text-white rounded-full p-0.5 shadow-lg">
+<span class="material-symbols-outlined text-base block" style="font-variation-settings: 'wght' 700">check</span>
+</div>
+</button>
+<button class="group relative aspect-[3/2] bg-slate-50/50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-700 rounded-xl flex items-center justify-center p-4 hover:border-primary/30 hover:bg-white dark:hover:bg-slate-800 transition-all hover:shadow-xl hover:scale-[1.02]">
+<span class="font-signature-2 text-3xl text-slate-800 dark:text-slate-300 opacity-80 group-hover:opacity-100">A. Morgan</span>
+<div class="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-all transform translate-y-1 group-hover:translate-y-0">
+<span class="material-symbols-outlined text-slate-400 hover:text-red-500 text-lg">delete</span>
+</div>
+</button>
+<button class="group relative aspect-[3/2] bg-slate-50/50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-700 rounded-xl flex items-center justify-center p-4 hover:border-primary/30 hover:bg-white dark:hover:bg-slate-800 transition-all hover:shadow-xl hover:scale-[1.02]">
+<div class="relative w-full h-full flex items-center justify-center">
+<img alt="Digital Signature" class="max-w-[80%] max-h-[80%] object-contain opacity-10 dark:opacity-20 grayscale" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBiC1F8x5ezTvlnslGJ-kPXftVXisgMmvttDyrvmYlbKIuchjC6bNpNdHz8kQ5Jb4-FJ1n94zK4HeY5eSXeTE3TPMNWMajJiX53l0sfu76L9OX2mSy0N2mbr1vZqkBjZeK8wp_1T1hIu-SwFP01WIaTGrmPzazDceRvsA9lc6t_5XZEq-ZUw597VAgiNzph8NR--A57fKnD_qg0oDQ2q1sP1x9OJyDlFNStAuaJ-VpfN8es4quK8ym9IUT6Xak2vdensllizqCG9RM"/>
+<span class="absolute font-signature-3 text-2xl text-slate-800 dark:text-slate-300 opacity-80 group-hover:opacity-100">AM</span>
+</div>
+<div class="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-all transform translate-y-1 group-hover:translate-y-0">
+<span class="material-symbols-outlined text-slate-400 hover:text-red-500 text-lg">delete</span>
+</div>
+</button>
+</div>
+</div>
+</div>
+</div>
+<div class="px-8 py-6 bg-slate-50/50 dark:bg-slate-800/20 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="relative flex items-center">
+<input checked="" class="w-5 h-5 rounded-md border-slate-300 text-primary focus:ring-primary/20 cursor-pointer" id="save-sig" type="checkbox"/>
+</div>
+<label class="text-sm font-semibold text-slate-600 dark:text-slate-400 cursor-pointer" for="save-sig">Save to my profile</label>
+</div>
+<div class="flex gap-4">
+<button class="px-6 py-2.5 text-sm font-bold text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-100 transition-colors">
+                Discard
+            </button>
+<button class="btn-premium-depth px-8 py-2.5 bg-primary text-white text-sm font-bold rounded-xl hover:bg-blue-600 transition-colors">
+                Apply Signature
+            </button>
+</div>
+</div>
+</div>
+<div class="fixed inset-0 flex h-screen overflow-hidden -z-10 blur-md pointer-events-none opacity-25">
+<aside class="w-64 flex flex-col bg-white border-r border-slate-100">
+<div class="p-6 h-full">
+<div class="flex items-center gap-3 mb-10">
+<div class="bg-primary size-10 rounded-lg"></div>
+<div class="h-4 w-24 bg-slate-200 rounded"></div>
+</div>
+<div class="space-y-4">
+<div class="h-8 w-full bg-slate-50 rounded-lg"></div>
+<div class="h-8 w-full bg-slate-50 rounded-lg"></div>
+<div class="h-8 w-full bg-slate-50 rounded-lg"></div>
+</div>
+</div>
+</aside>
+<main class="flex-1 p-8 overflow-hidden bg-slate-50/30">
+<div class="max-w-4xl mx-auto h-full border-2 border-dashed border-slate-200 rounded-3xl bg-white flex items-center justify-center">
+<div class="text-slate-200 font-bold text-4xl uppercase tracking-[0.2em]">Certificate Canvas</div>
+</div>
+</main>
+</div>
+
+</body></html>

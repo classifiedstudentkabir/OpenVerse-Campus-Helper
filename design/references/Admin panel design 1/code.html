@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CertiGen - Premium Admin Insights</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#8B3DFF",
+                        "sidebar-bg": "#FFFFFF",
+                        "content-bg": "#F4F5F7",
+                        "accent-teal": "#00C4CC",
+                        "accent-pink": "#FF4D97",
+                        "accent-yellow": "#FFD12D",
+                        "slate-custom": "#0E1318",
+                    },
+                    fontFamily: {
+                        "display": ["'Plus Jakarta Sans'", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "16px",
+                        "lg": "16px",
+                        "xl": "20px",
+                        "2xl": "24px",
+                        "3xl": "32px",
+                    },
+                    boxShadow: {
+                        'premium': '0 2px 8px rgba(0,0,0,0.02), 0 10px 40px rgba(0,0,0,0.04)',
+                        'kpi-layered': '0 1px 2px rgba(0,0,0,0.04), 0 4px 8px rgba(0,0,0,0.02), 0 12px 24px -2px rgba(0,0,0,0.06), 0 20px 40px -4px rgba(0,0,0,0.04)',
+                        'floating': '0 15px 35px -5px rgba(0,0,0,0.05), 0 5px 15px -2px rgba(0,0,0,0.03)',
+                    }
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        @layer base {
+            .material-symbols-outlined {
+                font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+            }
+            body {
+                font-family: 'Plus Jakarta Sans', sans-serif;
+            }
+        }
+        .kpi-card {
+            @apply relative overflow-hidden bg-white p-10 rounded-3xl border border-white shadow-kpi-layered transition-all duration-500 hover:scale-[1.02];
+        }
+        .chart-container {
+            @apply relative overflow-hidden bg-white/70 backdrop-blur-2xl p-10 rounded-3xl border border-white/80 shadow-floating;
+        }
+        .glass-texture {
+            background-image: radial-gradient(rgba(139, 61, 255, 0.05) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+        .floating-blob {
+            @apply absolute blur-[100px] opacity-10 pointer-events-none rounded-full;
+        }
+        .nav-item {
+            @apply flex items-center gap-3 px-5 py-3 rounded-xl transition-all duration-300 text-slate-500 hover:text-primary hover:bg-primary/5;
+        }
+        .nav-item.active {
+            @apply text-primary bg-primary/5 font-bold shadow-sm shadow-primary/10;
+        }
+    </style>
+</head>
+<body class="bg-content-bg text-slate-custom antialiased font-display">
+<div class="flex h-screen overflow-hidden">
+<aside class="w-72 flex-shrink-0 bg-white border-r border-slate-200/60 hidden lg:flex flex-col relative z-50">
+<div class="p-8 flex flex-col h-full">
+<div class="flex items-center gap-3 mb-12 px-2">
+<div class="bg-primary size-10 rounded-xl flex items-center justify-center shadow-xl shadow-primary/20">
+<span class="material-symbols-outlined text-white text-2xl">verified</span>
+</div>
+<h1 class="text-2xl font-black tracking-tighter text-slate-custom">CertiGen</h1>
+</div>
+<nav class="flex flex-col gap-2 grow">
+<p class="px-5 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-4">Core Platform</p>
+<a class="nav-item active" href="#">
+<span class="material-symbols-outlined text-[24px]">dashboard</span>
+<span class="text-[15px]">Insights</span>
+</a>
+<a class="nav-item" href="#">
+<span class="material-symbols-outlined text-[24px]">description</span>
+<span class="text-[15px]">Templates</span>
+</a>
+<a class="nav-item" href="#">
+<span class="material-symbols-outlined text-[24px]">group</span>
+<span class="text-[15px]">Institutions</span>
+</a>
+<a class="nav-item" href="#">
+<span class="material-symbols-outlined text-[24px]">card_membership</span>
+<span class="text-[15px]">Verification</span>
+</a>
+<a class="nav-item" href="#">
+<span class="material-symbols-outlined text-[24px]">analytics</span>
+<span class="text-[15px]">Audit Logs</span>
+</a>
+</nav>
+<div class="pt-8 mt-auto border-t border-slate-100">
+<div class="p-5 rounded-2xl bg-slate-50 border border-slate-100 mb-6">
+<div class="flex items-center justify-between mb-3">
+<p class="text-[11px] font-bold text-slate-900">CREDIT BALANCE</p>
+<span class="text-[11px] text-primary font-bold">62%</span>
+</div>
+<div class="w-full bg-slate-200 h-2 rounded-full mb-3 overflow-hidden">
+<div class="bg-primary h-full w-3/4 rounded-full"></div>
+</div>
+<p class="text-[11px] text-slate-500 font-medium">12,450 / 20,000 credits used</p>
+</div>
+<a class="nav-item" href="#">
+<span class="material-symbols-outlined text-[24px]">settings</span>
+<span class="text-[15px]">Settings</span>
+</a>
+</div>
+</div>
+</aside>
+<main class="flex-1 overflow-y-auto bg-[#F9FAFB] relative">
+<div class="floating-blob w-[600px] h-[600px] -top-[200px] -right-[100px] bg-primary"></div>
+<div class="floating-blob w-[500px] h-[500px] bottom-[100px] -left-[100px] bg-accent-teal"></div>
+<header class="sticky top-0 z-40 bg-white/60 backdrop-blur-2xl px-12 py-6 flex items-center justify-between border-b border-slate-200/40">
+<div class="flex items-center gap-8">
+<div class="lg:hidden text-slate-900">
+<span class="material-symbols-outlined text-3xl">menu</span>
+</div>
+<div class="relative w-[440px] group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary transition-colors">search</span>
+<input class="w-full pl-12 pr-6 py-3 bg-white/50 border border-slate-200/60 rounded-xl focus:bg-white focus:ring-4 focus:ring-primary/5 focus:border-primary/20 text-sm transition-all outline-none" placeholder="Search analytics or institutions..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2">
+<button class="size-11 flex items-center justify-center text-slate-500 hover:bg-white hover:shadow-premium rounded-xl transition-all">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="size-11 flex items-center justify-center text-slate-500 hover:bg-white hover:shadow-premium rounded-xl transition-all">
+<span class="material-symbols-outlined">help_center</span>
+</button>
+</div>
+<div class="h-8 w-px bg-slate-200 mx-2"></div>
+<div class="flex items-center gap-4">
+<div class="text-right">
+<p class="text-sm font-bold text-slate-900">Alex Rivera</p>
+<p class="text-[10px] text-slate-400 font-black uppercase tracking-widest">Global Admin</p>
+</div>
+<div class="size-11 rounded-full bg-cover bg-center border-2 border-white shadow-floating ring-1 ring-slate-200" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCKqNNbbObd_T3YlfEgM_GOqvhguSPl_OIUmRaoQhwFzst_HXrfV02X3g4VuUFIeRRmwcoDtUz0I1RtHbSWXxp91p1zjZAs85OMtdoUPduCnOokqtQQh1DG5Kdaoe3ng0ImriL9PbL_-hRwJTNzV1GZbn_gyd1TF2RvatniiAq0XJt-YbeNuC7_Gg-1B98IuooHJIJ5Gw8eKmS5IgKg2dbQP9V72RMtRURrU3F2h1QhNQu92ZZ8Edx1L6oKgzWwpcjgy4pPeCTF_dw");'></div>
+</div>
+</div>
+</header>
+<div class="px-12 py-10 max-w-[1600px] mx-auto relative z-10">
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+<div>
+<nav class="flex items-center gap-2 text-[11px] font-bold text-slate-400 uppercase tracking-widest mb-3">
+<span>Dashboard</span>
+<span class="material-symbols-outlined !text-[14px]">chevron_right</span>
+<span class="text-primary">System Insights</span>
+</nav>
+<h2 class="text-4xl font-black text-slate-900 tracking-tight">Premium Admin Insights</h2>
+<p class="text-slate-500 mt-2 font-medium text-lg">Real-time health monitoring for <span class="text-primary font-bold">Academic Q4</span></p>
+</div>
+<div class="flex items-center bg-white/80 backdrop-blur p-1.5 rounded-2xl border border-slate-200 shadow-sm">
+<button class="px-6 py-2.5 text-xs font-black rounded-xl transition-all bg-slate-900 text-white shadow-lg shadow-slate-900/10">30 DAYS</button>
+<button class="px-6 py-2.5 text-xs font-black rounded-xl transition-all text-slate-500 hover:text-slate-900">90 DAYS</button>
+<button class="px-6 py-2.5 text-xs font-black rounded-xl transition-all text-slate-500 hover:text-slate-900">1 YEAR</button>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+<div class="kpi-card group">
+<div class="glass-texture absolute inset-0 opacity-10"></div>
+<div class="flex justify-between items-start mb-10">
+<div class="size-14 bg-primary/10 text-primary rounded-2xl flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-all duration-500">
+<span class="material-symbols-outlined text-3xl">workspace_premium</span>
+</div>
+<span class="text-emerald-600 text-xs font-black flex items-center gap-1 bg-emerald-50 px-3 py-1.5 rounded-full border border-emerald-100/50">
+                            +12.5% <span class="material-symbols-outlined !text-[16px] !font-bold">trending_up</span>
+</span>
+</div>
+<p class="text-slate-400 text-xs font-black uppercase tracking-[0.15em] mb-2">Total Issued</p>
+<p class="text-5xl font-black tracking-tighter text-slate-900">12,450</p>
+</div>
+<div class="kpi-card group">
+<div class="glass-texture absolute inset-0 opacity-10"></div>
+<div class="flex justify-between items-start mb-10">
+<div class="size-14 bg-accent-teal/10 text-accent-teal rounded-2xl flex items-center justify-center group-hover:bg-accent-teal group-hover:text-white transition-all duration-500">
+<span class="material-symbols-outlined text-3xl">corporate_fare</span>
+</div>
+<span class="text-emerald-600 text-xs font-black flex items-center gap-1 bg-emerald-50 px-3 py-1.5 rounded-full border border-emerald-100/50">
+                            +5.2% <span class="material-symbols-outlined !text-[16px] !font-bold">trending_up</span>
+</span>
+</div>
+<p class="text-slate-400 text-xs font-black uppercase tracking-[0.15em] mb-2">Active Institutions</p>
+<p class="text-5xl font-black tracking-tighter text-slate-900">1,200</p>
+</div>
+<div class="kpi-card group">
+<div class="glass-texture absolute inset-0 opacity-10"></div>
+<div class="flex justify-between items-start mb-10">
+<div class="size-14 bg-accent-pink/10 text-accent-pink rounded-2xl flex items-center justify-center group-hover:bg-accent-pink group-hover:text-white transition-all duration-500">
+<span class="material-symbols-outlined text-3xl">token</span>
+</div>
+<span class="text-rose-500 text-xs font-black flex items-center gap-1 bg-rose-50 px-3 py-1.5 rounded-full border border-rose-100/50">
+                            -2.1% <span class="material-symbols-outlined !text-[16px] !font-bold">trending_down</span>
+</span>
+</div>
+<p class="text-slate-400 text-xs font-black uppercase tracking-[0.15em] mb-2">Annual Revenue</p>
+<p class="text-5xl font-black tracking-tighter text-slate-900">$4.2M</p>
+</div>
+<div class="kpi-card group">
+<div class="glass-texture absolute inset-0 opacity-10"></div>
+<div class="flex justify-between items-start mb-10">
+<div class="size-14 bg-accent-yellow/10 text-accent-yellow rounded-2xl flex items-center justify-center group-hover:bg-accent-yellow group-hover:text-white transition-all duration-500">
+<span class="material-symbols-outlined text-3xl">task_alt</span>
+</div>
+<span class="text-slate-400 text-xs font-black flex items-center gap-1 bg-slate-50 px-3 py-1.5 rounded-full border border-slate-100/50">
+                            99.9% <span class="material-symbols-outlined !text-[16px] !font-bold">check_circle</span>
+</span>
+</div>
+<p class="text-slate-400 text-xs font-black uppercase tracking-[0.15em] mb-2">Uptime Status</p>
+<p class="text-5xl font-black tracking-tighter text-slate-900">Active</p>
+</div>
+</div>
+<div class="grid grid-cols-1 xl:grid-cols-3 gap-10 mb-12">
+<div class="xl:col-span-2 chart-container relative overflow-visible">
+<div class="floating-blob w-64 h-64 -top-20 -left-20 bg-primary opacity-5"></div>
+<div class="flex justify-between items-center mb-12 relative z-10">
+<div>
+<h3 class="text-2xl font-black text-slate-900 tracking-tight">Issuance Volume</h3>
+<p class="text-sm text-slate-500 font-medium">Daily certificate distribution velocity</p>
+</div>
+<div class="flex gap-3">
+<button class="px-5 py-2.5 text-xs font-black text-slate-600 bg-white hover:bg-slate-50 rounded-xl transition-all flex items-center gap-2 border border-slate-200 shadow-sm">
+<span class="material-symbols-outlined !text-lg">tune</span> Filters
+                            </button>
+<button class="px-5 py-2.5 text-xs font-black text-white bg-primary hover:bg-primary/90 rounded-xl transition-all flex items-center gap-2 shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined !text-lg">download</span> Export Data
+                            </button>
+</div>
+</div>
+<div class="h-96 relative z-10 flex flex-col">
+<svg class="w-full flex-1" preserveAspectRatio="none" viewBox="0 0 800 240">
+<defs>
+<linearGradient id="premiumGradient" x1="0%" x2="100%" y1="0%" y2="0%">
+<stop offset="0%" stop-color="#8B3DFF"></stop>
+<stop offset="50%" stop-color="#FF4D97"></stop>
+<stop offset="100%" stop-color="#00C4CC"></stop>
+</linearGradient>
+<linearGradient id="areaGradient" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#8B3DFF" stop-opacity="0.12"></stop>
+<stop offset="100%" stop-color="#8B3DFF" stop-opacity="0"></stop>
+</linearGradient>
+</defs>
+<path d="M0,200 C100,180 150,220 250,140 C350,60 450,180 550,100 C650,20 750,100 800,80 L800,240 L0,240 Z" fill="url(#areaGradient)"></path>
+<path d="M0,200 C100,180 150,220 250,140 C350,60 450,180 550,100 C650,20 750,100 800,80" fill="none" stroke="url(#premiumGradient)" stroke-linecap="round" stroke-linejoin="round" stroke-width="6"></path>
+</svg>
+<div class="flex justify-between mt-8 border-t border-slate-100 pt-8">
+<div class="flex flex-col gap-1">
+<span class="text-[10px] font-black text-slate-400 uppercase tracking-widest">October 01</span>
+<span class="text-xs font-bold text-slate-900">8,240 units</span>
+</div>
+<div class="flex flex-col gap-1 text-center">
+<span class="text-[10px] font-black text-slate-400 uppercase tracking-widest">October 15</span>
+<span class="text-xs font-bold text-slate-900">14,200 units</span>
+</div>
+<div class="flex flex-col gap-1 text-right">
+<span class="text-[10px] font-black text-slate-400 uppercase tracking-widest">October 30</span>
+<span class="text-xs font-bold text-slate-900">12,450 units</span>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-white p-10 rounded-3xl border border-white shadow-floating flex flex-col">
+<div class="flex justify-between items-center mb-10">
+<h3 class="text-2xl font-black text-slate-900 tracking-tight">Global Feed</h3>
+<button class="size-10 flex items-center justify-center rounded-xl hover:bg-slate-50 text-slate-400 hover:text-slate-900 transition-colors">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</div>
+<div class="flex flex-col gap-10 grow">
+<div class="flex gap-5 relative">
+<div class="absolute left-6 top-10 bottom-[-40px] w-px bg-slate-100"></div>
+<div class="size-12 rounded-2xl bg-indigo-50 flex items-center justify-center shrink-0 text-indigo-600 relative z-10 border border-white shadow-sm">
+<span class="material-symbols-outlined text-[24px]">corporate_fare</span>
+</div>
+<div>
+<p class="text-[15px] font-bold text-slate-900 mb-1">TechCorp Global</p>
+<p class="text-sm text-slate-500 leading-relaxed">Issued 250 certificates for "AI Ethics 2024".</p>
+<p class="text-[10px] text-primary mt-3 font-black uppercase tracking-widest">2 MINS AGO</p>
+</div>
+</div>
+<div class="flex gap-5 relative">
+<div class="absolute left-6 top-10 bottom-[-40px] w-px bg-slate-100"></div>
+<div class="size-12 rounded-2xl bg-purple-50 flex items-center justify-center shrink-0 text-purple-600 relative z-10 border border-white shadow-sm">
+<span class="material-symbols-outlined text-[24px]">school</span>
+</div>
+<div>
+<p class="text-[15px] font-bold text-slate-900 mb-1">State University</p>
+<p class="text-sm text-slate-500 leading-relaxed">Updated masters level digital signatures.</p>
+<p class="text-[10px] text-primary mt-3 font-black uppercase tracking-widest">15 MINS AGO</p>
+</div>
+</div>
+<div class="flex gap-5">
+<div class="size-12 rounded-2xl bg-rose-50 flex items-center justify-center shrink-0 text-rose-600 relative z-10 border border-white shadow-sm">
+<span class="material-symbols-outlined text-[24px]">account_balance_wallet</span>
+</div>
+<div>
+<p class="text-[15px] font-bold text-slate-900 mb-1">Billing System</p>
+<p class="text-sm text-slate-500 leading-relaxed">Enterprise subscription renewed for 48 nodes.</p>
+<p class="text-[10px] text-primary mt-3 font-black uppercase tracking-widest">1 HOUR AGO</p>
+</div>
+</div>
+</div>
+<button class="w-full mt-10 py-4 rounded-2xl bg-slate-50 text-[12px] font-black text-slate-600 hover:bg-slate-900 hover:text-white transition-all">
+                        VIEW AUDIT LOGS
+                    </button>
+</div>
+</div>
+<div class="bg-white rounded-[32px] border border-white shadow-kpi-layered overflow-hidden">
+<div class="p-10 border-b border-slate-50 flex justify-between items-center">
+<div>
+<h3 class="text-2xl font-black text-slate-900 tracking-tight">Institutional Partners</h3>
+<p class="text-sm text-slate-500 font-medium mt-1">Manage and monitor high-volume accounts</p>
+</div>
+<div class="flex gap-3">
+<div class="relative hidden md:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 !text-lg">search</span>
+<input class="pl-10 pr-4 py-2 bg-slate-50 border-none rounded-xl text-xs w-64 focus:ring-2 focus:ring-primary/20" placeholder="Filter partners..." type="text"/>
+</div>
+<button class="flex items-center gap-2 px-5 py-2.5 bg-slate-50 border border-slate-200/60 rounded-xl text-xs font-black text-slate-600 hover:bg-white transition-all shadow-sm">
+<span class="material-symbols-outlined !text-lg">filter_list</span> ALL STATUS
+                        </button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="bg-slate-50/50">
+<th class="px-10 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">Organization</th>
+<th class="px-10 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">Compliance</th>
+<th class="px-10 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">License Tier</th>
+<th class="px-10 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest text-center">Usage Metrics</th>
+<th class="px-10 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-50">
+<tr class="hover:bg-slate-50/40 transition-all group">
+<td class="px-10 py-7">
+<div class="flex items-center gap-5">
+<div class="size-12 rounded-2xl bg-primary/10 text-primary flex items-center justify-center font-black text-sm border border-primary/5">TC</div>
+<div>
+<p class="text-base font-bold text-slate-900">TechCorp Global</p>
+<p class="text-xs text-slate-400 font-medium">techcorp.com • ID: 8829</p>
+</div>
+</div>
+</td>
+<td class="px-10 py-7">
+<span class="inline-flex items-center px-4 py-1.5 rounded-full text-[10px] font-black bg-emerald-50 text-emerald-600 border border-emerald-100/50">VERIFIED</span>
+</td>
+<td class="px-10 py-7">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary !text-lg">diamond</span>
+<p class="text-sm font-bold text-slate-700">Enterprise Elite</p>
+</div>
+</td>
+<td class="px-10 py-7">
+<div class="flex flex-col items-center gap-1.5">
+<p class="text-sm font-black text-slate-900">5,200 <span class="text-[10px] font-medium text-slate-400">/ MONTHLY</span></p>
+<div class="w-24 h-1 bg-slate-100 rounded-full overflow-hidden">
+<div class="bg-accent-teal h-full w-[65%]"></div>
+</div>
+</div>
+</td>
+<td class="px-10 py-7 text-right">
+<button class="bg-white border border-slate-200 px-5 py-2.5 rounded-xl text-xs font-black text-slate-700 hover:bg-slate-900 hover:text-white transition-all shadow-sm">MANAGE</button>
+</td>
+</tr>
+<tr class="hover:bg-slate-50/40 transition-all group">
+<td class="px-10 py-7">
+<div class="flex items-center gap-5">
+<div class="size-12 rounded-2xl bg-accent-teal/10 text-accent-teal flex items-center justify-center font-black text-sm border border-accent-teal/5">SU</div>
+<div>
+<p class="text-base font-bold text-slate-900">State University</p>
+<p class="text-xs text-slate-400 font-medium">state.edu • ID: 4122</p>
+</div>
+</div>
+</td>
+<td class="px-10 py-7">
+<span class="inline-flex items-center px-4 py-1.5 rounded-full text-[10px] font-black bg-amber-50 text-amber-600 border border-amber-100/50">PENDING</span>
+</td>
+<td class="px-10 py-7">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-slate-400 !text-lg">school</span>
+<p class="text-sm font-bold text-slate-700">Academic Plus</p>
+</div>
+</td>
+<td class="px-10 py-7">
+<div class="flex flex-col items-center gap-1.5">
+<p class="text-sm font-black text-slate-900">12,400 <span class="text-[10px] font-medium text-slate-400">/ MONTHLY</span></p>
+<div class="w-24 h-1 bg-slate-100 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[85%]"></div>
+</div>
+</div>
+</td>
+<td class="px-10 py-7 text-right">
+<button class="bg-white border border-slate-200 px-5 py-2.5 rounded-xl text-xs font-black text-slate-700 hover:bg-slate-900 hover:text-white transition-all shadow-sm">MANAGE</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-8 bg-slate-50/20 border-t border-slate-50 flex justify-between items-center px-10">
+<p class="text-[11px] font-black text-slate-400 uppercase tracking-[0.2em]">Displaying 2 / 1,248 Institutions</p>
+<div class="flex gap-3">
+<button class="px-6 py-2.5 text-xs font-black bg-white border border-slate-200 rounded-xl text-slate-600 hover:bg-slate-900 hover:text-white transition-all shadow-sm">PREVIOUS</button>
+<button class="px-6 py-2.5 text-xs font-black bg-white border border-slate-200 rounded-xl text-slate-600 hover:bg-slate-900 hover:text-white transition-all shadow-sm">NEXT PAGE</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+
+</body></html>

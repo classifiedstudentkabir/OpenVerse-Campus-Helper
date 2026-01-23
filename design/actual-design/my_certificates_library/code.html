@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Professional Achievement Library</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2b6cee",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "0.75rem", "xl": "1rem", "2xl": "1.5rem", "full": "9999px"},
+                    boxShadow: {
+                        'glow-green': '0 0 15px rgba(34, 197, 94, 0.5)',
+                        'glow-blue': '0 0 15px rgba(59, 130, 246, 0.5)',
+                        'glow-amber': '0 0 15px rgba(245, 158, 11, 0.5)',
+                        'glow-gray': '0 0 15px rgba(100, 116, 139, 0.5)',
+                        'card-hover': '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+        .dark ::-webkit-scrollbar-thumb { background: #334155; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-[#0d121b] dark:text-white antialiased">
+<div class="relative flex h-screen w-full bg-background-light dark:bg-background-dark overflow-hidden">
+<div class="flex-none hidden md:flex h-full w-72 flex-col justify-between bg-white dark:bg-[#1a2332] border-r border-[#cfd7e7] dark:border-[#2a3441] p-5 z-20">
+<div class="flex flex-col gap-8">
+<div class="flex gap-3 items-center px-2">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-xl size-10 shadow-sm" data-alt="CertifyApp logo placeholder abstract blue shape" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCEd4FUYk70griwVpdZXHjTqqgBq5OdRXsSAFk-_QtnV5DP6O-D_0wb5UNYcH8Mr4kIewIyWv0wP9T-01NSrxRxNx-ElbhYM3SyYI1GYd7G3kMAg6SrtUF5Gav-CW7pvlyVPVUIeSiYaLOWDP58w-QdcCw_9Fqd7wk0Tsh5Ek6f1tQ00g3rAIZC_z_GE8uziqUFqvwa8YySGt6rZmY-RyUtvkLsl0MX5Tj1kxXPnE1rlSrXWYMsDTE2jr8mvXNQF7WVpUktyj_oLlu3");'></div>
+<div class="flex flex-col">
+<h1 class="text-lg font-bold leading-tight dark:text-white">CertifyApp</h1>
+<p class="text-[#4c669a] dark:text-gray-400 text-xs font-medium">Pro Plan</p>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#4c669a] dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[24px] group-hover:text-primary transition-colors">dashboard</span>
+<p class="text-sm font-medium leading-normal group-hover:text-[#0d121b] dark:group-hover:text-white transition-colors">Dashboard</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary" href="#">
+<span class="material-symbols-outlined text-[24px] fill-1">workspace_premium</span>
+<p class="text-sm font-bold leading-normal">Achievements</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#4c669a] dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[24px] group-hover:text-primary transition-colors">group</span>
+<p class="text-sm font-medium leading-normal group-hover:text-[#0d121b] dark:group-hover:text-white transition-colors">Recipients</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#4c669a] dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[24px] group-hover:text-primary transition-colors">description</span>
+<p class="text-sm font-medium leading-normal group-hover:text-[#0d121b] dark:group-hover:text-white transition-colors">Templates</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#4c669a] dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[24px] group-hover:text-primary transition-colors">settings</span>
+<p class="text-sm font-medium leading-normal group-hover:text-[#0d121b] dark:group-hover:text-white transition-colors">Settings</p>
+</a>
+</div>
+</div>
+<div class="flex items-center gap-3 px-3 py-3 rounded-xl bg-gray-50 dark:bg-gray-800/50 border border-gray-100 dark:border-gray-800">
+<div class="relative">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border-2 border-white dark:border-gray-700" data-alt="User profile picture of a smiling person" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBqVi73-4FKE7pOLS59ujGWpWOr8LobIIPTeRdGPcyFHmAuUYnTnhM0tMTJdKgwhkAl5nBQaNzl-TXmHKbMSgt_evIsSWt4vSCspxvGSJeCoq5wUF8176_aiyEx8tvzKZK8K0oC_4ysdBK4sjshTU5POx5eCRaEyE0RKAENr4tulxwfiDvIJz8IPC5isv0bFWhdHf2m-ho58cUN1xoShdDAHNRCr4vOEuDIvsjNhz_y9CrjbR8Ak67bsmkrnj52QTsejAUNMlUK73Zf");'></div>
+<div class="absolute bottom-0 right-0 size-3 bg-green-500 rounded-full border-2 border-white dark:border-gray-800"></div>
+</div>
+<div class="flex flex-col overflow-hidden">
+<p class="text-[#0d121b] dark:text-white text-sm font-semibold truncate">Jane Doe</p>
+<p class="text-[#4c669a] dark:text-gray-400 text-xs truncate">jane@certify.app</p>
+</div>
+</div>
+</div>
+<div class="flex-1 flex flex-col h-full overflow-hidden relative">
+<header class="h-16 flex items-center justify-between px-6 md:px-10 border-b border-[#cfd7e7] dark:border-[#2a3441] bg-white dark:bg-[#1a2332] md:hidden z-20">
+<span class="material-symbols-outlined text-[#0d121b] dark:text-white">menu</span>
+<span class="font-bold text-lg dark:text-white">CertifyApp</span>
+<div class="size-8 rounded-full bg-gray-200 dark:bg-gray-700"></div>
+</header>
+<main class="flex-1 overflow-y-auto p-4 md:p-10 bg-background-light dark:bg-background-dark relative">
+<div class="max-w-[1200px] mx-auto flex flex-col gap-8 pb-32">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div>
+<h1 class="text-3xl md:text-4xl font-black text-[#0d121b] dark:text-white tracking-tight">Achievement Library</h1>
+<p class="text-[#4c669a] dark:text-gray-400 mt-2 text-lg">Showcase of completed certificate projects.</p>
+</div>
+<button class="flex items-center justify-center gap-2 bg-primary hover:bg-blue-600 text-white px-6 h-12 rounded-xl shadow-lg shadow-blue-500/30 transition-all active:scale-95 w-full md:w-auto">
+<span class="material-symbols-outlined text-[20px]">add</span>
+<span class="font-bold text-sm">Create New</span>
+</button>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-4 items-center bg-white dark:bg-[#1a2332] p-4 rounded-2xl shadow-sm border border-[#cfd7e7] dark:border-[#2a3441]">
+<div class="lg:col-span-5 w-full relative group">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-[#9ca3af] group-focus-within:text-primary transition-colors">search</span>
+</div>
+<input class="block w-full pl-10 pr-3 py-2.5 border-none rounded-lg bg-gray-50 dark:bg-gray-800 text-[#0d121b] dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-shadow sm:text-sm" placeholder="Search achievements..." type="text"/>
+</div>
+<div class="lg:col-span-4 w-full relative">
+<button class="flex items-center justify-between w-full px-4 py-2.5 bg-gray-50 dark:bg-gray-800 text-left text-sm font-medium text-[#0d121b] dark:text-white rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors focus:outline-none focus:ring-2 focus:ring-primary/50">
+<span class="flex items-center gap-2 text-gray-500 dark:text-gray-400">
+<span class="material-symbols-outlined text-[20px]">calendar_today</span>
+<span>Oct 1 - Oct 31, 2023</span>
+</span>
+<span class="material-symbols-outlined text-[20px] text-gray-400">expand_more</span>
+</button>
+</div>
+<div class="lg:col-span-3 w-full relative">
+<button class="flex items-center justify-between w-full px-4 py-2.5 bg-gray-50 dark:bg-gray-800 text-left text-sm font-medium text-[#0d121b] dark:text-white rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors focus:outline-none focus:ring-2 focus:ring-primary/50">
+<span class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px] text-gray-500">filter_list</span>
+<span>All Statuses</span>
+</span>
+<span class="material-symbols-outlined text-[20px] text-gray-400">expand_more</span>
+</button>
+</div>
+</div>
+<div class="bg-white dark:bg-[#1a2332] rounded-2xl shadow-sm border border-[#cfd7e7] dark:border-[#2a3441] overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-gray-50/50 dark:bg-gray-800/30 border-b border-[#cfd7e7] dark:border-[#2a3441]">
+<th class="pl-6 py-4 w-12 text-center">
+<input class="rounded border-gray-300 text-primary focus:ring-primary h-5 w-5 cursor-pointer bg-white dark:bg-gray-700 dark:border-gray-600 dark:checked:bg-primary dark:checked:border-transparent" type="checkbox"/>
+</th>
+<th class="px-6 py-4 text-xs font-semibold text-[#4c669a] dark:text-gray-400 uppercase tracking-wider w-48">Portfolio Item</th>
+<th class="px-6 py-4 text-xs font-semibold text-[#4c669a] dark:text-gray-400 uppercase tracking-wider">Details</th>
+<th class="px-6 py-4 text-xs font-semibold text-[#4c669a] dark:text-gray-400 uppercase tracking-wider w-40">Recipients</th>
+<th class="px-6 py-4 text-xs font-semibold text-[#4c669a] dark:text-gray-400 uppercase tracking-wider w-48">Date Created</th>
+<th class="px-6 py-4 text-xs font-semibold text-[#4c669a] dark:text-gray-400 uppercase tracking-wider w-32">Status</th>
+<th class="px-6 py-4 text-xs font-semibold text-[#4c669a] dark:text-gray-400 uppercase tracking-wider w-24 text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-[#cfd7e7] dark:divide-[#2a3441]">
+<tr class="hover:bg-blue-50/30 dark:hover:bg-blue-900/10 transition-colors group cursor-pointer relative">
+<td class="pl-6 py-4 text-center">
+<input checked="" class="rounded border-gray-300 text-primary focus:ring-primary h-5 w-5 cursor-pointer bg-white dark:bg-gray-700 dark:border-gray-600 dark:checked:bg-primary dark:checked:border-transparent" type="checkbox"/>
+</td>
+<td class="px-6 py-4 whitespace-nowrap overflow-visible">
+<div class="h-24 w-40 bg-cover bg-center rounded-lg shadow-lg border border-gray-200 dark:border-gray-600 transition-all duration-300 ease-out hover:scale-110 hover:shadow-card-hover hover:z-50 hover:rotate-1 origin-left relative z-10" data-alt="Miniature of a certificate with blue borders" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCGwH_6ERAJPWMwC1OLFV70FibPoEkdIn53kMupgJ6O6N6eg5fQZI9xzMsSW_HWW_SZQ5JF1UomrHL0phv-j1daovfLO-BGObl4thwJnkuT9xB-2-A7ptFLHhtOeNnwu7XYXl2TMkooww4ck2LDjKO46rqzQ3dTymCwRzHuNnuX1cD_Wsv0Hp9BvHkJ3yLnS4rw22xxLg88ICKSwNNH7b6G8taRFLCOatCGrf2LKrwLSbb2iwljquB2j8Cljbd4tu0IaVH33j2Bc7sX");'></div>
+</td>
+<td class="px-6 py-6">
+<div class="flex flex-col gap-1.5">
+<div class="text-base font-bold text-[#0d121b] dark:text-white">Q3 Excellence Awards</div>
+<div class="flex flex-wrap gap-2 items-center">
+<span class="text-xs text-gray-500 font-mono">ID: #CERT-8921</span>
+<span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold bg-indigo-100 text-indigo-700 dark:bg-indigo-900/40 dark:text-indigo-300 uppercase tracking-wide border border-indigo-200 dark:border-indigo-800">
+                                                    High Engagement
+                                                </span>
+</div>
+</div>
+</td>
+<td class="px-6 py-6 whitespace-nowrap">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px] text-gray-400">group</span>
+<span class="text-sm font-bold text-[#4c669a] dark:text-gray-300 tabular-nums">45</span>
+</div>
+</td>
+<td class="px-6 py-6 whitespace-nowrap">
+<span class="text-sm font-medium text-[#4c669a] dark:text-gray-300">Oct 24, 2023</span>
+</td>
+<td class="px-6 py-6 whitespace-nowrap">
+<span class="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-bold bg-green-600 text-white shadow-glow-green border border-green-500">
+<span class="material-symbols-outlined text-[14px] mr-1.5 font-bold">check</span>
+                                            Sent
+                                        </span>
+</td>
+<td class="px-6 py-6 whitespace-nowrap text-right">
+<div class="flex items-center justify-end gap-1 opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 text-gray-400 hover:text-primary hover:bg-white dark:hover:bg-gray-700 rounded-lg transition-all shadow-sm" title="Download PDF">
+<span class="material-symbols-outlined text-[20px]">download</span>
+</button>
+<button class="p-2 text-gray-400 hover:text-primary hover:bg-white dark:hover:bg-gray-700 rounded-lg transition-all shadow-sm" title="Share">
+<span class="material-symbols-outlined text-[20px]">share</span>
+</button>
+<button class="p-2 text-gray-400 hover:text-primary hover:bg-white dark:hover:bg-gray-700 rounded-lg transition-all shadow-sm" title="More options">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-blue-50/30 dark:hover:bg-blue-900/10 transition-colors group cursor-pointer relative">
+<td class="pl-6 py-4 text-center">
+<input class="rounded border-gray-300 text-primary focus:ring-primary h-5 w-5 cursor-pointer bg-white dark:bg-gray-700 dark:border-gray-600 dark:checked:bg-primary dark:checked:border-transparent" type="checkbox"/>
+</td>
+<td class="px-6 py-4 whitespace-nowrap overflow-visible">
+<div class="h-24 w-40 bg-cover bg-center rounded-lg shadow-lg border border-gray-200 dark:border-gray-600 transition-all duration-300 ease-out hover:scale-110 hover:shadow-card-hover hover:z-50 hover:rotate-1 origin-left relative z-10 grayscale opacity-80 hover:grayscale-0 hover:opacity-100" data-alt="Miniature of a simple text certificate" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCS0EIwPc-sbnfk8v26b3jFfVGBskgn0agBS7-Yq-YVQbccSTeuFSJRdxM2pTMYetjn6_gR6WmttJSHwkz7UE67sLdM4a8hbbLf0LKg2i2DGiTzI0g2ntO597StmPe1wCgnRRyGTBWLFmzKM5M3jhf-vIUqbByHTn5YNSA6aFTUVE7gqmQc9O1wYQEL5r_G77tHAaloFJcJkNdxd1ACFQtUhFybrBNE_SJf144CfZ7rhzBdawVpffHUA7SeDrIr7HaQ-qLxuTY-wgs-");'></div>
+</td>
+<td class="px-6 py-6">
+<div class="flex flex-col gap-1.5">
+<div class="text-base font-bold text-[#0d121b] dark:text-white">Web Development Bootcamp</div>
+<div class="flex flex-wrap gap-2 items-center">
+<span class="text-xs text-gray-500 font-mono">ID: #CERT-9942</span>
+<span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold bg-pink-100 text-pink-700 dark:bg-pink-900/40 dark:text-pink-300 uppercase tracking-wide border border-pink-200 dark:border-pink-800">
+                                                    Recently Updated
+                                                </span>
+</div>
+</div>
+</td>
+<td class="px-6 py-6 whitespace-nowrap">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px] text-gray-400">person</span>
+<span class="text-sm font-bold text-[#4c669a] dark:text-gray-300 tabular-nums">1</span>
+</div>
+</td>
+<td class="px-6 py-6 whitespace-nowrap">
+<span class="text-sm font-medium text-[#4c669a] dark:text-gray-300">Oct 20, 2023</span>
+</td>
+<td class="px-6 py-6 whitespace-nowrap">
+<span class="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-bold bg-slate-600 text-white shadow-glow-gray border border-slate-500">
+<span class="material-symbols-outlined text-[14px] mr-1.5 font-bold">edit_note</span>
+                                            Draft
+                                        </span>
+</td>
+<td class="px-6 py-6 whitespace-nowrap text-right">
+<div class="flex items-center justify-end gap-1 opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 text-gray-400 hover:text-primary hover:bg-white dark:hover:bg-gray-700 rounded-lg transition-all shadow-sm" title="Edit">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="p-2 text-gray-400 hover:text-primary hover:bg-white dark:hover:bg-gray-700 rounded-lg transition-all shadow-sm" title="More options">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-blue-50/30 dark:hover:bg-blue-900/10 transition-colors group cursor-pointer relative">
+<td class="pl-6 py-4 text-center">
+<input class="rounded border-gray-300 text-primary focus:ring-primary h-5 w-5 cursor-pointer bg-white dark:bg-gray-700 dark:border-gray-600 dark:checked:bg-primary dark:checked:border-transparent" type="checkbox"/>
+</td>
+<td class="px-6 py-4 whitespace-nowrap overflow-visible">
+<div class="h-24 w-40 bg-cover bg-center rounded-lg shadow-lg border border-gray-200 dark:border-gray-600 transition-all duration-300 ease-out hover:scale-110 hover:shadow-card-hover hover:z-50 hover:rotate-1 origin-left relative z-10" data-alt="Miniature of a golden bordered certificate" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD768nFL0Z0INEx-_OjplXb3FG3xkAZhmmKAHSyjCKCEQlA5XC5mzX3BcmhTcL5Be_j2AzRNLgnIKX3_OhtwW2DIkWKvOZmpHany5thR-rf1bygE4kaRPXsXp03XZSVyDceV-ghCwmfNOL98e9qgMWag-ihhoZRVgxCz8pFBuUU0wwpEtwnwBsrTJrwrC2q22zKGNEgvmsoBxXnfccE0am59JmDCRWOmpvkHKimtkvahFiPdv3fELPvQLgxhuxLg4il5A4GHt_v0VX2");'></div>
+</td>
+<td class="px-6 py-6">
+<div class="flex flex-col gap-1.5">
+<div class="text-base font-bold text-[#0d121b] dark:text-white">Employee of the Month</div>
+<div class="flex flex-wrap gap-2 items-center">
+<span class="text-xs text-gray-500 font-mono">ID: #CERT-1102</span>
+</div>
+</div>
+</td>
+<td class="px-6 py-6 whitespace-nowrap">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px] text-gray-400">group</span>
+<span class="text-sm font-bold text-[#4c669a] dark:text-gray-300 tabular-nums">12</span>
+</div>
+</td>
+<td class="px-6 py-6 whitespace-nowrap">
+<span class="text-sm font-medium text-[#4c669a] dark:text-gray-300">Sep 15, 2023</span>
+</td>
+<td class="px-6 py-6 whitespace-nowrap">
+<span class="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-bold bg-blue-600 text-white shadow-glow-blue border border-blue-500">
+<span class="material-symbols-outlined text-[14px] mr-1.5 font-bold">done_all</span>
+                                            Completed
+                                        </span>
+</td>
+<td class="px-6 py-6 whitespace-nowrap text-right">
+<div class="flex items-center justify-end gap-1 opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 text-gray-400 hover:text-primary hover:bg-white dark:hover:bg-gray-700 rounded-lg transition-all shadow-sm" title="Download PDF">
+<span class="material-symbols-outlined text-[20px]">download</span>
+</button>
+<button class="p-2 text-gray-400 hover:text-primary hover:bg-white dark:hover:bg-gray-700 rounded-lg transition-all shadow-sm" title="Share">
+<span class="material-symbols-outlined text-[20px]">share</span>
+</button>
+<button class="p-2 text-gray-400 hover:text-primary hover:bg-white dark:hover:bg-gray-700 rounded-lg transition-all shadow-sm" title="More options">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-blue-50/30 dark:hover:bg-blue-900/10 transition-colors group cursor-pointer relative">
+<td class="pl-6 py-4 text-center">
+<input checked="" class="rounded border-gray-300 text-primary focus:ring-primary h-5 w-5 cursor-pointer bg-white dark:bg-gray-700 dark:border-gray-600 dark:checked:bg-primary dark:checked:border-transparent" type="checkbox"/>
+</td>
+<td class="px-6 py-4 whitespace-nowrap overflow-visible">
+<div class="h-24 w-40 bg-cover bg-center rounded-lg shadow-lg border border-gray-200 dark:border-gray-600 transition-all duration-300 ease-out hover:scale-110 hover:shadow-card-hover hover:z-50 hover:rotate-1 origin-left relative z-10" data-alt="Miniature of a classic diploma style certificate" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBJgMKghmxo6ROaoGBQ1ZBzIdNudUdGgg-8HNVKEVY-uiivwOCxqs_uOFhgYJ1WJt3mg88oorIvdFMvRAUMlDozlMzzfjpYsiLFwXnn_hV5pXGxqgKHgQrq92cdrUdk8N4p6WkdiN72X8CMDOH9b35RFBGryS6JIrO3UEJBpk9_mBipdtqon_SWH2UelwaHliOyin-vD6RvMW8AxT_T-wQxeXF731X8pDsP0pERYbbsSPL5xRGLFp_woKRHvZVcmD3wrFzXT_ETtwsg");'></div>
+</td>
+<td class="px-6 py-6">
+<div class="flex flex-col gap-1.5">
+<div class="text-base font-bold text-[#0d121b] dark:text-white">Annual Sales Summit 2023</div>
+<div class="flex flex-wrap gap-2 items-center">
+<span class="text-xs text-gray-500 font-mono">ID: #CERT-5591</span>
+<span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold bg-indigo-100 text-indigo-700 dark:bg-indigo-900/40 dark:text-indigo-300 uppercase tracking-wide border border-indigo-200 dark:border-indigo-800">
+                                                    High Engagement
+                                                </span>
+</div>
+</div>
+</td>
+<td class="px-6 py-6 whitespace-nowrap">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px] text-gray-400">group</span>
+<span class="text-sm font-bold text-[#4c669a] dark:text-gray-300 tabular-nums">210</span>
+</div>
+</td>
+<td class="px-6 py-6 whitespace-nowrap">
+<span class="text-sm font-medium text-[#4c669a] dark:text-gray-300">Aug 30, 2023</span>
+</td>
+<td class="px-6 py-6 whitespace-nowrap">
+<span class="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-bold bg-green-600 text-white shadow-glow-green border border-green-500">
+<span class="material-symbols-outlined text-[14px] mr-1.5 font-bold">check</span>
+                                            Sent
+                                        </span>
+</td>
+<td class="px-6 py-6 whitespace-nowrap text-right">
+<div class="flex items-center justify-end gap-1 opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 text-gray-400 hover:text-primary hover:bg-white dark:hover:bg-gray-700 rounded-lg transition-all shadow-sm" title="Download PDF">
+<span class="material-symbols-outlined text-[20px]">download</span>
+</button>
+<button class="p-2 text-gray-400 hover:text-primary hover:bg-white dark:hover:bg-gray-700 rounded-lg transition-all shadow-sm" title="Share">
+<span class="material-symbols-outlined text-[20px]">share</span>
+</button>
+<button class="p-2 text-gray-400 hover:text-primary hover:bg-white dark:hover:bg-gray-700 rounded-lg transition-all shadow-sm" title="More options">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-blue-50/30 dark:hover:bg-blue-900/10 transition-colors group cursor-pointer relative">
+<td class="pl-6 py-4 text-center">
+<input class="rounded border-gray-300 text-primary focus:ring-primary h-5 w-5 cursor-pointer bg-white dark:bg-gray-700 dark:border-gray-600 dark:checked:bg-primary dark:checked:border-transparent" type="checkbox"/>
+</td>
+<td class="px-6 py-4 whitespace-nowrap overflow-visible">
+<div class="h-24 w-40 bg-cover bg-center rounded-lg shadow-lg border border-gray-200 dark:border-gray-600 transition-all duration-300 ease-out hover:scale-110 hover:shadow-card-hover hover:z-50 hover:rotate-1 origin-left relative z-10" data-alt="Miniature of a modern geometric certificate" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBgtkagsSgA9T1RfJ3b4NJ0muh_ns2JTrSDAl9WguWNmslftGj2gxq05GB1PimCb7knvx36obDWbDWeCBikfKIKTLTikMf2Ef5MiIdkABIwCUHzG4xDe1R15_3htYq11fAUtBwXuDc_pRECZl9tCl6LxVzq59p1NormIOxr0XUxKS_u1ZgXY-RZIextfZdwJ2IwHdXVpfUcU6osZbJkh8mwojAF_FvOkxlTCPU4inhv99QSjaptHmj7IOR0-j679v9jen0H7Scvfh3m");'></div>
+</td>
+<td class="px-6 py-6">
+<div class="flex flex-col gap-1.5">
+<div class="text-base font-bold text-[#0d121b] dark:text-white">React Advanced Patterns</div>
+<div class="flex flex-wrap gap-2 items-center">
+<span class="text-xs text-gray-500 font-mono">ID: #CERT-3312</span>
+</div>
+</div>
+</td>
+<td class="px-6 py-6 whitespace-nowrap">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px] text-gray-400">group</span>
+<span class="text-sm font-bold text-[#4c669a] dark:text-gray-300 tabular-nums">15</span>
+</div>
+</td>
+<td class="px-6 py-6 whitespace-nowrap">
+<span class="text-sm font-medium text-[#4c669a] dark:text-gray-300">Aug 12, 2023</span>
+</td>
+<td class="px-6 py-6 whitespace-nowrap">
+<span class="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-bold bg-amber-500 text-white shadow-glow-amber border border-amber-400">
+<span class="material-symbols-outlined text-[14px] mr-1.5 font-bold animate-spin">sync</span>
+                                            Generating
+                                        </span>
+</td>
+<td class="px-6 py-6 whitespace-nowrap text-right">
+<div class="flex items-center justify-end gap-1 opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="text-xs text-gray-400 italic">Processing...</span>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="flex items-center justify-between px-6 py-4 border-t border-[#cfd7e7] dark:border-[#2a3441] bg-white dark:bg-[#1a2332]">
+<div class="text-sm text-gray-500 dark:text-gray-400">
+                            Showing <span class="font-medium text-[#0d121b] dark:text-white">1</span> to <span class="font-medium text-[#0d121b] dark:text-white">5</span> of <span class="font-medium text-[#0d121b] dark:text-white">128</span> results
+                        </div>
+<div class="flex items-center gap-2">
+<button class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-400 hover:text-[#0d121b] dark:hover:text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+<span class="material-symbols-outlined text-[18px]">chevron_left</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-full bg-primary text-white text-sm font-bold shadow-sm shadow-blue-500/30">1</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-600 dark:text-gray-300 hover:text-[#0d121b] dark:hover:text-white text-sm font-medium transition-colors">2</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-600 dark:text-gray-300 hover:text-[#0d121b] dark:hover:text-white text-sm font-medium transition-colors">3</button>
+<span class="w-8 h-8 flex items-center justify-center text-gray-400 text-sm">...</span>
+<button class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-600 dark:text-gray-300 hover:text-[#0d121b] dark:hover:text-white text-sm font-medium transition-colors">8</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-400 hover:text-[#0d121b] dark:hover:text-white transition-colors">
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<div class="fixed bottom-6 left-0 right-0 mx-auto w-max z-50 md:pl-72 pointer-events-none">
+<div class="bg-[#101622] text-white px-5 py-3 rounded-full shadow-2xl shadow-blue-900/30 flex items-center gap-6 border border-gray-700 pointer-events-auto transform translate-y-0 transition-transform animate-in slide-in-from-bottom-4 fade-in duration-300">
+<div class="flex items-center gap-3 border-r border-gray-700 pr-4">
+<div class="bg-primary text-white text-xs font-bold px-2 py-0.5 rounded shadow-sm">2</div>
+<span class="text-sm font-medium">Selected</span>
+</div>
+<div class="flex items-center gap-2">
+<button class="group flex items-center gap-2 hover:bg-gray-800/50 px-3 py-1.5 rounded-lg transition-colors text-sm font-medium">
+<span class="material-symbols-outlined text-[18px] text-gray-300 group-hover:text-primary transition-colors">download</span>
+                            Download All
+                        </button>
+<button class="group flex items-center gap-2 hover:bg-gray-800/50 px-3 py-1.5 rounded-lg transition-colors text-sm font-medium">
+<span class="material-symbols-outlined text-[18px] text-gray-300 group-hover:text-green-400 transition-colors">send</span>
+                            Resend Batch
+                        </button>
+</div>
+<button class="ml-2 p-1 text-gray-400 hover:text-white hover:bg-gray-800 rounded-full transition-colors">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+</div>
+</main>
+</div>
+</div>
+</body></html>

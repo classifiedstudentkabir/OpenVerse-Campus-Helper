@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Login to Your Account</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#8b3dff", 
+                        "primary-hover": "#7a2ce0",
+                        "card-bg": "#ffffff",
+                        "input-bg": "#ffffff",
+                        "input-border": "#e5e7eb",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+    .bg-mesh-gradient-dark {
+        background-color: #0f172a;
+        background-image: 
+            radial-gradient(at 0% 0%, rgba(124, 58, 237, 0.3) 0px, transparent 50%),
+            radial-gradient(at 100% 0%, rgba(79, 70, 229, 0.3) 0px, transparent 50%),
+            radial-gradient(at 100% 100%, rgba(139, 92, 246, 0.3) 0px, transparent 50%),
+            radial-gradient(at 0% 100%, rgba(99, 102, 241, 0.3) 0px, transparent 50%),
+            radial-gradient(at 50% 50%, #0f172a 0px, transparent 50%);
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+    }
+    .shadow-soft-xl {
+        box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.35), 0 0 20px rgba(0,0,0,0.1);
+    }
+</style>
+</head>
+<body class="font-display text-slate-900 antialiased h-screen overflow-hidden">
+<div class="relative w-full h-full flex items-center justify-center bg-mesh-gradient-dark">
+<div class="relative w-full max-w-[440px] px-4 z-10 animate-fade-in-up">
+<div class="flex flex-col w-full bg-white rounded-xl shadow-soft-xl border border-gray-100 overflow-hidden">
+<div class="p-8 flex flex-col gap-6">
+<div class="flex flex-col gap-2 text-center items-center">
+<div class="mb-2 flex items-center justify-center h-12 w-12 rounded-full bg-purple-50 text-primary border border-purple-100">
+<span class="material-symbols-outlined text-2xl">workspace_premium</span>
+</div>
+<h1 class="text-gray-900 tracking-tight text-2xl font-bold leading-tight">
+                        Log in or sign up
+                    </h1>
+<p class="text-gray-500 text-sm font-normal">
+                        Access your certificate templates and designs.
+                    </p>
+</div>
+<form class="flex flex-col gap-4">
+<div class="flex flex-col gap-3 mb-1">
+<div class="text-xs font-semibold text-gray-500 uppercase tracking-wider">Recent</div>
+<button class="flex items-center gap-3 p-3 bg-white hover:bg-gray-50 rounded-lg transition-colors group text-left border border-gray-200 shadow-sm" type="button">
+<div class="h-10 w-10 rounded-full bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center text-sm font-bold text-white shadow-inner border border-white/20">
+                                JS
+                            </div>
+<div class="flex flex-col">
+<span class="text-sm font-medium text-gray-900 group-hover:text-primary transition-colors">John Smith</span>
+<span class="text-xs text-gray-500">john.smith@education.org</span>
+</div>
+<span class="material-symbols-outlined text-gray-400 ml-auto text-lg opacity-0 group-hover:opacity-100 transition-opacity">arrow_forward</span>
+</button>
+</div>
+<div class="h-px bg-gray-100 w-full my-1"></div>
+<div class="flex flex-col gap-1.5">
+<label class="text-gray-700 text-sm font-medium" for="email">
+                            Email
+                        </label>
+<input class="form-input flex w-full rounded-lg text-gray-900 focus:outline-0 focus:ring-2 focus:ring-primary/20 border border-gray-300 bg-white focus:border-primary h-11 placeholder:text-gray-400 px-4 text-sm transition-all duration-200" id="email" placeholder="name@company.com" type="email" value=""/>
+</div>
+<div class="flex flex-col gap-1.5">
+<div class="flex justify-between items-center">
+<label class="text-gray-700 text-sm font-medium" for="password">
+                                Password
+                            </label>
+<a class="text-primary hover:text-primary-hover text-xs font-medium transition-colors" href="#">
+                                Forgot?
+                            </a>
+</div>
+<div class="relative flex w-full items-center">
+<input class="form-input flex w-full rounded-lg text-gray-900 focus:outline-0 focus:ring-2 focus:ring-primary/20 border border-gray-300 bg-white focus:border-primary h-11 placeholder:text-gray-400 pl-4 pr-10 text-sm transition-all duration-200" id="password" placeholder="Enter password" type="password" value=""/>
+<button class="absolute right-0 top-0 bottom-0 px-3 flex items-center justify-center text-gray-400 hover:text-gray-600 transition-colors cursor-pointer" type="button">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+</div>
+</div>
+<div class="flex flex-col gap-3 mt-2">
+<button class="flex w-full cursor-pointer items-center justify-center rounded-lg h-11 px-5 bg-primary hover:bg-primary-hover text-white text-sm font-semibold tracking-wide transition-all shadow-[0_4px_14px_0_rgba(139,61,255,0.39)] hover:shadow-[0_6px_20px_rgba(139,61,255,0.23)] active:scale-[0.98] duration-150 border border-transparent" type="button">
+                            Continue
+                        </button>
+<div class="relative flex items-center py-1">
+<div class="flex-grow border-t border-gray-200"></div>
+<span class="flex-shrink-0 mx-4 text-gray-400 text-xs uppercase">OR</span>
+<div class="flex-grow border-t border-gray-200"></div>
+</div>
+<button class="flex w-full cursor-pointer items-center relative justify-center gap-3 rounded-lg h-11 px-5 bg-white border border-gray-300 hover:bg-gray-50 hover:border-gray-400 text-gray-700 text-sm font-medium transition-all active:scale-[0.98] duration-150" type="button">
+<svg class="absolute left-4 top-1/2 -translate-y-1/2" data-alt="Google G logo" fill="none" height="18" viewBox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg">
+<path d="M23.766 12.2764C23.766 11.4607 23.6999 10.6406 23.5588 9.83807H12.24V14.4591H18.7217C18.4528 15.9494 17.5885 17.2678 16.323 18.1056V21.1039H20.19C22.4608 19.0139 23.766 15.9274 23.766 12.2764Z" fill="#4285F4"></path>
+<path d="M12.24 24.0008C15.4765 24.0008 18.2059 22.9382 20.1945 21.1039L16.3275 18.1055C15.2517 18.8375 13.8627 19.252 12.2445 19.252C9.11388 19.252 6.45946 17.1399 5.50705 14.3003H1.5166V17.3912C3.55371 21.4434 7.7029 24.0008 12.24 24.0008Z" fill="#34A853"></path>
+<path d="M5.50253 14.3003C5.00236 12.8199 5.00236 11.1799 5.50253 9.69951V6.60861H1.51649C-0.18551 10.0056 -0.18551 13.9945 1.51649 17.3915L5.50253 14.3003Z" fill="#FBBC05"></path>
+<path d="M12.24 4.74966C13.9509 4.7232 15.6044 5.36697 16.8434 6.54867L20.2695 3.12262C18.1001 1.0855 15.2208 -0.0344664 12.24 0.000808666C7.7029 0.000808666 3.55371 2.55822 1.5166 6.60861L5.50264 9.69951C6.45064 6.85991 9.10947 4.74966 12.24 4.74966Z" fill="#EA4335"></path>
+</svg>
+<span>Continue with Google</span>
+</button>
+</div>
+</form>
+<div class="text-center pt-2">
+<p class="text-gray-500 text-xs font-normal">
+                        Don't have an account? 
+                        <a class="text-primary font-medium hover:underline ml-1" href="#">Sign up</a>
+</p>
+</div>
+</div>
+</div>
+<div class="mt-6 flex justify-center gap-6 text-xs text-gray-400">
+<a class="hover:text-gray-200 transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-gray-200 transition-colors" href="#">Terms of Use</a>
+</div>
+</div>
+</div>
+</body></html>

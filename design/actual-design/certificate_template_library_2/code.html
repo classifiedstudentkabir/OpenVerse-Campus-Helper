@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Certificate Template Library</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1337ec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101322",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        .certificate-card:hover .hover-overlay {
+            opacity: 1;
+        }
+        .certificate-card:hover {
+            box-shadow: 0 0 20px 2px rgba(19, 55, 236, 0.15);
+            transform: translateY(-4px);
+            transition: all 0.3s ease;
+        }
+        .realistic-shadow {
+            box-shadow: 
+                0 10px 15px -3px rgba(0, 0, 0, 0.1), 
+                0 4px 6px -2px rgba(0, 0, 0, 0.05),
+                inset 0 0 0 1px rgba(0, 0, 0, 0.05);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #e2e8f0;
+            border-radius: 10px;
+        }
+        .dark .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #334155;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-[#111218] dark:text-white antialiased overflow-hidden">
+<header class="sticky top-0 z-40 w-full border-b border-solid border-[#f0f1f4] dark:border-white/10 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md px-6 py-3">
+<div class="flex items-center justify-between max-w-[1600px] mx-auto">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-3">
+<div class="bg-primary text-white p-1.5 rounded-lg">
+<span class="material-symbols-outlined text-2xl">verified</span>
+</div>
+<h2 class="text-xl font-bold leading-tight tracking-tight">CertifyGen</h2>
+</div>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Home</a>
+<a class="text-sm font-medium text-primary" href="#">Templates</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">My Designs</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Brand Kit</a>
+</nav>
+</div>
+<div class="flex-1 max-w-xl px-12">
+<div class="relative group">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400 group-focus-within:text-primary">
+<span class="material-symbols-outlined">search</span>
+</div>
+<input class="block w-full pl-10 pr-3 py-2 border-none bg-background-light dark:bg-white/5 rounded-xl text-sm placeholder-gray-500 focus:ring-2 focus:ring-primary/20 transition-all" placeholder="Search templates (e.g. Modern Internship, Gold Award)" type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="flex items-center gap-2 bg-primary text-white px-5 py-2 rounded-xl text-sm font-bold hover:bg-primary/90 transition-all">
+<span class="material-symbols-outlined text-sm">add</span>
+<span>Create Design</span>
+</button>
+<div class="h-10 w-10 rounded-full bg-cover bg-center border-2 border-primary/20" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBBMNFWi3Sr1WZbRma86WCpe4RLgtZFQq9UbflbAqXlgPkzhTZ-ISC4a37dvnxRPDa5rDqUjXdjykIgydcA6Z2p-kFeiLXES8TPxTUqlVTQ2dg6AIw-eZBym9edNfQ5pMtK-6gDQxnNKI_FskV4L-QcaIDXUOItgH33lUQf0VvoEnwsDdxYtqNq-rwJKxzSSmmBpdPtL3d_WyHseELIr5yS28rvS5ujrswrxCINEYBDfz3-2ZjQj-uCQhlzQP3JIBdcT6rwG9Ll6puc');"></div>
+</div>
+</div>
+</header>
+<div class="flex min-h-screen max-w-[1600px] mx-auto">
+<aside class="w-64 fixed left-0 top-[73px] bottom-0 overflow-y-auto border-r border-[#f0f1f4] dark:border-white/10 bg-white dark:bg-background-dark p-6 hidden lg:block">
+<div class="flex flex-col gap-8">
+<div>
+<h3 class="text-sm font-bold text-gray-400 uppercase tracking-wider mb-4">Categories</h3>
+<div class="flex flex-col gap-1">
+<button class="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-primary/10 text-primary font-semibold">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-sm">All Templates</span>
+</button>
+<button class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-white/5 transition-all">
+<span class="material-symbols-outlined">emoji_events</span>
+<span class="text-sm">Winner</span>
+</button>
+<button class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-white/5 transition-all">
+<span class="material-symbols-outlined">badge</span>
+<span class="text-sm">Internship</span>
+</button>
+<button class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-white/5 transition-all">
+<span class="material-symbols-outlined">groups</span>
+<span class="text-sm">Participation</span>
+</button>
+<button class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-white/5 transition-all">
+<span class="material-symbols-outlined">workspace_premium</span>
+<span class="text-sm">Achievement</span>
+</button>
+</div>
+</div>
+<div>
+<h3 class="text-sm font-bold text-gray-400 uppercase tracking-wider mb-4">Orientation</h3>
+<div class="flex bg-background-light dark:bg-white/5 p-1 rounded-xl">
+<button class="flex-1 flex flex-col items-center gap-1 py-2 rounded-lg bg-white dark:bg-background-dark shadow-sm text-primary">
+<span class="material-symbols-outlined">crop_landscape</span>
+<span class="text-[10px] font-bold">LANDSCAPE</span>
+</button>
+<button class="flex-1 flex flex-col items-center gap-1 py-2 rounded-lg text-gray-500 hover:text-primary">
+<span class="material-symbols-outlined">crop_portrait</span>
+<span class="text-[10px] font-bold">PORTRAIT</span>
+</button>
+</div>
+</div>
+</div>
+</aside>
+<main class="flex-1 lg:ml-64 p-8">
+<div class="flex items-center justify-between mb-8">
+<div>
+<h1 class="text-2xl font-bold">Certificate Templates</h1>
+<p class="text-gray-500 text-sm mt-1">Found 1,284 professional designs</p>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+<div class="certificate-card group relative bg-white dark:bg-white/5 rounded-xl border border-gray-100 dark:border-white/10 overflow-hidden cursor-pointer">
+<div class="aspect-[4/3] bg-background-light dark:bg-white/5 overflow-hidden relative">
+<img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCD-sBUEA452OsnuAk-7_dFka6FHztSdL3Umf3YvcPlJBue3Q5igeIxhC6z9g6ELdAG0KtVBOGSGMKluq238U68tSlAsAYoo2Seyjbez70QxjRWBM5lD3sBBD0nziMJvyGFDQFDXinN_tdxoiuxxYYAVxSAJtOHGuPF968LzukTqxmiVv94nENzhCZ1sb6dFeXwoTI88WnoCP5B-2GxUVnDEzU1YrnpFTYU2-idL-6tOHlzhFo-riwSz7xbJfuO8sis3OUzvVb2vD-4"/>
+</div>
+<div class="p-4 flex items-center justify-between">
+<div>
+<h4 class="font-bold text-sm">Corporate Excellence</h4>
+<p class="text-xs text-gray-500 mt-0.5">Minimalist • Formal</p>
+</div>
+<span class="material-symbols-outlined text-gray-400 hover:text-primary transition-colors">favorite</span>
+</div>
+</div>
+</div>
+</main>
+</div>
+<div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+<div class="bg-white dark:bg-background-dark w-full max-w-6xl h-[92vh] rounded-2xl overflow-hidden shadow-2xl flex flex-col relative">
+<button class="absolute top-6 right-6 z-30 size-10 flex items-center justify-center bg-white dark:bg-white/10 rounded-full hover:bg-gray-100 dark:hover:bg-white/20 transition-all shadow-md">
+<span class="material-symbols-outlined text-gray-600 dark:text-gray-300">close</span>
+</button>
+<div class="flex-1 overflow-y-auto custom-scrollbar">
+<div class="flex flex-col md:flex-row h-auto">
+<div class="flex-1 bg-gray-50 dark:bg-white/5 flex items-center justify-center p-8 md:p-12">
+<div class="w-full max-w-3xl realistic-shadow bg-white rounded-sm transform hover:scale-[1.01] transition-transform duration-500 overflow-hidden relative">
+<div class="aspect-[1.414/1] border-[14px] border-amber-600/10 p-10 flex flex-col items-center text-center justify-between relative bg-[#fafafa]">
+<div class="absolute inset-3 border-2 border-amber-600/40 pointer-events-none"></div>
+<div class="absolute inset-5 border border-amber-600/20 pointer-events-none"></div>
+<div>
+<p class="text-amber-800 text-[10px] font-bold tracking-[0.3em] mb-4 uppercase">Certificate of Excellence</p>
+<h3 class="text-5xl font-serif text-gray-800 italic">Classic Gold Award</h3>
+<div class="w-16 h-0.5 bg-amber-600/30 mx-auto mt-6"></div>
+<p class="text-gray-400 mt-6 text-[10px] font-bold uppercase tracking-widest">Proudly Presented To</p>
+</div>
+<div class="w-full">
+<h2 class="text-4xl font-bold text-[#1a1a1a] mb-8 tracking-tight font-serif italic border-b border-gray-100 inline-block px-12 pb-2">Johnathan Doe Smith</h2>
+<p class="text-gray-600 max-w-md mx-auto leading-relaxed text-sm">
+                                        For demonstrating exceptional commitment, leadership, and outstanding performance during the 2024 Corporate Innovation Summit.
+                                    </p>
+</div>
+<div class="flex justify-between items-end w-full px-10">
+<div class="text-center pb-2">
+<p class="font-serif text-lg text-gray-700 italic border-b border-gray-300 mb-1 px-4">Harvey Specter</p>
+<p class="text-[9px] font-bold text-gray-400 tracking-wider uppercase">Managing Director</p>
+</div>
+<div class="relative">
+<div class="size-24 rounded-full border border-amber-600/30 flex items-center justify-center p-1">
+<div class="size-full rounded-full border-4 border-amber-600/10 flex items-center justify-center relative bg-amber-50/50">
+<span class="material-symbols-outlined text-amber-600 text-4xl">verified_user</span>
+</div>
+</div>
+</div>
+<div class="text-center pb-2">
+<p class="font-serif text-lg text-gray-700 italic border-b border-gray-300 mb-1 px-4">Mike Ross</p>
+<p class="text-[9px] font-bold text-gray-400 tracking-wider uppercase">Program Supervisor</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="w-full md:w-[420px] bg-white dark:bg-background-dark border-l border-gray-100 dark:border-white/10 p-8 flex flex-col">
+<div class="flex-1">
+<h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4 leading-tight">Classic Gold Award</h2>
+<div class="flex flex-wrap gap-2 mb-8">
+<div class="flex items-center gap-1.5 bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 px-3 py-1.5 rounded-lg text-[11px] font-bold uppercase tracking-wide border border-emerald-100 dark:border-emerald-500/20">
+<span class="material-symbols-outlined text-sm leading-none">groups_3</span>
+                                    Supports Bulk
+                                </div>
+<div class="flex items-center gap-1.5 bg-blue-50 dark:bg-blue-500/10 text-blue-700 dark:text-blue-400 px-3 py-1.5 rounded-lg text-[11px] font-bold uppercase tracking-wide border border-blue-100 dark:border-blue-500/20">
+<span class="material-symbols-outlined text-sm leading-none">database</span>
+                                    Dynamic Fields
+                                </div>
+</div>
+<div class="space-y-3">
+<button class="w-full flex items-center justify-center gap-3 bg-primary text-white py-4 rounded-xl font-bold text-base hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20 transition-all">
+<span class="material-symbols-outlined">edit_square</span>
+                                    Edit Design
+                                </button>
+<button class="w-full flex items-center justify-center gap-3 border-2 border-gray-200 dark:border-white/10 py-4 rounded-xl font-bold text-base text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-white/5 transition-all">
+<span class="material-symbols-outlined">file_download</span>
+                                    Sample Download
+                                </button>
+</div>
+<div class="mt-10 border-t border-gray-100 dark:border-white/10 pt-8">
+<h4 class="text-xs font-bold text-gray-400 uppercase tracking-[0.2em] mb-6">Template Details</h4>
+<div class="space-y-4">
+<div class="flex justify-between items-center text-sm">
+<span class="text-gray-500 dark:text-gray-400">Dimensions</span>
+<span class="font-semibold text-gray-900 dark:text-white">A4 (297 x 210 mm)</span>
+</div>
+<div class="flex justify-between items-center text-sm">
+<span class="text-gray-500 dark:text-gray-400">Orientation</span>
+<span class="font-semibold text-gray-900 dark:text-white">Landscape</span>
+</div>
+<div class="flex justify-between items-center text-sm">
+<span class="text-gray-500 dark:text-gray-400">Resolution</span>
+<span class="font-semibold text-gray-900 dark:text-white">Print-ready (300 DPI)</span>
+</div>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-center gap-12 pt-8 border-t border-gray-100 dark:border-white/10 mt-10">
+<button class="p-2 text-gray-400 hover:text-primary transition-colors" title="Share">
+<span class="material-symbols-outlined text-2xl">share</span>
+</button>
+<button class="p-2 text-gray-400 hover:text-primary transition-colors" title="Copy Link">
+<span class="material-symbols-outlined text-2xl">content_copy</span>
+</button>
+<button class="p-2 text-gray-400 hover:text-rose-500 transition-colors" title="Report">
+<span class="material-symbols-outlined text-2xl">flag</span>
+</button>
+</div>
+</div>
+</div>
+<div class="p-8 border-t border-gray-100 dark:border-white/10 bg-gray-50/30 dark:bg-white/[0.02]">
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-lg font-bold text-gray-900 dark:text-white">Recommended for You</h3>
+<button class="text-primary text-xs font-bold hover:underline">View All</button>
+</div>
+<div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
+<div class="group cursor-pointer">
+<div class="aspect-[1.414/1] bg-white rounded-lg overflow-hidden border border-gray-200 dark:border-white/10 transition-all hover:ring-2 hover:ring-primary/20 mb-3">
+<img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCD-sBUEA452OsnuAk-7_dFka6FHztSdL3Umf3YvcPlJBue3Q5igeIxhC6z9g6ELdAG0KtVBOGSGMKluq238U68tSlAsAYoo2Seyjbez70QxjRWBM5lD3sBBD0nziMJvyGFDQFDXinN_tdxoiuxxYYAVxSAJtOHGuPF968LzukTqxmiVv94nENzhCZ1sb6dFeXwoTI88WnoCP5B-2GxUVnDEzU1YrnpFTYU2-idL-6tOHlzhFo-riwSz7xbJfuO8sis3OUzvVb2vD-4"/>
+</div>
+<div class="flex items-start justify-between">
+<div>
+<h4 class="text-sm font-bold text-gray-900 dark:text-white group-hover:text-primary transition-colors">Classic Achievement</h4>
+<p class="text-xs text-gray-500 mt-0.5">Premium Texture</p>
+</div>
+<span class="material-symbols-outlined text-sm text-amber-500">verified</span>
+</div>
+</div>
+<div class="group cursor-pointer">
+<div class="aspect-[1.414/1] bg-white rounded-lg overflow-hidden border border-gray-200 dark:border-white/10 transition-all hover:ring-2 hover:ring-primary/20 mb-3">
+<img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjaw9HFzyKruxKiGYXoLX68T6_IZPQAFjHZz0wLNixN9F9S4ssER_fl_19I8_bxQ-2PQQPMEimSZ6FkZo1VrQxG_eEiigq7-NbLktQ9qLl-bM0CI6Luze0lOsSQ3DrdZRsSXpkMvvn7PUTWypxq1-5bc0oi_1t7Tg8Dx9ZZsMqIV07HVjr9MZcs45i5Ucy--ktvTf4oNMsTyEZZ3XT2KigoHtb7AGvhOYExGGUBFFXqkKTHtHt149yNZBctbhE5FJ8jYEHYA3m-UWU"/>
+</div>
+<div class="flex items-start justify-between">
+<div>
+<h4 class="text-sm font-bold text-gray-900 dark:text-white group-hover:text-primary transition-colors">Modern Participation</h4>
+<p class="text-xs text-gray-500 mt-0.5">Minimalist Style</p>
+</div>
+<span class="material-symbols-outlined text-sm text-gray-400">favorite</span>
+</div>
+</div>
+<div class="group cursor-pointer">
+<div class="aspect-[1.414/1] bg-white rounded-lg overflow-hidden border border-gray-200 dark:border-white/10 transition-all hover:ring-2 hover:ring-primary/20 mb-3">
+<img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDu1hAHkRbKnM3xL0Fd8qFVE9qXzSbTy8hV4gJIelBVuG5PEjME762zovdtJYMVyr8Z3zKZFyQgQlF81HweGW6gcIowPOZzFGmdZ9zIvzMKySX-zsX-7qyXz_pA4A-K-z5Ki0r_Yko4jQLUlyteNZ6XT62ABVXohy86B4AmEgTq4WOeHVLUPW_iAHDRmtoGsQwmwdqOOXlr6R2QdmjEaJ2tqqA6TCVViQWWuVoeoMj-_0t2L9L3CIa6LTnHw0RmgSB4pshzEb-Oguly"/>
+</div>
+<div class="flex items-start justify-between">
+<div>
+<h4 class="text-sm font-bold text-gray-900 dark:text-white group-hover:text-primary transition-colors">Award of Excellence</h4>
+<p class="text-xs text-gray-500 mt-0.5">Gold Embossed</p>
+</div>
+<span class="material-symbols-outlined text-sm text-amber-500">verified</span>
+</div>
+</div>
+<div class="group cursor-pointer">
+<div class="aspect-[1.414/1] bg-white rounded-lg overflow-hidden border border-gray-200 dark:border-white/10 transition-all hover:ring-2 hover:ring-primary/20 mb-3">
+<img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCD-sBUEA452OsnuAk-7_dFka6FHztSdL3Umf3YvcPlJBue3Q5igeIxhC6z9g6ELdAG0KtVBOGSGMKluq238U68tSlAsAYoo2Seyjbez70QxjRWBM5lD3sBBD0nziMJvyGFDQFDXinN_tdxoiuxxYYAVxSAJtOHGuPF968LzukTqxmiVv94nENzhCZ1sb6dFeXwoTI88WnoCP5B-2GxUVnDEzU1YrnpFTYU2-idL-6tOHlzhFo-riwSz7xbJfuO8sis3OUzvVb2vD-4"/>
+</div>
+<div class="flex items-start justify-between">
+<div>
+<h4 class="text-sm font-bold text-gray-900 dark:text-white group-hover:text-primary transition-colors">Creative Diploma</h4>
+<p class="text-xs text-gray-500 mt-0.5">Abstract Borders</p>
+</div>
+<span class="material-symbols-outlined text-sm text-blue-500">verified</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</body></html>

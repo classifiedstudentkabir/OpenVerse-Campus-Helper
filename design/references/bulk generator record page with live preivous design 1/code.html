@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1337ec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101322",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Manrope', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .certificate-preview-glow {
+            box-shadow: 0 10px 40px -10px rgba(19, 55, 236, 0.15);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-[#111218] dark:text-white transition-colors duration-300">
+<div class="layout-container flex h-full grow flex-col min-h-screen">
+<!-- Top Navigation -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-[#dbdde6] dark:border-white/10 bg-white dark:bg-background-dark px-10 py-3 sticky top-0 z-50">
+<div class="flex items-center gap-4 text-[#111218] dark:text-white">
+<div class="size-8 bg-primary rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined">verified</span>
+</div>
+<h2 class="text-lg font-bold leading-tight tracking-[-0.015em]">CertifyPro</h2>
+</div>
+<div class="flex flex-1 justify-end gap-8">
+<div class="flex items-center gap-9">
+<a class="text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Dashboard</a>
+<a class="text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Templates</a>
+<a class="text-primary text-sm font-bold leading-normal" href="#">Bulk Generator</a>
+</div>
+<div class="flex gap-2">
+<button class="flex size-10 cursor-pointer items-center justify-center rounded-xl bg-[#f0f1f4] dark:bg-white/10 text-[#111218] dark:text-white">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border border-[#dbdde6] dark:border-white/10" data-alt="User avatar profile picture" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD9qu24ALFvH81g4vokr6b63mj8BwjoX6gguAhGPCkgGzDs48Ci8Rrf_p_aJnS8ocKGXe_Adb-dfkv_22uWCk3UhmRvBNypq1wpy5ZWTXqnd-Gvveh1JF4q0DWs3Yfw4ZmajtCt9fmN6kYvkw8jlrIVLHzteUwJABrPr8T01GLOabXq6xzDfCHq8bQqWjs65nh6wzNp88O2WGq_4Cc8BmbBw4_ElTmsCZgF2wTU8-uFPU-EEMcBzhNEs-TKOiypghOIpupAoCW_mfk");'></div>
+</div>
+</div>
+</header>
+<main class="flex-1 px-4 md:px-20 lg:px-40 py-8">
+<!-- Breadcrumbs & Stepper -->
+<div class="flex flex-col gap-6 mb-8">
+<div class="flex items-center gap-2 text-[#616889] dark:text-gray-400">
+<a class="text-sm font-medium hover:text-primary" href="#">Bulk Generator</a>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+<a class="text-sm font-medium hover:text-primary" href="#">Upload CSV</a>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+<span class="text-primary text-sm font-bold">Field Mapping</span>
+</div>
+<!-- Progress Stepper Component -->
+<div class="flex items-center w-full max-w-2xl mx-auto mb-4">
+<div class="flex flex-col items-center flex-1">
+<div class="size-8 rounded-full bg-primary/20 text-primary flex items-center justify-center mb-2">
+<span class="material-symbols-outlined text-sm">check</span>
+</div>
+<span class="text-xs font-semibold text-primary">Upload</span>
+</div>
+<div class="h-1 flex-1 bg-primary rounded-full -mt-6"></div>
+<div class="flex flex-col items-center flex-1">
+<div class="size-10 rounded-full bg-primary text-white flex items-center justify-center mb-2 shadow-lg shadow-primary/30">
+<span class="text-sm font-bold">2</span>
+</div>
+<span class="text-xs font-bold text-primary">Mapping</span>
+</div>
+<div class="h-1 flex-1 bg-[#dbdde6] dark:bg-white/10 rounded-full -mt-6"></div>
+<div class="flex flex-col items-center flex-1 opacity-50">
+<div class="size-8 rounded-full bg-[#dbdde6] dark:bg-white/10 text-[#616889] flex items-center justify-center mb-2">
+<span class="text-sm font-bold">3</span>
+</div>
+<span class="text-xs font-medium">Generate</span>
+</div>
+</div>
+</div>
+<!-- Page Heading -->
+<div class="flex flex-wrap justify-between items-end gap-3 mb-8">
+<div class="flex flex-col gap-2">
+<h1 class="text-4xl font-black leading-tight tracking-[-0.033em] text-[#111218] dark:text-white">Map Your Data</h1>
+<p class="text-[#616889] dark:text-gray-400 text-lg max-w-xl">Link your spreadsheet columns to the variables in your certificate template. We've auto-matched what we could.</p>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center gap-2 px-5 h-12 bg-white dark:bg-white/5 border border-[#dbdde6] dark:border-white/10 rounded-xl text-sm font-bold hover:bg-gray-50 dark:hover:bg-white/10 transition-all">
+<span class="material-symbols-outlined text-sm">refresh</span>
+                        Reset Mapping
+                    </button>
+<button class="flex items-center gap-2 px-8 h-12 bg-primary text-white rounded-xl text-sm font-bold hover:opacity-90 transition-all shadow-lg shadow-primary/20">
+                        Next: Review &amp; Generate
+                        <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Main Content Area: Split Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- Left: Mapping Table -->
+<div class="lg:col-span-7 bg-white dark:bg-background-dark/50 border border-[#dbdde6] dark:border-white/10 rounded-xl overflow-hidden shadow-sm">
+<div class="p-6 border-b border-[#dbdde6] dark:border-white/10 flex justify-between items-center bg-gray-50/50 dark:bg-white/5">
+<h3 class="font-bold text-lg">Fields &amp; Placeholders</h3>
+<span class="bg-primary/10 text-primary text-xs font-bold px-3 py-1 rounded-full">4 Fields Found</span>
+</div>
+<div class="p-0">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="text-xs uppercase tracking-wider text-[#616889] dark:text-gray-400">
+<th class="px-6 py-4 font-bold border-b border-[#dbdde6] dark:border-white/10">CSV Column (Source)</th>
+<th class="px-6 py-4 font-bold border-b border-[#dbdde6] dark:border-white/10">Preview Data</th>
+<th class="px-6 py-4 font-bold border-b border-[#dbdde6] dark:border-white/10">Certificate Field</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-[#dbdde6] dark:divide-white/10">
+<!-- Row 1 -->
+<tr class="hover:bg-gray-50 dark:hover:bg-white/5 transition-colors">
+<td class="px-6 py-5">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-gray-400 text-sm">table_rows</span>
+<span class="font-semibold">Full Name</span>
+</div>
+</td>
+<td class="px-6 py-5 text-sm text-[#616889] italic">"Johnathan Doe"</td>
+<td class="px-6 py-5">
+<div class="relative">
+<select class="w-full bg-primary/5 dark:bg-primary/20 border-primary/20 dark:border-primary/40 text-primary text-sm font-bold rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary appearance-none cursor-pointer">
+<option selected="">{{Name}}</option>
+<option>{{Course}}</option>
+<option>{{Date}}</option>
+<option>Do not map</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 text-primary pointer-events-none">expand_more</span>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-gray-50 dark:hover:bg-white/5 transition-colors">
+<td class="px-6 py-5">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-gray-400 text-sm">table_rows</span>
+<span class="font-semibold">Course Title</span>
+</div>
+</td>
+<td class="px-6 py-5 text-sm text-[#616889] italic">"Advanced UI Design"</td>
+<td class="px-6 py-5">
+<div class="relative">
+<select class="w-full bg-primary/5 dark:bg-primary/20 border-primary/20 dark:border-primary/40 text-primary text-sm font-bold rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary appearance-none cursor-pointer">
+<option selected="">{{Course}}</option>
+<option>{{Name}}</option>
+<option>{{Date}}</option>
+<option>Do not map</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 text-primary pointer-events-none">expand_more</span>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-gray-50 dark:hover:bg-white/5 transition-colors">
+<td class="px-6 py-5">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-gray-400 text-sm">table_rows</span>
+<span class="font-semibold">Completion Date</span>
+</div>
+</td>
+<td class="px-6 py-5 text-sm text-[#616889] italic">"October 24, 2023"</td>
+<td class="px-6 py-5">
+<div class="relative">
+<select class="w-full bg-primary/5 dark:bg-primary/20 border-primary/20 dark:border-primary/40 text-primary text-sm font-bold rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary appearance-none cursor-pointer">
+<option selected="">{{Date}}</option>
+<option>{{Name}}</option>
+<option>{{Course}}</option>
+<option>Do not map</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 text-primary pointer-events-none">expand_more</span>
+</div>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-gray-50 dark:hover:bg-white/5 transition-colors">
+<td class="px-6 py-5">
+<div class="flex items-center gap-2 text-gray-400">
+<span class="material-symbols-outlined text-sm">table_rows</span>
+<span class="font-medium italic">Unrecognized Col</span>
+</div>
+</td>
+<td class="px-6 py-5 text-sm text-[#616889] italic">"ID: 99281"</td>
+<td class="px-6 py-5">
+<div class="relative">
+<select class="w-full bg-gray-100 dark:bg-white/5 border-gray-200 dark:border-white/10 text-gray-500 text-sm rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary appearance-none cursor-pointer italic">
+<option selected="">Select placeholder...</option>
+<option>{{Name}}</option>
+<option>{{Course}}</option>
+<option>{{Date}}</option>
+<option>Ignore field</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">expand_more</span>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Right: Live Preview -->
+<div class="lg:col-span-5 sticky top-24">
+<div class="bg-white dark:bg-background-dark/50 border border-[#dbdde6] dark:border-white/10 rounded-xl overflow-hidden shadow-sm certificate-preview-glow">
+<div class="p-6 border-b border-[#dbdde6] dark:border-white/10 flex justify-between items-center">
+<h3 class="font-bold text-lg flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">visibility</span>
+                                Live Preview
+                            </h3>
+<button class="text-primary text-xs font-bold hover:underline">Change Template</button>
+</div>
+<div class="p-8 bg-[#f8f9fb] dark:bg-white/5">
+<!-- Mock Certificate Card -->
+<div class="aspect-[1.414/1] bg-white dark:bg-gray-800 rounded-lg shadow-2xl relative flex flex-col items-center justify-center p-8 text-center border-[12px] border-primary/10">
+<div class="absolute inset-4 border-2 border-primary/5 rounded"></div>
+<span class="material-symbols-outlined text-primary text-5xl mb-4">military_tech</span>
+<h4 class="text-xs uppercase tracking-[0.2em] font-bold text-gray-400 mb-2">Certificate of Completion</h4>
+<p class="text-[8px] text-gray-500 mb-6">This is to certify that</p>
+<!-- Placeholder Value from Row 1 -->
+<h2 class="text-xl font-bold text-primary mb-1">Johnathan Doe</h2>
+<div class="w-12 h-[1px] bg-primary/20 mb-6"></div>
+<p class="text-[8px] text-gray-500 mb-1">has successfully completed the program</p>
+<h3 class="text-sm font-bold text-gray-800 dark:text-white">Advanced UI Design</h3>
+<div class="mt-10 flex justify-between w-full px-8 items-end">
+<div class="flex flex-col items-center">
+<div class="w-16 h-[1px] bg-gray-300 dark:bg-gray-600 mb-1"></div>
+<span class="text-[6px] text-gray-400 uppercase">Lead Instructor</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="text-[8px] font-bold text-gray-700 dark:text-gray-300">Oct 24, 2023</span>
+<span class="text-[6px] text-gray-400 uppercase">Date Issued</span>
+</div>
+</div>
+</div>
+<p class="text-center text-xs text-[#616889] dark:text-gray-400 mt-6 italic">
+                                Showing sample preview using data from row 1 of your CSV.
+                            </p>
+</div>
+<div class="p-6 bg-white dark:bg-background-dark/50">
+<div class="flex flex-col gap-3">
+<div class="flex justify-between items-center text-sm">
+<span class="text-[#616889] dark:text-gray-400">Total Rows</span>
+<span class="font-bold">1,240</span>
+</div>
+<div class="flex justify-between items-center text-sm">
+<span class="text-[#616889] dark:text-gray-400">Mapped Fields</span>
+<span class="font-bold text-green-500">3 of 4</span>
+</div>
+<div class="w-full bg-[#dbdde6] dark:bg-white/10 rounded-full h-1.5 mt-2">
+<div class="bg-primary h-1.5 rounded-full" style="width: 75%"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Help Card -->
+<div class="mt-6 p-6 rounded-xl border border-dashed border-primary/30 bg-primary/5 dark:bg-primary/10 flex items-start gap-4">
+<span class="material-symbols-outlined text-primary">lightbulb</span>
+<div class="flex flex-col gap-1">
+<h4 class="text-sm font-bold text-primary">Pro Tip</h4>
+<p class="text-xs text-primary/80 leading-relaxed">Ensure your date formats match (e.g., DD/MM/YYYY) for optimal results in the final export.</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Fixed Footer Action Bar -->
+<footer class="sticky bottom-0 bg-white dark:bg-background-dark border-t border-[#dbdde6] dark:border-white/10 px-10 py-5 flex justify-between items-center z-50">
+<button class="flex items-center gap-2 text-sm font-bold text-[#616889] dark:text-gray-400 hover:text-[#111218] dark:hover:text-white transition-colors">
+<span class="material-symbols-outlined text-sm">arrow_back</span>
+                Go Back to Upload
+            </button>
+<div class="flex items-center gap-6">
+<p class="text-sm text-[#616889] dark:text-gray-400 hidden md:block">
+                    Everything looks good? Proceed to review your certificates.
+                </p>
+<button class="bg-primary text-white px-10 h-12 rounded-xl font-bold shadow-xl shadow-primary/20 hover:scale-[1.02] active:scale-[0.98] transition-all">
+                    Next: Review &amp; Generate
+                </button>
+</div>
+</footer>
+</div>
+</body></html>
