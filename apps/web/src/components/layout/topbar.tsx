@@ -101,9 +101,13 @@ export function Topbar() {
                 </div>
               </div>
               <div className="mt-2 space-y-1">
-                <button className="w-full rounded-lg px-2 py-1 text-left hover:bg-muted" disabled>
+                <Link
+                  href="/settings"
+                  className="block w-full rounded-lg px-2 py-1 text-left hover:bg-muted"
+                  onClick={() => setProfileOpen(false)}
+                >
                   Account settings
-                </button>
+                </Link>
                 <button className="w-full rounded-lg px-2 py-1 text-left hover:bg-muted" disabled>
                   Billing & plans
                 </button>

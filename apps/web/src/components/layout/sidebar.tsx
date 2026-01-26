@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { LayoutGrid, Layers, UploadCloud, Users } from "lucide-react";
+import { LayoutGrid, Layers, Settings, UploadCloud, Users } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 
@@ -8,7 +8,8 @@ const navItems = [
   { href: "/templates", label: "Templates", icon: Layers },
   { href: "/batches/new/upload", label: "New batch", icon: UploadCloud },
   { href: "/batches/alpha/results", label: "Results", icon: LayoutGrid },
-  { href: "/team", label: "Team", icon: Users }
+  { href: "/team", label: "Team", icon: Users },
+  { href: "/settings", label: "Settings", icon: Settings }
 ];
 
 export function Sidebar() {

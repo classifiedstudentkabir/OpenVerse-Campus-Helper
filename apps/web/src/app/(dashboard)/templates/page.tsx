@@ -156,7 +156,7 @@ export default function TemplatesPage() {
             <UploadCloud className="h-4 w-4" />
             Import template
           </Button>
-          <Link href="/templates/new/edit">
+          <Link href="/editor" target="_blank" rel="noreferrer">
             <Button>
               <PlusCircle className="h-4 w-4" />
               Create new

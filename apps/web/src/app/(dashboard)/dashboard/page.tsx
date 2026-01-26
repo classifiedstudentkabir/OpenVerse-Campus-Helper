@@ -65,7 +65,7 @@ export default function DashboardPage() {
               </p>
             </div>
             <div className="flex flex-wrap gap-3">
-              <Link href="/editor">
+              <Link href="/editor" target="_blank" rel="noreferrer">
                 <Button className="bg-white/15 text-white hover:bg-white/25" variant="secondary">
                   <Plus className="h-4 w-4" />
                   Create certificate
