@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { ArrowLeft, Download, Layers, Monitor, Smartphone, Tablet } from "lucide-react";
 
@@ -20,10 +20,51 @@ const templates = [
 
 export default function EditorPage() {
   const [activeTemplateId, setActiveTemplateId] = useState(templates[0].id);
+  const [forceDesktop, setForceDesktop] = useState(false);
+
   const activeTemplate = useMemo(
     () => templates.find((item) => item.id === activeTemplateId) ?? templates[0],
     [activeTemplateId]
   );
+
+  useEffect(() => {
+    const root = document.documentElement;
+    const viewportContent = forceDesktop
+      ? "width=1024, initial-scale=1"
+      : "width=device-width, initial-scale=1";
+
+    if (forceDesktop) {
+      root.classList.add("force-desktop");
+    } else {
+      root.classList.remove("force-desktop");
+    }
+
+    let meta = document.querySelector('meta[name="viewport"]') as HTMLMetaElement | null;
+    if (!meta) {
+      meta = document.createElement("meta");
+      meta.name = "viewport";
+      document.head.appendChild(meta);
+    }
+    meta.setAttribute("content", viewportContent);
+  }, [forceDesktop]);
+
+  const handleExport = () => {
+    const name = window.prompt("Save as (PDF name):", activeTemplate.title) || "certificate";
+    if (!name) return;
+
+    const win = window.open("", "_blank");
+    if (!win) return;
+    win.document.write(`
+      <html>
+        <head><title>${name}</title></head>
+        <body style="margin:0;display:flex;align-items:center;justify-content:center;height:100vh;background:#fff;">
+          <img src="${activeTemplate.image}" style="max-width:95%;max-height:95%;" />
+          <script>window.onload = () => { window.print(); }</script>
+        </body>
+      </html>
+    `);
+    win.document.close();
+  };
 
   return (
     <div className="space-y-6 px-6 py-6">
@@ -39,12 +80,23 @@ export default function EditorPage() {
           </div>
         </div>
         <div className="flex flex-wrap items-center gap-3">
+          <button
+            className="inline-flex h-10 items-center gap-2 rounded-full border border-border/60 bg-card px-3 text-xs font-medium text-foreground"
+            onClick={() => setForceDesktop((prev) => !prev)}
+          >
+            {forceDesktop ? (
+              <Smartphone className="h-4 w-4" />
+            ) : (
+              <Monitor className="h-4 w-4" />
+            )}
+            {forceDesktop ? "Mobile view" : "Desktop view"}
+          </button>
           <div className="flex items-center gap-2 rounded-full border border-border/60 bg-background px-3 py-1 text-xs text-muted-foreground">
             <Monitor className="h-4 w-4" />
             <Tablet className="h-4 w-4" />
             <Smartphone className="h-4 w-4" />
           </div>
-          <Button>
+          <Button onClick={handleExport}>
             <Download className="h-4 w-4" />
             Export PDF
           </Button>
@@ -61,6 +113,27 @@ export default function EditorPage() {
               <button className="rounded-lg border border-border/60 bg-muted/40 px-2 py-3">Winner</button>
               <button className="rounded-lg border border-border/60 bg-muted/40 px-2 py-3">Complete</button>
               <button className="rounded-lg border border-border/60 bg-muted/40 px-2 py-3">Participate</button>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-sm">Templates</CardTitle>
+            </CardHeader>
+            <CardContent className="max-h-56 overflow-y-auto">
+              <div className="grid grid-cols-3 gap-2">
+                {templates.map((item) => (
+                  <button
+                    key={item.id}
+                    className={`rounded-lg border border-border/60 p-1 ${
+                      activeTemplateId === item.id ? "bg-muted" : "bg-muted/30"
+                    }`}
+                    onClick={() => setActiveTemplateId(item.id)}
+                  >
+                    <img src={item.image} alt={item.title} className="h-12 w-full rounded-md object-cover" />
+                  </button>
+                ))}
+              </div>
             </CardContent>
           </Card>
 
@@ -103,19 +176,20 @@ export default function EditorPage() {
               </button>
             </CardHeader>
             <CardContent className="space-y-2 text-xs text-muted-foreground">
-              {templates.map((item) => (
-                <button
-                  key={item.id}
-                  className={`flex w-full items-center gap-2 rounded-lg border border-border/60 px-3 py-2 text-left transition ${
-                    activeTemplateId === item.id ? "bg-muted text-foreground" : "bg-muted/40"
-                  }`}
-                  onClick={() => setActiveTemplateId(item.id)}
+              {[
+                "Recipient name",
+                "Certificate title",
+                "Body text",
+                "Gold seal",
+                "Background",
+              ].map((layer) => (
+                <div
+                  key={layer}
+                  className="flex items-center justify-between rounded-lg border border-border/60 bg-muted/40 px-3 py-2"
                 >
-                  <span className="h-8 w-10 overflow-hidden rounded-md border border-border/60 bg-background">
-                    <img src={item.image} alt={item.title} className="h-full w-full object-cover" />
-                  </span>
-                  <span>{item.title}</span>
-                </button>
+                  <span>{layer}</span>
+                  <span className="text-[10px]">•••</span>
+                </div>
               ))}
             </CardContent>
           </Card>
