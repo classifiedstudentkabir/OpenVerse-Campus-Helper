@@ -18,6 +18,7 @@ const navItems = [
 export function Topbar() {
   const [forceDesktop, setForceDesktop] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [profileOpen, setProfileOpen] = useState(false);
 
   useEffect(() => {
     if (typeof document === "undefined") return;
@@ -71,9 +72,32 @@ export function Topbar() {
         >
           <Menu className="h-4 w-4" />
         </button>
-        <div className="hidden items-center gap-3 rounded-full border border-border/60 bg-card px-3 py-2 text-xs text-muted-foreground md:flex">
-          <span className="font-medium text-foreground">Kabir</span>
-          <span>Owner</span>
+        <div className="relative hidden md:block">
+          <button
+            className="flex items-center gap-3 rounded-full border border-border/60 bg-card px-3 py-2 text-xs text-muted-foreground"
+            onClick={() => setProfileOpen((prev) => !prev)}
+          >
+            <img
+              src="/avatars/user.svg"
+              alt="User avatar"
+              className="h-8 w-8 rounded-full border border-border/60"
+            />
+            <div className="flex flex-col items-start">
+              <span className="text-[11px] font-semibold text-foreground">Kabir</span>
+              <span className="text-[10px]">Owner</span>
+            </div>
+          </button>
+          {profileOpen ? (
+            <div className="absolute right-0 z-20 mt-2 w-44 rounded-xl border border-border/60 bg-card p-2 text-xs text-muted-foreground shadow-lg">
+              <p className="px-2 py-1 text-[11px] font-semibold text-foreground">Profile</p>
+              <button className="w-full rounded-lg px-2 py-1 text-left hover:bg-muted" disabled>
+                Account settings
+              </button>
+              <button className="w-full rounded-lg px-2 py-1 text-left hover:bg-muted" disabled>
+                Sign out
+              </button>
+            </div>
+          ) : null}
         </div>
       </div>
       {menuOpen ? (
