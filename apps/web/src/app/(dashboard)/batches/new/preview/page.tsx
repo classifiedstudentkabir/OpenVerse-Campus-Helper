@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect, useMemo, useRef, useState } from "react";
 import { BadgeCheck, ImageIcon } from "lucide-react";
 
 import { BatchStepper } from "@/components/batches/stepper";
@@ -5,7 +8,69 @@ import { CertificatePlaceholder } from "@/components/certificate-placeholder";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
+const FALLBACK_ROW = {
+  name: "Binod",
+  event: "Campus Hackathon",
+  date: new Date().toISOString(),
+  certificate_id: "CERT-001",
+};
+
 export default function BatchPreviewPage() {
+  const [previewSrc, setPreviewSrc] = useState<string | null>(null);
+  const previewUrlRef = useRef<string | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  const summary = useMemo(() => {
+    const saved = sessionStorage.getItem("certifyneo-upload");
+    if (!saved) return { rowCount: 0 };
+    try {
+      const parsed = JSON.parse(saved) as { rowCount?: number };
+      return { rowCount: parsed.rowCount ?? 0 };
+    } catch {
+      return { rowCount: 0 };
+    }
+  }, []);
+
+  useEffect(() => {
+    const loadPreview = async () => {
+      setLoading(true);
+      setError(null);
+      try {
+        const response = await fetch("http://localhost:3000/api/render/preview", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            templateId: "default-1",
+            rowData: FALLBACK_ROW,
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error("Preview API failed. Is the backend running?");
+        }
+
+        const blob = await response.blob();
+        const url = URL.createObjectURL(blob);
+        previewUrlRef.current = url;
+        setPreviewSrc(url);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "Failed to load preview");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadPreview();
+
+    return () => {
+      if (previewUrlRef.current) {
+        URL.revokeObjectURL(previewUrlRef.current);
+        previewUrlRef.current = null;
+      }
+    };
+  }, []);
+
   return (
     <div className="space-y-8">
       <div className="space-y-2">
@@ -21,14 +86,26 @@ export default function BatchPreviewPage() {
         <Card className="overflow-hidden">
           <CardHeader>
             <CardTitle>Preview image</CardTitle>
-            <CardDescription>Awaiting Phase 2 preview endpoint.</CardDescription>
+            <CardDescription>
+              {loading ? "Generating preview..." : "Preview from render API"}
+            </CardDescription>
           </CardHeader>
           <CardContent>
-            <CertificatePlaceholder title="Preview image placeholder" />
-            <div className="mt-4 flex items-center gap-2 text-xs text-muted-foreground">
-              <ImageIcon className="h-4 w-4" />
-              This box will render a preview image from the backend API.
-            </div>
+            {previewSrc ? (
+              <div className="overflow-hidden rounded-lg border border-border/60 bg-muted/10">
+                <img alt="Certificate preview" className="w-full" src={previewSrc} />
+              </div>
+            ) : (
+              <CertificatePlaceholder title="Preview image placeholder" />
+            )}
+            {error ? (
+              <p className="mt-4 text-xs text-destructive">{error}</p>
+            ) : (
+              <div className="mt-4 flex items-center gap-2 text-xs text-muted-foreground">
+                <ImageIcon className="h-4 w-4" />
+                Preview uses the default template and sample data.
+              </div>
+            )}
           </CardContent>
         </Card>
 
@@ -48,7 +125,7 @@ export default function BatchPreviewPage() {
             </div>
             <div className="flex items-center gap-2 rounded-lg border border-border/60 bg-muted/30 p-4">
               <BadgeCheck className="h-4 w-4 text-primary" />
-              Ready to generate 120 certificates.
+              Ready to generate {summary.rowCount || 0} certificates.
             </div>
             <Button className="w-full" disabled>
               Generate batch
