@@ -187,7 +187,7 @@ export default function TemplatesPage() {
                 </div>
                 <Link
                   className="text-sm text-primary hover:underline"
-                  href={`/templates/${template.id}/edit`}
+                  href={`/editor?template=${template.id}`}
                 >
                   Edit template
                 </Link>
