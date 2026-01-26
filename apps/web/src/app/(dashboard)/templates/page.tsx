@@ -173,13 +173,15 @@ export default function TemplatesPage() {
               <CardDescription>{template.description}</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="overflow-hidden rounded-lg border border-border/60 bg-muted/10">
-                <img
-                  alt={`${template.title} preview`}
-                  className="w-full"
-                  src={template.image}
-                />
-              </div>
+              <Link href={`/templates/${template.id}`} className="block">
+                <div className="overflow-hidden rounded-lg border border-border/60 bg-muted/10">
+                  <img
+                    alt={`${template.title} preview`}
+                    className="w-full"
+                    src={template.image}
+                  />
+                </div>
+              </Link>
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2 text-xs text-muted-foreground">
                   <Skeleton className="h-3 w-16" />
@@ -187,9 +189,9 @@ export default function TemplatesPage() {
                 </div>
                 <Link
                   className="text-sm text-primary hover:underline"
-                  href={`/editor?template=${template.id}`}
+                  href={`/templates/${template.id}`}
                 >
-                  Edit template
+                  View details
                 </Link>
               </div>
             </CardContent>

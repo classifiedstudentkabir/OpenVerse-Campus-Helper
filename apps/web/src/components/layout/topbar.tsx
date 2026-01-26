@@ -88,14 +88,35 @@ export function Topbar() {
             </div>
           </button>
           {profileOpen ? (
-            <div className="absolute right-0 z-20 mt-2 w-44 rounded-xl border border-border/60 bg-card p-2 text-xs text-muted-foreground shadow-lg">
-              <p className="px-2 py-1 text-[11px] font-semibold text-foreground">Profile</p>
-              <button className="w-full rounded-lg px-2 py-1 text-left hover:bg-muted" disabled>
-                Account settings
-              </button>
-              <button className="w-full rounded-lg px-2 py-1 text-left hover:bg-muted" disabled>
-                Sign out
-              </button>
+            <div className="absolute right-0 z-20 mt-2 w-56 rounded-xl border border-border/60 bg-card p-2 text-xs text-muted-foreground shadow-lg">
+              <div className="flex items-center gap-2 rounded-lg px-2 py-2">
+                <img
+                  src="/avatars/user.svg"
+                  alt="User avatar"
+                  className="h-9 w-9 rounded-full border border-border/60"
+                />
+                <div>
+                  <p className="text-[11px] font-semibold text-foreground">Kabir</p>
+                  <p className="text-[10px] text-muted-foreground">kabir@example.com</p>
+                </div>
+              </div>
+              <div className="mt-2 space-y-1">
+                <button className="w-full rounded-lg px-2 py-1 text-left hover:bg-muted" disabled>
+                  Account settings
+                </button>
+                <button className="w-full rounded-lg px-2 py-1 text-left hover:bg-muted" disabled>
+                  Billing & plans
+                </button>
+                <button className="w-full rounded-lg px-2 py-1 text-left hover:bg-muted" disabled>
+                  Teams
+                </button>
+                <button className="w-full rounded-lg px-2 py-1 text-left hover:bg-muted" disabled>
+                  Help & resources
+                </button>
+                <button className="w-full rounded-lg px-2 py-1 text-left hover:bg-muted" disabled>
+                  Log out
+                </button>
+              </div>
             </div>
           ) : null}
         </div>
