@@ -8,6 +8,7 @@ import { ThemeToggle } from "@/components/theme-toggle";
 import { Input } from "@/components/ui/input";
 
 const navItems = [
+  { href: "/dashboard", label: "Dashboard" },
   { href: "/templates", label: "Templates" },
   { href: "/batches/new/upload", label: "New batch" },
   { href: "/batches/alpha/results", label: "Results" },

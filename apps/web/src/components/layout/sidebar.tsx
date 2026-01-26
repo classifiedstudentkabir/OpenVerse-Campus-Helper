@@ -4,6 +4,7 @@ import { LayoutGrid, Layers, UploadCloud, Users } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 
 const navItems = [
+  { href: "/dashboard", label: "Dashboard", icon: LayoutGrid },
   { href: "/templates", label: "Templates", icon: Layers },
   { href: "/batches/new/upload", label: "New batch", icon: UploadCloud },
   { href: "/batches/alpha/results", label: "Results", icon: LayoutGrid },
