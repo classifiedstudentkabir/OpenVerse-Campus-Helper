@@ -1,11 +1,14 @@
+"use client";
+
+import { useRef, useState, type ChangeEvent } from "react";
 import Link from "next/link";
-import { PlusCircle } from "lucide-react";
+import { PlusCircle, UploadCloud } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 
-const templates = [
+const initialTemplates = [
   {
     id: "cert-1",
     title: "Template 1",
@@ -98,7 +101,40 @@ const templates = [
   }
 ];
 
+type TemplateItem = {
+  id: string;
+  title: string;
+  description: string;
+  image: string;
+};
+
 export default function TemplatesPage() {
+  const [templates, setTemplates] = useState<TemplateItem[]>(initialTemplates);
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+
+  const handleImportClick = () => {
+    fileInputRef.current?.click();
+  };
+
+  const handleImport = (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+    const previewUrl = URL.createObjectURL(file);
+    const nextId = `import-${Date.now()}`;
+
+    setTemplates((prev) => [
+      {
+        id: nextId,
+        title: file.name.replace(/\.[^/.]+$/, ""),
+        description: "Imported template",
+        image: previewUrl,
+      },
+      ...prev,
+    ]);
+
+    event.target.value = "";
+  };
+
   return (
     <div className="space-y-8">
       <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
@@ -109,13 +145,23 @@ export default function TemplatesPage() {
           </p>
         </div>
         <div className="flex items-center gap-3">
-          <Button variant="outline" disabled>
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept=".png,.jpg,.jpeg,.webp,.pdf"
+            className="hidden"
+            onChange={handleImport}
+          />
+          <Button variant="outline" onClick={handleImportClick}>
+            <UploadCloud className="h-4 w-4" />
             Import template
           </Button>
-          <Button disabled>
-            <PlusCircle className="h-4 w-4" />
-            New template
-          </Button>
+          <Link href="/templates/new/edit">
+            <Button>
+              <PlusCircle className="h-4 w-4" />
+              Create new
+            </Button>
+          </Link>
         </div>
       </div>
 
