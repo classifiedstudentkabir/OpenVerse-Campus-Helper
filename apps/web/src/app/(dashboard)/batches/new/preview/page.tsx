@@ -102,7 +102,8 @@ export default function BatchPreviewPage() {
         });
 
         if (!createResponse.ok) {
-          throw new Error("Failed to create batch.");
+          const errorBody = await createResponse.json().catch(() => ({}));
+          throw new Error(errorBody.error || "Failed to create batch.");
         }
 
         const created = (await createResponse.json()) as { batchId?: string };
@@ -127,7 +128,8 @@ export default function BatchPreviewPage() {
       );
 
       if (!generateResponse.ok) {
-        throw new Error("Failed to generate batch.");
+        const errorBody = await generateResponse.json().catch(() => ({}));
+        throw new Error(errorBody.error || "Failed to generate batch.");
       }
 
       router.push(`/batches/${batchId}/results`);
