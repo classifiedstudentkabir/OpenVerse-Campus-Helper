@@ -6,6 +6,8 @@ const { spawn } = require('child_process');
 
 const DEFAULT_RENDER_TIMEOUT_MS = Number(process.env.RENDER_TIMEOUT_MS || 30000);
 const DEFAULT_PDF_TEMPLATE_TIMEOUT_MS = Number(process.env.PDF_TEMPLATE_TIMEOUT_MS || 45000);
+const SAFE_MARGIN_BOTTOM = 24;
+const SAFE_MARGIN_RIGHT = 24;
 
 const withTimeout = (promise, ms, label) => {
     let timeoutId;
@@ -145,6 +147,8 @@ exports.generateCertificate = async (template, data, outputFilename) => {
                         bufferPages: true
                     });
 
+                    const clampY = (y, elementHeight) => Math.min(y, height - SAFE_MARGIN_BOTTOM - elementHeight);
+
                     logEvent('pdf.page.init', { width, height });
 
                     const outputPath = path.join(process.cwd(), 'generated', outputFilename);
@@ -233,19 +237,33 @@ exports.generateCertificate = async (template, data, outputFilename) => {
                                 const fontFamily = layer.fontFamily || 'Helvetica'; // Standard font
                                 const color = layer.color || '#000000';
                                 const align = layer.align || 'left';
-                                const x = layer.x || 0;
+                                const rawX = layer.x || 0;
                                 const rawY = layer.y || 0;
-                                const y = Math.min(rawY, height - fontSize - 1);
+
+                                doc.font(fontFamily).fontSize(fontSize).fillColor(color);
+
+                                const isCertificateId = String(layer.key || '').toLowerCase() === 'certificate_id'
+                                    || String(layer.key || '').toLowerCase() === 'certificateid'
+                                    || String(layer.text || '').includes('{certificate_id}')
+                                    || String(layer.text || '').includes('{certificateId}');
+
+                                let x = rawX;
+                                let y = clampY(rawY, fontSize);
+                                let textAlign = align === 'center' || align === 'right' ? align : undefined;
+
+                                if (isCertificateId) {
+                                    const textWidth = doc.widthOfString(content);
+                                    x = width - SAFE_MARGIN_RIGHT - textWidth;
+                                    y = clampY(height - SAFE_MARGIN_BOTTOM - fontSize, fontSize);
+                                    textAlign = undefined;
+                                }
 
                                 // PDFKit text options
-                                doc.font(fontFamily)
-                                    .fontSize(fontSize)
-                                    .fillColor(color)
-                                    .text(content, x, y, {
-                                        align: align === 'center' || align === 'right' ? align : undefined,
-                                        lineBreak: false
-                                        // width: undefined // could limit width
-                                    });
+                                doc.text(content, x, y, {
+                                    align: textAlign,
+                                    lineBreak: false
+                                    // width: undefined // could limit width
+                                });
 
                             } else if (layer.type === 'image') {
                                 // Image layer logic
@@ -261,9 +279,10 @@ exports.generateCertificate = async (template, data, outputFilename) => {
                                     // PDFKit supports paths
                                     if (fs.existsSync(src)) {
                                         const x = layer.x || 0;
-                                        const y = layer.y || 0;
+                                        const rawY = layer.y || 0;
                                         const w = layer.w || 100;
                                         const h = layer.h || 100;
+                                        const y = clampY(rawY, h);
                                         const clampedH = Math.max(0, Math.min(h, height - y));
                                         doc.image(src, x, y, { width: w, height: clampedH });
                                     }
