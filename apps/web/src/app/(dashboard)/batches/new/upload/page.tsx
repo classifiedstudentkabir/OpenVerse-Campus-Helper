@@ -50,13 +50,20 @@ export default function BatchUploadPage() {
       const data = (await response.json()) as {
         headers: string[];
         rowCount: number;
+        filename?: string;
+        originalName?: string;
       };
 
       setHeaders(data.headers ?? []);
       setRowCount(data.rowCount ?? 0);
       sessionStorage.setItem(
         "certifyneo-upload",
-        JSON.stringify({ headers: data.headers, rowCount: data.rowCount })
+        JSON.stringify({
+          headers: data.headers,
+          rowCount: data.rowCount,
+          filename: data.filename,
+          originalName: data.originalName,
+        })
       );
     } catch (uploadError) {
       setError(uploadError instanceof Error ? uploadError.message : "Upload failed");

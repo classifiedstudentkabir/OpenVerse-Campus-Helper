@@ -120,7 +120,10 @@ export default function BatchMapPage() {
             <Button
               className="w-full"
               disabled={!readyToContinue}
-              onClick={() => router.push("/batches/new/preview")}
+              onClick={() => {
+                sessionStorage.setItem("certifyneo-mapping", JSON.stringify(mapping));
+                router.push("/batches/new/preview");
+              }}
             >
               Continue to preview
             </Button>

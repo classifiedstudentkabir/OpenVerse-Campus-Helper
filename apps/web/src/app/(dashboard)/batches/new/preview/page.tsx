@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 import { BadgeCheck, ImageIcon } from "lucide-react";
 
 import { BatchStepper } from "@/components/batches/stepper";
@@ -16,19 +17,21 @@ const FALLBACK_ROW = {
 };
 
 export default function BatchPreviewPage() {
+  const router = useRouter();
   const [previewSrc, setPreviewSrc] = useState<string | null>(null);
   const previewUrlRef = useRef<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [isGenerating, setIsGenerating] = useState(false);
 
   const summary = useMemo(() => {
     const saved = sessionStorage.getItem("certifyneo-upload");
-    if (!saved) return { rowCount: 0 };
+    if (!saved) return { rowCount: 0, filename: null };
     try {
-      const parsed = JSON.parse(saved) as { rowCount?: number };
-      return { rowCount: parsed.rowCount ?? 0 };
+      const parsed = JSON.parse(saved) as { rowCount?: number; filename?: string };
+      return { rowCount: parsed.rowCount ?? 0, filename: parsed.filename ?? null };
     } catch {
-      return { rowCount: 0 };
+      return { rowCount: 0, filename: null };
     }
   }, []);
 
@@ -70,6 +73,70 @@ export default function BatchPreviewPage() {
       }
     };
   }, []);
+
+  const handleGenerate = async () => {
+    console.log("Generate batch clicked");
+    if (!summary.filename) {
+      setError("Missing upload filename. Please re-upload your CSV/XLSX.");
+      return;
+    }
+
+    setIsGenerating(true);
+    setError(null);
+
+    const savedMapping = sessionStorage.getItem("certifyneo-mapping");
+    const mapping = savedMapping ? JSON.parse(savedMapping) : {};
+
+    try {
+      let batchId = sessionStorage.getItem("certifyneo-batchId");
+
+      if (!batchId) {
+        const createResponse = await fetch("http://localhost:3000/api/batches", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            filename: summary.filename,
+            templateId: "default-1",
+            mapping,
+          }),
+        });
+
+        if (!createResponse.ok) {
+          throw new Error("Failed to create batch.");
+        }
+
+        const created = (await createResponse.json()) as { batchId?: string };
+        if (!created.batchId) {
+          throw new Error("Batch ID missing from create response.");
+        }
+        batchId = created.batchId;
+        sessionStorage.setItem("certifyneo-batchId", batchId);
+      }
+
+      const generateResponse = await fetch(
+        `http://localhost:3000/api/batches/${batchId}/generate`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            filename: summary.filename,
+            templateId: "default-1",
+            mapping,
+          }),
+        }
+      );
+
+      if (!generateResponse.ok) {
+        throw new Error("Failed to generate batch.");
+      }
+
+      router.push(`/batches/${batchId}/results`);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Failed to generate batch");
+    } finally {
+      setIsGenerating(false);
+    }
+  };
 
   return (
     <div className="space-y-8">
@@ -127,8 +194,12 @@ export default function BatchPreviewPage() {
               <BadgeCheck className="h-4 w-4 text-primary" />
               Ready to generate {summary.rowCount || 0} certificates.
             </div>
-            <Button className="w-full" disabled>
-              Generate batch
+            <Button
+              className="w-full"
+              onClick={handleGenerate}
+              disabled={!summary.filename || isGenerating}
+            >
+              {isGenerating ? "Generating..." : "Generate batch"}
             </Button>
           </CardContent>
         </Card>
