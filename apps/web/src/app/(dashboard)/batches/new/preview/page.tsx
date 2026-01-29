@@ -23,19 +23,23 @@ export default function BatchPreviewPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [isGenerating, setIsGenerating] = useState(false);
-
-  const summary = useMemo(() => {
-    const saved = sessionStorage.getItem("certifyneo-upload");
-    if (!saved) return { rowCount: 0, filename: null };
-    try {
-      const parsed = JSON.parse(saved) as { rowCount?: number; filename?: string };
-      return { rowCount: parsed.rowCount ?? 0, filename: parsed.filename ?? null };
-    } catch {
-      return { rowCount: 0, filename: null };
-    }
-  }, []);
+  const [summary, setSummary] = useState<{ rowCount: number; filename: string | null }>(
+    { rowCount: 0, filename: null }
+  );
 
   useEffect(() => {
+    if (typeof window !== "undefined") {
+      const saved = window.sessionStorage.getItem("certifyneo-upload");
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved) as { rowCount?: number; filename?: string };
+          setSummary({ rowCount: parsed.rowCount ?? 0, filename: parsed.filename ?? null });
+        } catch {
+          setSummary({ rowCount: 0, filename: null });
+        }
+      }
+    }
+
     const loadPreview = async () => {
       setLoading(true);
       setError(null);
