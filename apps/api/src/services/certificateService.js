@@ -142,12 +142,10 @@ exports.generateCertificate = async (template, data, outputFilename) => {
                     const doc = new PDFDocument({
                         size: [width, height],
                         margin: 0,
-                        autoFirstPage: false,
                         bufferPages: true
                     });
 
-                    doc.addPage({ size: [width, height], margin: 0 });
-                    logEvent('pdf.page.add', { width, height });
+                    logEvent('pdf.page.init', { width, height });
 
                     const outputPath = path.join(process.cwd(), 'generated', outputFilename);
                     logEvent('file.write.start', { outputPath, mode: 'pdf' });

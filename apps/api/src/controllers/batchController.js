@@ -9,6 +9,7 @@ const { PDFDocument } = require('pdf-lib');
 const DEFAULT_BATCH_TIMEOUT_MS = Number(process.env.BATCH_RENDER_TIMEOUT_MS || 30000);
 const DEFAULT_ZIP_TIMEOUT_MS = Number(process.env.ZIP_TIMEOUT_MS || 60000);
 const BATCH_PROGRESS_EVERY = Number(process.env.BATCH_PROGRESS_EVERY || 5);
+const ENABLE_PDF_NORMALIZE = String(process.env.ENABLE_PDF_NORMALIZE || '').toLowerCase() === 'true';
 
 const logEvent = (event, data = {}) => {
     console.log(JSON.stringify({ at: new Date().toISOString(), scope: 'batchController', event, ...data }));
@@ -260,6 +261,7 @@ exports.generateBatch = async (req, res) => {
         console.log(`[Batch] Starting generation for batch ${id}`);
         console.log(`[Batch] Template: ${template.name}, File: ${filename}`);
         console.log(`[Batch] Mapping: ${JSON.stringify(mapping)}`);
+        logEvent('batch.generate.start', { batchId: id, templateId, filename });
 
         batch.status = 'processing';
         batch.templateId = templateId;
@@ -295,37 +297,62 @@ exports.generateBatch = async (req, res) => {
             const outFile = `cert_${id}_${safeName}_${i}.pdf`;
 
             const renderStart = Date.now();
-            const outputPath = await withTimeout(
-                certificateService.generateCertificate(template, rowData, outFile),
-                DEFAULT_BATCH_TIMEOUT_MS,
-                `render:${outFile}`
-            );
-            logEvent('render.complete', { batchId: id, file: outFile, durationMs: Date.now() - renderStart });
-            logEvent('batch.pdf.path', { path: outputPath, generator: 'certificateService.generateCertificate' });
-
+            let outputPath;
             try {
-                await waitForFileStable(outputPath);
-                await verifyAndNormalizePdf(outputPath);
-            } catch (normalizeError) {
-                logEvent('pdf.normalize.error', {
-                    path: outputPath,
-                    message: normalizeError.message,
-                    stack: normalizeError.stack
+                outputPath = await withTimeout(
+                    certificateService.generateCertificate(template, rowData, outFile),
+                    DEFAULT_BATCH_TIMEOUT_MS,
+                    `render:${outFile}`
+                );
+                logEvent('render.complete', { batchId: id, file: outFile, durationMs: Date.now() - renderStart });
+                logEvent('batch.pdf.path', { path: outputPath, generator: 'certificateService.generateCertificate' });
+                logEvent('pdf.write.done', { path: outputPath });
+            } catch (renderError) {
+                logEvent('render.error', {
+                    batchId: id,
+                    file: outFile,
+                    message: renderError.message,
+                    stack: renderError.stack
                 });
+                continue;
+            }
+
+            if (ENABLE_PDF_NORMALIZE) {
+                try {
+                    logEvent('pdf.normalize.start', { path: outputPath });
+                    await waitForFileStable(outputPath);
+                    await verifyAndNormalizePdf(outputPath);
+                    logEvent('pdf.normalize.done', { path: outputPath });
+                } catch (normalizeError) {
+                    logEvent('pdf.normalize.error', {
+                        path: outputPath,
+                        message: normalizeError.message,
+                        stack: normalizeError.stack
+                    });
+                }
             }
 
             generatedFiles.push(outFile);
-            batch.generatedCount = i + 1;
+            batch.generatedCount = generatedFiles.length;
 
             if ((i + 1) % BATCH_PROGRESS_EVERY === 0 || i === limit - 1) {
-                logEvent('batch.progress', { batchId: id, generated: i + 1, total: limit });
+                logEvent('batch.progress', { batchId: id, generated: generatedFiles.length, total: limit });
             }
+        }
+
+        if (generatedFiles.length === 0) {
+            const errorMessage = 'No certificates were generated.';
+            logEvent('batch.generate.empty', { batchId: id, message: errorMessage });
+            batch.status = 'failed';
+            batch.error = errorMessage;
+            return res.status(500).json({ error: 'Generation failed', details: errorMessage, stage: 'batch.generate' });
         }
 
         // Create ZIP file
         const zipStart = Date.now();
+        logEvent('zip.start', { batchId: id, count: generatedFiles.length });
         const zipFile = await createZip(generatedFiles, id);
-        logEvent('zip.complete', { batchId: id, zipFile, durationMs: Date.now() - zipStart });
+        logEvent('zip.done', { batchId: id, zipFile, durationMs: Date.now() - zipStart });
 
         batch.status = 'completed';
         batch.items = generatedFiles;
