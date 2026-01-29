@@ -142,10 +142,12 @@ exports.generateCertificate = async (template, data, outputFilename) => {
                     const doc = new PDFDocument({
                         size: [width, height],
                         margin: 0,
-                        autoFirstPage: false
+                        autoFirstPage: false,
+                        bufferPages: true
                     });
 
                     doc.addPage({ size: [width, height], margin: 0 });
+                    logEvent('pdf.page.add', { width, height });
 
                     const outputPath = path.join(process.cwd(), 'generated', outputFilename);
                     logEvent('file.write.start', { outputPath, mode: 'pdf' });
@@ -234,7 +236,8 @@ exports.generateCertificate = async (template, data, outputFilename) => {
                                 const color = layer.color || '#000000';
                                 const align = layer.align || 'left';
                                 const x = layer.x || 0;
-                                const y = layer.y || 0;
+                                const rawY = layer.y || 0;
+                                const y = Math.min(rawY, height - fontSize - 1);
 
                                 // PDFKit text options
                                 doc.font(fontFamily)
@@ -259,12 +262,20 @@ exports.generateCertificate = async (template, data, outputFilename) => {
                                     // Load image and draw
                                     // PDFKit supports paths
                                     if (fs.existsSync(src)) {
-                                        doc.image(src, layer.x || 0, layer.y || 0, { width: layer.w || 100, height: layer.h || 100 });
+                                        const x = layer.x || 0;
+                                        const y = layer.y || 0;
+                                        const w = layer.w || 100;
+                                        const h = layer.h || 100;
+                                        const clampedH = Math.max(0, Math.min(h, height - y));
+                                        doc.image(src, x, y, { width: w, height: clampedH });
                                     }
                                 }
                             }
                         }
                     }
+
+                    const pageRange = doc.bufferedPageRange();
+                    logEvent('pdf.page.count', { count: pageRange.count, start: pageRange.start, width, height });
 
                     doc.end();
                     stream.on('finish', () => {
