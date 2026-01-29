@@ -8,6 +8,7 @@ const DEFAULT_RENDER_TIMEOUT_MS = Number(process.env.RENDER_TIMEOUT_MS || 30000)
 const DEFAULT_PDF_TEMPLATE_TIMEOUT_MS = Number(process.env.PDF_TEMPLATE_TIMEOUT_MS || 45000);
 const SAFE_MARGIN_BOTTOM = 24;
 const SAFE_MARGIN_RIGHT = 24;
+const TEXT_BOTTOM_LIMIT = 50;
 
 const withTimeout = (promise, ms, label) => {
     let timeoutId;
@@ -147,7 +148,8 @@ exports.generateCertificate = async (template, data, outputFilename) => {
                         bufferPages: true
                     });
 
-                    const clampY = (y, elementHeight) => Math.min(y, height - SAFE_MARGIN_BOTTOM - elementHeight);
+                    const clampTextY = (y) => Math.min(y, height - TEXT_BOTTOM_LIMIT);
+                    const clampImageY = (y, elementHeight) => Math.min(y, height - SAFE_MARGIN_BOTTOM - elementHeight);
 
                     logEvent('pdf.page.init', { width, height });
 
@@ -240,22 +242,24 @@ exports.generateCertificate = async (template, data, outputFilename) => {
                                 const rawX = layer.x || 0;
                                 const rawY = layer.y || 0;
 
-                                doc.font(fontFamily).fontSize(fontSize).fillColor(color);
-
                                 const isCertificateId = String(layer.key || '').toLowerCase() === 'certificate_id'
                                     || String(layer.key || '').toLowerCase() === 'certificateid'
                                     || String(layer.text || '').includes('{certificate_id}')
                                     || String(layer.text || '').includes('{certificateId}');
 
                                 let x = rawX;
-                                let y = clampY(rawY, fontSize);
+                                let y = clampTextY(rawY);
                                 let textAlign = align === 'center' || align === 'right' ? align : undefined;
 
                                 if (isCertificateId) {
+                                    const footerSize = Math.min(7, Math.max(6, fontSize));
+                                    doc.font(fontFamily).fontSize(footerSize).fillColor(color);
                                     const textWidth = doc.widthOfString(content);
-                                    x = width - SAFE_MARGIN_RIGHT - textWidth;
-                                    y = clampY(height - SAFE_MARGIN_BOTTOM - fontSize, fontSize);
+                                    x = (width - textWidth) / 2;
+                                    y = clampTextY(height - 40);
                                     textAlign = undefined;
+                                } else {
+                                    doc.font(fontFamily).fontSize(fontSize).fillColor(color);
                                 }
 
                                 // PDFKit text options
@@ -282,7 +286,7 @@ exports.generateCertificate = async (template, data, outputFilename) => {
                                         const rawY = layer.y || 0;
                                         const w = layer.w || 100;
                                         const h = layer.h || 100;
-                                        const y = clampY(rawY, h);
+                                        const y = clampImageY(rawY, h);
                                         const clampedH = Math.max(0, Math.min(h, height - y));
                                         doc.image(src, x, y, { width: w, height: clampedH });
                                     }
