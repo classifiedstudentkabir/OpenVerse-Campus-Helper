@@ -104,9 +104,6 @@ export default function BatchUploadPage() {
                 <Button onClick={handleUpload} disabled={!file || loading}>
                   {loading ? "Uploading..." : "Upload file"}
                 </Button>
-                <Button variant="outline" disabled>
-                  Use sample data
-                </Button>
               </div>
             </div>
             {error ? (
