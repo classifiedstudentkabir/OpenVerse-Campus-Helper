@@ -4,6 +4,7 @@ const fs = require('fs');
 const csv = require('csv-parser');
 const xlsx = require('xlsx');
 const archiver = require('archiver');
+const { PDFDocument } = require('pdf-lib');
 
 const DEFAULT_BATCH_TIMEOUT_MS = Number(process.env.BATCH_RENDER_TIMEOUT_MS || 30000);
 const DEFAULT_ZIP_TIMEOUT_MS = Number(process.env.ZIP_TIMEOUT_MS || 60000);
@@ -89,6 +90,22 @@ const readFileData = (filename) => {
 };
 
 // Helper to create ZIP from generated files
+const verifyAndNormalizePdf = async (pdfPath) => {
+    const bytes = fs.readFileSync(pdfPath);
+    const pdfDoc = await PDFDocument.load(bytes);
+    const pages = pdfDoc.getPageCount();
+    logEvent('pdf.verify.pages', { path: pdfPath, pages });
+
+    if (pages > 1) {
+        const normalized = await PDFDocument.create();
+        const [firstPage] = await normalized.copyPages(pdfDoc, [0]);
+        normalized.addPage(firstPage);
+        const outBytes = await normalized.save();
+        fs.writeFileSync(pdfPath, outBytes);
+        logEvent('pdf.normalize.single', { path: pdfPath, pages });
+    }
+};
+
 const createZip = (files, batchId) => {
     return new Promise((resolve, reject) => {
         const zipFilename = `certificates_${batchId}.zip`;
@@ -264,12 +281,14 @@ exports.generateBatch = async (req, res) => {
             const outFile = `cert_${id}_${safeName}_${i}.pdf`;
 
             const renderStart = Date.now();
-            await withTimeout(
+            const outputPath = await withTimeout(
                 certificateService.generateCertificate(template, rowData, outFile),
                 DEFAULT_BATCH_TIMEOUT_MS,
                 `render:${outFile}`
             );
             logEvent('render.complete', { batchId: id, file: outFile, durationMs: Date.now() - renderStart });
+            logEvent('batch.pdf.path', { path: outputPath, generator: 'certificateService.generateCertificate' });
+            await verifyAndNormalizePdf(outputPath);
 
             generatedFiles.push(outFile);
             batch.generatedCount = i + 1;
