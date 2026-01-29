@@ -419,6 +419,46 @@ exports.getBatchStatus = (req, res) => {
 };
 
 /**
+ * Download batch ZIP
+ * GET /api/batches/:id/download
+ */
+exports.downloadBatchZip = (req, res) => {
+    const { id } = req.params;
+    const batch = batches[id];
+
+    if (!batch || !batch.zipFile) {
+        return res.status(404).json({ error: 'Batch ZIP not found' });
+    }
+
+    const zipFilename = batch.zipFile;
+    const zipPath = path.join(process.cwd(), 'generated', zipFilename);
+
+    if (!fs.existsSync(zipPath)) {
+        return res.status(404).json({ error: 'ZIP file missing on disk' });
+    }
+
+    const stats = fs.statSync(zipPath);
+
+    res.setHeader('Content-Type', 'application/zip');
+    res.setHeader('Content-Disposition', `attachment; filename="certificates_${id}.zip"`);
+    res.setHeader('Cache-Control', 'no-store');
+    res.setHeader('Content-Length', stats.size);
+
+    const stream = fs.createReadStream(zipPath);
+
+    stream.on('error', (err) => {
+        console.error('[Batch] ZIP stream error:', err);
+        if (!res.headersSent) {
+            res.status(500).json({ error: 'Failed to stream ZIP' });
+        } else {
+            res.end();
+        }
+    });
+
+    stream.pipe(res);
+};
+
+/**
  * Get first row preview data from uploaded file
  * POST /api/batches/preview-data
  * Body: { filename, mapping }
