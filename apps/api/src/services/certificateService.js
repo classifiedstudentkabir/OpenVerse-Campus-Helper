@@ -142,8 +142,10 @@ exports.generateCertificate = async (template, data, outputFilename) => {
                     const doc = new PDFDocument({
                         size: [width, height],
                         margin: 0,
-                        autoFirstPage: true
+                        autoFirstPage: false
                     });
+
+                    doc.addPage({ size: [width, height], margin: 0 });
 
                     const outputPath = path.join(process.cwd(), 'generated', outputFilename);
                     logEvent('file.write.start', { outputPath, mode: 'pdf' });
@@ -239,7 +241,8 @@ exports.generateCertificate = async (template, data, outputFilename) => {
                                     .fontSize(fontSize)
                                     .fillColor(color)
                                     .text(content, x, y, {
-                                        align: align === 'center' || align === 'right' ? align : undefined
+                                        align: align === 'center' || align === 'right' ? align : undefined,
+                                        lineBreak: false
                                         // width: undefined // could limit width
                                     });
 
