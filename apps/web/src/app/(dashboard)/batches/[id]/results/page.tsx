@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { useParams } from "next/navigation";
+import Link from "next/link";
+import { useParams, useRouter } from "next/navigation";
 import { Download, MailCheck } from "lucide-react";
 
 import { CertificatePlaceholder } from "@/components/certificate-placeholder";
@@ -23,7 +24,9 @@ type BatchStatus = {
 
 export default function BatchResultsPage() {
   const params = useParams();
-  const batchId = params?.id as string;
+  const router = useRouter();
+  const paramId = params?.id as string | undefined;
+  const [resolvedBatchId, setResolvedBatchId] = useState<string | null>(null);
   const [batch, setBatch] = useState<BatchStatus | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -36,15 +39,40 @@ export default function BatchResultsPage() {
   }, [batch?.items, batch?.status]);
 
   useEffect(() => {
-    if (!batchId) return;
+    if (!paramId) return;
+
+    if (paramId === "alpha") {
+      const stored =
+        typeof window !== "undefined"
+          ? window.sessionStorage.getItem("certifyneo-batchId")
+          : null;
+      if (stored) {
+        setResolvedBatchId(stored);
+        router.replace(`/batches/${stored}/results`);
+      } else {
+        setResolvedBatchId(null);
+      }
+      return;
+    }
+
+    setResolvedBatchId(paramId);
+  }, [paramId, router]);
+
+  useEffect(() => {
+    if (!resolvedBatchId) return;
     let timer: NodeJS.Timeout | null = null;
 
     const fetchStatus = async () => {
       setLoading(true);
       setError(null);
       try {
-        const response = await fetch(`http://localhost:3000/api/batches/${batchId}/status`);
+        const response = await fetch(
+          `http://localhost:3000/api/batches/${resolvedBatchId}/status`
+        );
         if (!response.ok) {
+          if (response.status === 404) {
+            throw new Error("Batch not found. Start a new batch.");
+          }
           throw new Error("Failed to load batch status.");
         }
         const data = (await response.json()) as BatchStatus;
@@ -65,7 +93,7 @@ export default function BatchResultsPage() {
     return () => {
       if (timer) clearInterval(timer);
     };
-  }, [batchId, isProcessing]);
+  }, [resolvedBatchId, isProcessing]);
 
   return (
     <div className="space-y-8">
@@ -108,7 +136,12 @@ export default function BatchResultsPage() {
                 <Skeleton className="h-10 w-5/6" />
               </div>
             ) : error ? (
-              <p className="text-sm text-destructive">{error}</p>
+              <div className="space-y-2 text-sm">
+                <p className="text-destructive">{error}</p>
+                <Link className="text-primary hover:underline" href="/batches/new/upload">
+                  Start a new batch
+                </Link>
+              </div>
             ) : (
               <div className="space-y-3">
                 {recipients.length ? (

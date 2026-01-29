@@ -47,7 +47,7 @@ export default function BatchGeneratePage() {
               <CheckCircle2 className="mt-1 h-4 w-4 text-primary" />
               <p>We will email recipients once certificates are generated.</p>
             </div>
-            <Link className="text-primary hover:underline" href="/batches/alpha/results">
+            <Link className="text-primary hover:underline" href="/batches/new/preview">
               View batch results
             </Link>
           </CardContent>
