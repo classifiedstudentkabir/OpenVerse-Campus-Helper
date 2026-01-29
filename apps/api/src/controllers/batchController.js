@@ -106,6 +106,20 @@ const verifyAndNormalizePdf = async (pdfPath) => {
     }
 };
 
+const waitForFileStable = async (filePath, attempts = 5, delayMs = 200) => {
+    for (let i = 0; i < attempts; i++) {
+        try {
+            const stats = fs.statSync(filePath);
+            if (stats.size > 0) {
+                return;
+            }
+        } catch (e) {
+            // ignore and retry
+        }
+        await new Promise((resolve) => setTimeout(resolve, delayMs));
+    }
+};
+
 const createZip = (files, batchId) => {
     return new Promise((resolve, reject) => {
         const zipFilename = `certificates_${batchId}.zip`;
@@ -288,7 +302,17 @@ exports.generateBatch = async (req, res) => {
             );
             logEvent('render.complete', { batchId: id, file: outFile, durationMs: Date.now() - renderStart });
             logEvent('batch.pdf.path', { path: outputPath, generator: 'certificateService.generateCertificate' });
-            await verifyAndNormalizePdf(outputPath);
+
+            try {
+                await waitForFileStable(outputPath);
+                await verifyAndNormalizePdf(outputPath);
+            } catch (normalizeError) {
+                logEvent('pdf.normalize.error', {
+                    path: outputPath,
+                    message: normalizeError.message,
+                    stack: normalizeError.stack
+                });
+            }
 
             generatedFiles.push(outFile);
             batch.generatedCount = i + 1;
@@ -326,10 +350,15 @@ exports.generateBatch = async (req, res) => {
 
     } catch (error) {
         console.error("[Batch] Generation error:", error);
-        logEvent('response.error', { batchId: id, message: error.message, durationMs: Date.now() - reqStart });
+        logEvent('response.error', {
+            batchId: id,
+            message: error.message,
+            stack: error.stack,
+            durationMs: Date.now() - reqStart
+        });
         batch.status = 'failed';
         batch.error = error.message;
-        res.status(500).json({ error: 'Generation failed', details: error.message });
+        res.status(500).json({ error: 'Generation failed', details: error.message, stage: 'batch.generate' });
     }
 };
 
