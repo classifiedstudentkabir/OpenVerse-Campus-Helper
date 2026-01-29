@@ -9,6 +9,7 @@ const DEFAULT_PDF_TEMPLATE_TIMEOUT_MS = Number(process.env.PDF_TEMPLATE_TIMEOUT_
 const SAFE_MARGIN_BOTTOM = 24;
 const SAFE_MARGIN_RIGHT = 24;
 const TEXT_BOTTOM_LIMIT = 50;
+const SAFE_BOTTOM = 72;
 
 const withTimeout = (promise, ms, label) => {
     let timeoutId;
@@ -148,10 +149,22 @@ exports.generateCertificate = async (template, data, outputFilename) => {
                         bufferPages: true
                     });
 
-                    const clampTextY = (y) => Math.min(y, height - TEXT_BOTTOM_LIMIT);
-                    const clampImageY = (y, elementHeight) => Math.min(y, height - SAFE_MARGIN_BOTTOM - elementHeight);
+                    const pageW = doc.page.width;
+                    const pageH = doc.page.height;
+                    const maxY = pageH - SAFE_BOTTOM;
+                    const certW = width;
+                    const offsetX = (pageW - certW) / 2;
 
-                    logEvent('pdf.page.init', { width, height });
+                    const clampY = (y, elementHeight, label) => {
+                        if (y + elementHeight > maxY) {
+                            const clamped = maxY - elementHeight;
+                            logEvent('pdf.clamp.y', { label, originalY: y, clampedY: clamped, elementHeight, maxY });
+                            return clamped;
+                        }
+                        return y;
+                    };
+
+                    logEvent('pdf.page.init', { width, height, pageW, pageH, maxY, offsetX });
 
                     const outputPath = path.join(process.cwd(), 'generated', outputFilename);
                     logEvent('file.write.start', { outputPath, mode: 'pdf' });
@@ -247,17 +260,18 @@ exports.generateCertificate = async (template, data, outputFilename) => {
                                     || String(layer.text || '').includes('{certificate_id}')
                                     || String(layer.text || '').includes('{certificateId}');
 
-                                let x = rawX;
-                                let y = clampTextY(rawY);
+                                let x = rawX + offsetX;
+                                let y = clampY(rawY, fontSize, 'text');
                                 let textAlign = align === 'center' || align === 'right' ? align : undefined;
 
                                 if (isCertificateId) {
-                                    const footerSize = Math.min(7, Math.max(6, fontSize));
+                                    const footerSize = Math.min(8, Math.max(6, fontSize));
                                     doc.font(fontFamily).fontSize(footerSize).fillColor(color);
                                     const textWidth = doc.widthOfString(content);
-                                    x = (width - textWidth) / 2;
-                                    y = clampTextY(height - 40);
+                                    x = (pageW - textWidth) / 2;
+                                    y = clampY(pageH - 90, footerSize, 'footer');
                                     textAlign = undefined;
+                                    logEvent('pdf.footer.position', { x, y, footerSize, textWidth, pageW, pageH });
                                 } else {
                                     doc.font(fontFamily).fontSize(fontSize).fillColor(color);
                                 }
@@ -282,12 +296,12 @@ exports.generateCertificate = async (template, data, outputFilename) => {
                                     // Load image and draw
                                     // PDFKit supports paths
                                     if (fs.existsSync(src)) {
-                                        const x = layer.x || 0;
+                                        const x = (layer.x || 0) + offsetX;
                                         const rawY = layer.y || 0;
                                         const w = layer.w || 100;
                                         const h = layer.h || 100;
-                                        const y = clampImageY(rawY, h);
-                                        const clampedH = Math.max(0, Math.min(h, height - y));
+                                        const y = clampY(rawY, h, 'image');
+                                        const clampedH = Math.max(0, Math.min(h, pageH - y));
                                         doc.image(src, x, y, { width: w, height: clampedH });
                                     }
                                 }
