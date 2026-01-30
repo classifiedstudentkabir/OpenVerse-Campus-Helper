@@ -61,7 +61,7 @@ export default function TemplatePreviewPage({ params }: PageProps) {
               <span className="rounded-full bg-emerald-100 px-3 py-1 text-emerald-700">Bulk support</span>
               <span className="rounded-full bg-indigo-100 px-3 py-1 text-indigo-700">Dynamic fields</span>
             </div>
-            <Link href={`/editor?template=${template.id}`} target="_blank" rel="noreferrer">
+            <Link href={`/editor?templateId=${template.id}`} target="_blank" rel="noreferrer">
               <Button className="w-full">
                 <Pencil className="h-4 w-4" />
                 Edit design

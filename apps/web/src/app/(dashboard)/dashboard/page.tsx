@@ -8,9 +8,9 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 const quickActions = [
-  { title: "Design new", description: "Start from a blank canvas", icon: "✍️" },
-  { title: "Explore templates", description: "Browse certificate designs", icon: "🗂️" },
-  { title: "Integrations", description: "Connect with your apps", icon: "🧩" },
+  { title: "Design new", description: "Start from a blank canvas", icon: "✍️", href: "/templates" },
+  { title: "Explore templates", description: "Browse certificate designs", icon: "🗂️", href: "/templates" },
+  { title: "Template Editor", description: "Edit certificate with drag & resize", icon: "🎨", href: "/batches/new/preview" },
 ];
 
 const activityItems = [
@@ -65,10 +65,10 @@ export default function DashboardPage() {
               </p>
             </div>
             <div className="flex flex-wrap gap-3">
-              <Link href="/editor" target="_blank" rel="noreferrer">
+              <Link href="/editor?mode=blank">
                 <Button className="bg-white/15 text-white hover:bg-white/25" variant="secondary">
                   <Plus className="h-4 w-4" />
-                  Create certificate
+                  Template Editor
                 </Button>
               </Link>
               <Link href="/batches/new/upload">
@@ -87,15 +87,17 @@ export default function DashboardPage() {
           </div>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {quickActions.map((item) => (
-              <Card key={item.title}>
-                <CardHeader>
-                  <div className="mb-2 flex h-10 w-10 items-center justify-center rounded-full bg-muted text-lg">
-                    {item.icon}
-                  </div>
-                  <CardTitle className="text-base">{item.title}</CardTitle>
-                  <CardDescription>{item.description}</CardDescription>
-                </CardHeader>
-              </Card>
+              <Link key={item.title} href={item.href}>
+                <Card className="cursor-pointer transition hover:shadow-md">
+                  <CardHeader>
+                    <div className="mb-2 flex h-10 w-10 items-center justify-center rounded-full bg-muted text-lg">
+                      {item.icon}
+                    </div>
+                    <CardTitle className="text-base">{item.title}</CardTitle>
+                    <CardDescription>{item.description}</CardDescription>
+                  </CardHeader>
+                </Card>
+              </Link>
             ))}
           </div>
         </section>

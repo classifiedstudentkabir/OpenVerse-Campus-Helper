@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, Download, Layers, Monitor, Smartphone, Tablet } from "lucide-react";
 
@@ -19,11 +20,50 @@ const templates = [
 ];
 
 export default function EditorPage() {
-  const [activeTemplateId, setActiveTemplateId] = useState(templates[0].id);
+  const searchParams = useSearchParams();
+  const mode = searchParams.get("mode");
+  const templateId = searchParams.get("templateId");
+  const bgUrl = searchParams.get("bg");
+
+  const [activeTemplateId, setActiveTemplateId] = useState<string | null>(null);
   const [forceDesktop, setForceDesktop] = useState(false);
+  const [backgroundImage, setBackgroundImage] = useState<string | null>(null);
+
+  // Determine which template to use based on query params
+  useEffect(() => {
+    if (mode === "blank") {
+      // Blank mode - no background image
+      setBackgroundImage(null);
+      setActiveTemplateId(null);
+    } else if (bgUrl) {
+      // Custom background URL provided
+      setBackgroundImage(bgUrl);
+      setActiveTemplateId(null);
+    } else if (templateId) {
+      // Template ID provided - look it up
+      const template = templates.find((t) => t.id === templateId);
+      if (template) {
+        setBackgroundImage(template.image);
+        setActiveTemplateId(template.id);
+      } else {
+        // Fallback to blank if template not found
+        setBackgroundImage(null);
+        setActiveTemplateId(null);
+      }
+    } else {
+      // Default: use first template
+      setBackgroundImage(templates[0].image);
+      setActiveTemplateId(templates[0].id);
+    }
+  }, [mode, templateId, bgUrl]);
 
   const activeTemplate = useMemo(
-    () => templates.find((item) => item.id === activeTemplateId) ?? templates[0],
+    () => {
+      if (activeTemplateId) {
+        return templates.find((item) => item.id === activeTemplateId) ?? templates[0];
+      }
+      return templates[0];
+    },
     [activeTemplateId]
   );
 
@@ -49,6 +89,10 @@ export default function EditorPage() {
   }, [forceDesktop]);
 
   const handleExport = () => {
+    if (!backgroundImage) {
+      alert("Cannot export blank canvas. Select a template first.");
+      return;
+    }
     const name = window.prompt("Save as (PDF name):", activeTemplate.title) || "certificate";
     if (!name) return;
 
@@ -58,7 +102,7 @@ export default function EditorPage() {
       <html>
         <head><title>${name}</title></head>
         <body style="margin:0;display:flex;align-items:center;justify-content:center;height:100vh;background:#fff;">
-          <img src="${activeTemplate.image}" style="max-width:95%;max-height:95%;" />
+          <img src="${backgroundImage}" style="max-width:95%;max-height:95%;" />
           <script>window.onload = () => { window.print(); }</script>
         </body>
       </html>
@@ -163,7 +207,14 @@ export default function EditorPage() {
 
         <main className="flex items-center justify-center rounded-3xl border border-border/60 bg-gradient-to-br from-violet-200/40 via-indigo-200/40 to-purple-200/40 p-8">
           <div className="flex h-[420px] w-full max-w-[680px] items-center justify-center rounded-2xl border border-dashed border-border/60 bg-white/70 p-4 text-sm text-muted-foreground">
-            <img src={activeTemplate.image} alt={activeTemplate.title} className="max-h-full w-full object-contain" />
+            {backgroundImage ? (
+              <img src={backgroundImage} alt="Certificate" className="max-h-full w-full object-contain" />
+            ) : (
+              <div className="text-center space-y-2">
+                <p className="text-muted-foreground">Blank canvas</p>
+                <p className="text-xs text-muted-foreground/60">Select a template or go back to choose one</p>
+              </div>
+            )}
           </div>
         </main>
 

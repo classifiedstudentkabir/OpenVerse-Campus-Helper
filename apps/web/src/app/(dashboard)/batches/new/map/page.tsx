@@ -9,12 +9,14 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select } from "@/components/ui/select";
 import { Skeleton } from "@/components/ui/skeleton";
+import { getParsedHeaders, setFieldMapping } from "@/lib/storage";
 
 const FIELD_OPTIONS = [
   { key: "name", label: "Recipient name", required: true },
-  { key: "event", label: "Event name", required: true },
+  { key: "event", label: "Event name", required: false },
+  { key: "organization", label: "Organization", required: false },
   { key: "date", label: "Date issued", required: false },
-  { key: "grade", label: "Grade / score", required: false },
+  { key: "certificate_id", label: "Certificate ID", required: false },
   { key: "email", label: "Recipient email", required: false }
 ];
 
@@ -25,11 +27,9 @@ export default function BatchMapPage() {
   const [mapping, setMapping] = useState<Record<string, string>>({});
 
   useEffect(() => {
-    const saved = sessionStorage.getItem("certifyneo-upload");
-    if (saved) {
-      const parsed = JSON.parse(saved) as { headers: string[] };
-      setHeaders(parsed.headers ?? []);
-    }
+    // Read headers from centralized storage
+    const parsedHeaders = getParsedHeaders();
+    setHeaders(parsedHeaders);
     setTimeout(() => setLoading(false), 400);
   }, []);
 
@@ -121,7 +121,7 @@ export default function BatchMapPage() {
               className="w-full"
               disabled={!readyToContinue}
               onClick={() => {
-                sessionStorage.setItem("certifyneo-mapping", JSON.stringify(mapping));
+                setFieldMapping(mapping);
                 router.push("/batches/new/preview");
               }}
             >

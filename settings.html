@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CertifyNeo - Settings</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <style>
+        .avatar-container {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            overflow: hidden;
+            background: var(--primary-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border: 2px solid var(--border-light);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            position: relative;
+            transition: all 0.2s;
+        }
+
+        .avatar-container:hover {
+            border-color: var(--primary);
+            box-shadow: 0 4px 12px rgba(124, 58, 237, 0.2);
+        }
+
+        .avatar-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .avatar-initials {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+            user-select: none;
+        }
+
+        .form-input {
+            width: 100%;
+            height: 44px;
+            padding: 0 1rem;
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            background: var(--bg-surface);
+            font-size: 0.9rem;
+            color: var(--text-main);
+            transition: all 0.2s;
+        }
+
+        .form-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px var(--primary-light);
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--bg-surface);
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            border: 1px solid var(--border-light);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            transform: translateY(120%);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+        }
+
+        .toast-success {
+            color: var(--success);
+        }
+    </style>
+</head>
+
+<body style="background-color: var(--bg-body);">
+    <div class="app-shell">
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="brand-icon"><span class="material-symbols-outlined">workspace_premium</span></div>
+                <span class="brand-name">CertifyNeo</span>
+            </div>
+            <nav class="nav-menu">
+                <a href="dashboard.html" class="nav-item"><span class="material-symbols-outlined icon">dashboard</span>
+                    Dashboard</a>
+                <a href="bulk.html" class="nav-item"><span class="material-symbols-outlined icon">cloud_upload</span>
+                    Bulk Generation</a>
+                <a href="issued.html" class="nav-item"><span class="material-symbols-outlined icon">description</span>
+                    Issued</a>
+                <a href="recipients.html" class="nav-item"><span class="material-symbols-outlined icon">groups</span>
+                    Recipients</a>
+                <a href="settings.html" class="nav-item active"><span
+                        class="material-symbols-outlined icon">settings</span> Settings</a>
+            </nav>
+            <div style="margin-top: auto; padding-top: 1rem; border-top: 1px solid var(--border-light);">
+                <button onclick="logout()" class="nav-item" style="width: 100%; color: var(--danger);">
+                    <span class="material-symbols-outlined icon">logout</span> Sign Out
+                </button>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="top-bar">
+                <h2 class="font-bold text-main">Settings</h2>
+                <div class="user-profile">
+                    <div class="user-avatar dropdown" onclick="toggleProfileDropdown(event)" style="cursor: pointer;">
+                        <img id="headerAvatar" src="" alt="User">
+                        <div class="dropdown-content" id="headerDropdown"
+                            style="right: 0; top: 120%; margin-top: 0.5rem;">
+                            <a href="settings.html">Settings</a>
+                            <a href="#" onclick="logout()">Sign Out</a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="p-6" style="max-width: 700px; margin: 0 auto; width: 100%;">
+                <div class="card" style="padding: 2.5rem;">
+                    <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 2rem; color: var(--text-main);">
+                        Profile Settings</h3>
+
+                    <!-- Avatar Section -->
+                    <div
+                        style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border-light);">
+                        <div class="avatar-container" id="avatarPreview"
+                            onclick="document.getElementById('avatarInput').click()">
+                            <img id="avatarImg" class="avatar-img" style="display: none;">
+                            <div id="avatarInitials" class="avatar-initials">US</div>
+                        </div>
+                        <div style="flex: 1;">
+                            <h4 style="font-weight: 600; margin-bottom: 0.25rem;">Profile Picture</h4>
+                            <p style="font-size: 0.875rem; color: var(--text-muted); margin-bottom: 0.75rem;">JPG, PNG
+                                or GIF (max. 2MB)</p>
+                            <input type="file" id="avatarInput" hidden accept="image/*">
+                            <button onclick="document.getElementById('avatarInput').click()" class="btn btn-secondary"
+                                style="font-size: 0.875rem;">
+                                Change photo
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Form Fields -->
+                    <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+                        <div>
+                            <label
+                                style="display: block; font-weight: 600; font-size: 0.875rem; margin-bottom: 0.5rem; color: var(--text-main);">Full
+                                Name</label>
+                            <input type="text" id="fullName" class="form-input" placeholder="Enter your full name">
+                        </div>
+
+                        <div>
+                            <label
+                                style="display: block; font-weight: 600; font-size: 0.875rem; margin-bottom: 0.5rem; color: var(--text-main);">Email
+                                Address</label>
+                            <input type="email" id="email" class="form-input" placeholder="you@example.com">
+                        </div>
+
+                        <div style="padding-top: 1rem; display: flex; justify-content: flex-end;">
+                            <button onclick="saveSettings()" class="btn btn-primary" style="padding: 0.75rem 2rem;">
+                                Save Changes
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">
+        <span class="material-symbols-outlined toast-success">check_circle</span>
+        <span>Settings saved successfully!</span>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script>
+        // Check auth
+        if (typeof api !== 'undefined' && api.checkAuth) {
+            api.checkAuth();
+        }
+
+        // Load profile data
+        const stored = JSON.parse(localStorage.getItem('user_profile')) || {};
+        const profile = {
+            name: stored.name || '',
+            email: stored.email || '',
+            avatar: stored.avatar || null,
+            initials: stored.initials || 'US'
+        };
+
+        // Initialize UI
+        document.getElementById('fullName').value = profile.name;
+        document.getElementById('email').value = profile.email;
+        updateAvatar();
+        updateHeaderAvatar();
+
+        // Handle avatar upload
+        document.getElementById('avatarInput').addEventListener('change', function (e) {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            // Check size
+            if (file.size > 2 * 1024 * 1024) {
+                showToast('File too large. Maximum size is 2MB.', false);
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function (event) {
+                profile.avatar = event.target.result;
+                updateAvatar();
+                updateHeaderAvatar();
+            };
+            reader.readAsDataURL(file);
+        });
+
+        function updateAvatar() {
+            const img = document.getElementById('avatarImg');
+            const initials = document.getElementById('avatarInitials');
+
+            if (profile.avatar) {
+                img.src = profile.avatar;
+                img.style.display = 'block';
+                initials.style.display = 'none';
+            } else {
+                img.style.display = 'none';
+                initials.style.display = 'flex';
+                initials.textContent = profile.initials;
+            }
+        }
+
+        function updateHeaderAvatar() {
+            const headerAvatar = document.getElementById('headerAvatar');
+            if (profile.avatar) {
+                headerAvatar.src = profile.avatar;
+            } else {
+                headerAvatar.src = `https://ui-avatars.com/api/?name=${profile.initials}&background=7c3aed&color=fff`;
+            }
+        }
+
+        function saveSettings() {
+            const name = document.getElementById('fullName').value.trim();
+            const email = document.getElementById('email').value.trim();
+
+            if (!name || !email) {
+                showToast('Please fill in all fields.', false);
+                return;
+            }
+
+            // Generate initials
+            const parts = name.split(' ').filter(p => p.length > 0);
+            let initials = 'US';
+            if (parts.length >= 2) {
+                initials = (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+            } else if (parts.length === 1 && parts[0].length >= 2) {
+                initials = parts[0].substring(0, 2).toUpperCase();
+            }
+
+            profile.name = name;
+            profile.email = email;
+            profile.initials = initials;
+
+            localStorage.setItem('user_profile', JSON.stringify(profile));
+            showToast('Settings saved successfully!', true);
+            updateAvatar();
+            updateHeaderAvatar();
+        }
+
+        function showToast(message, success = true) {
+            const toast = document.getElementById('toast');
+            const icon = toast.querySelector('.material-symbols-outlined');
+            const text = toast.querySelector('span:last-child');
+
+            text.textContent = message;
+            if (success) {
+                icon.textContent = 'check_circle';
+                icon.className = 'material-symbols-outlined toast-success';
+            } else {
+                icon.textContent = 'error';
+                icon.className = 'material-symbols-outlined';
+                icon.style.color = 'var(--danger)';
+            }
+
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        function toggleProfileDropdown(e) {
+            e.stopPropagation();
+            const d = document.getElementById('headerDropdown');
+            d.style.display = d.style.display === 'block' ? 'none' : 'block';
+        }
+
+        document.onclick = function (e) {
+            if (!e.target.closest('.user-avatar')) {
+                document.getElementById('headerDropdown').style.display = 'none';
+            }
+        };
+
+        function logout() {
+            if (typeof api !== 'undefined' && api.logout) {
+                api.logout();
+            } else {
+                localStorage.removeItem('token');
+                window.location.href = 'login.html';
+            }
+        }
+    </script>
+</body>
+
+</html>
