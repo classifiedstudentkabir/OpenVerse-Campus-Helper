@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { Suspense, useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, Download, Layers, Monitor, Smartphone, Tablet } from "lucide-react";
@@ -19,7 +19,7 @@ const templates = [
   { id: "cert-8", title: "Template 8", image: "/templates/cert_8.png" },
 ];
 
-export default function EditorPage() {
+function EditorContent() {
   const searchParams = useSearchParams();
   const mode = searchParams.get("mode");
   const templateId = searchParams.get("templateId");
@@ -247,5 +247,13 @@ export default function EditorPage() {
         </aside>
       </div>
     </div>
+  );
+}
+
+export default function EditorPage() {
+  return (
+    <Suspense fallback={<div className="flex h-96 items-center justify-center">Loading editor...</div>}>
+      <EditorContent />
+    </Suspense>
   );
 }

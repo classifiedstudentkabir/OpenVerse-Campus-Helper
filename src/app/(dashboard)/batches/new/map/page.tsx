@@ -121,7 +121,7 @@ export default function BatchMapPage() {
               className="w-full"
               disabled={!readyToContinue}
               onClick={() => {
-                setFieldMapping(mapping);
+                setFieldMapping(mapping as any);
                 router.push("/batches/new/preview");
               }}
             >

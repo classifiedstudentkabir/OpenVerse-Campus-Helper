@@ -39,13 +39,16 @@ export default function BatchResultsPage() {
   const bgSrc = selected?.templateImage ?? "/templates/openverse-purple.png";
 
   // Get name field config from template
-  const nameCfg = selected?.fieldConfig.fields.name ?? {
+  const nameCfg = (selected?.fieldConfig.fields.name as any) ?? {
     x: 380,
     y: 300,
+    height: 50,
     fontSize: 40,
+    fontFamily: "Georgia",
     color: "#111111",
     width: 420,
     align: "center" as const,
+    visible: true,
   };
 
   const x = Number.isFinite(nameCfg.x) ? Number(nameCfg.x) : 380;
