@@ -1,26 +1,5 @@
-# Dependencies
-node_modules/
-
-# Environment Variables
-.env
-.env.*
-!.env.example
-
-# Runtime Data
-apps/api/uploads/*
-!apps/api/uploads/.gitkeep
-apps/api/generated/*
-!apps/api/generated/.gitkeep
-apps/api/logs/*
-!apps/api/logs/.gitkeep
-
-# System
-.DS_Store
-Thumbs.db
-
-# Logs
-*.log
-npm-debug.log*
-
-# Test artifacts
-preview_test.png
+node_modules
+.next
+out
+dist
+.env*
